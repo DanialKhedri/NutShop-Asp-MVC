@@ -18,6 +18,11 @@ namespace Domain.Entities.User
 
         public string Phone { get; set; }
 
+
+        public bool Isdelete { get; set; } = false;
+
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+
         #endregion
 
 

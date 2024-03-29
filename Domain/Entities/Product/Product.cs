@@ -19,6 +19,12 @@ namespace Domain.Entities.Product
 
         public int? Weight { get; set; }
 
+
+
+        public bool Isdelete { get; set; } = false;
+
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+
         #endregion
 
         #region Navigation Properties
