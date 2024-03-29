@@ -21,6 +21,7 @@ namespace Infrastructure.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
+
         }
 
         #endregion

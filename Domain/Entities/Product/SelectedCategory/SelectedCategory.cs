@@ -24,9 +24,9 @@ namespace Domain.Entities.Product.SelectedCategory
 
         #region Navigation Properties
 
-        public Product.Product Product { get; set; }
+        public Product Product { get; set; }
 
-        public Category Category { get; set; }
+        public Category.Category Category { get; set; }
 
         #endregion
 
