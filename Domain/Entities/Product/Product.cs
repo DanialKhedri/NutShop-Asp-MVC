@@ -20,6 +20,9 @@ namespace Domain.Entities.Product
         public int? Weight { get; set; }
 
 
+        public string Image { get; set; }
+
+
 
         public bool Isdelete { get; set; } = false;
 
