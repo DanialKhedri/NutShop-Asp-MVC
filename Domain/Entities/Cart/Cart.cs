@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Cart
 {
-    public  class Cart
+    public class Cart
     {
 
         public int Id { get; set; }
@@ -23,6 +23,8 @@ namespace Domain.Entities.Cart
         public bool Isdelete { get; set; } = false;
 
         public DateTime CreateDate { get; set; } = DateTime.Now;
+
+        public CartStatus.cartstatus cartstatus { get; set; } = CartStatus.cartstatus.Waiting;
 
     }
 }
