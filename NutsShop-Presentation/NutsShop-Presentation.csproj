@@ -14,7 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
+    <Folder Include="Areas\SitePanel\Data\" />
+    <Folder Include="Areas\SitePanel\Models\" />
+    <Folder Include="wwwroot\Images\Logo\" />
+    <Folder Include="wwwroot\Images\Categories\" />
+    <Folder Include="wwwroot\Images\Products\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +32,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
   </ItemGroup>
 
 </Project>

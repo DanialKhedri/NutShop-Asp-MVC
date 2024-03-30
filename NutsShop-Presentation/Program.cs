@@ -33,8 +33,22 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
+app.MapControllerRoute
+    (
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+
+
+app.MapAreaControllerRoute(
     name: "default",
+    areaName: "SitePanel",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+    
+
+
+
+
+
 
 app.Run();
