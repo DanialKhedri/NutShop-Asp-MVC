@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.UserRegisterDTO;
+using Application.Security;
 using Application.Services.Interfaces;
 using Domain.Entities.User;
 using Domain.IRepository;
@@ -32,7 +33,8 @@ namespace Application.Services.implements
             {
                 UserName = userRegisterDTO.UserName,
                 Phone = userRegisterDTO.Phone,
-                Password = userRegisterDTO.Password,
+                Password = PasswordHasher.EncodePasswordMd5(userRegisterDTO.Password),
+
             };
 
 

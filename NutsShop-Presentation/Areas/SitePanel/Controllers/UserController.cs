@@ -22,10 +22,6 @@ public class UserController : Controller
     #endregion
 
 
-
-
-
-
     #region Register
 
 
@@ -40,21 +36,50 @@ public class UserController : Controller
     [HttpPost]
     public async Task<IActionResult> Register(UserRegisterDTO userRegisterDTO)
     {
-       var IsSucces = await _IUserService.Register(userRegisterDTO);
+        if (ModelState.IsValid)
+        {
 
-        if (IsSucces)
-        {
-            _IUserService.SaveChange();
-            return Redirect("SitePanel/Home/Index");
+            if (userRegisterDTO.Password == userRegisterDTO.RePassword)
+            {
+                var IsSucces = await _IUserService.Register(userRegisterDTO);
+
+                if (IsSucces)
+                {
+
+                    _IUserService.SaveChange();
+                    return RedirectToAction("Index","Home");
+
+                }
+
+                else
+                {
+                    TempData["Message"] = "This Username or Phone Used Befor";
+                    return View();
+                }
+
+            }
+
+            else
+            {
+
+                TempData["Message"] = "Passwor and Repassword Are Different";
+                return View();
+
+            }
+          
         }
-        else 
+
+        else
         {
-            TempData["Message"] = "This Username or Phone Used Befor";
+
             return View();
+
         }
 
-        
+
     }
     #endregion
+
+
 
 }

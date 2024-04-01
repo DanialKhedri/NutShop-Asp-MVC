@@ -16,7 +16,7 @@ namespace Application.Dtos.UserRegisterDTO
 
         public string Password { get; set; }
 
-        [Compare("Password",ErrorMessage ="رمز و تکرار رمز متفاوت هستند")]
+        [Compare("Password", ErrorMessage ="رمز و تکرار رمز متفاوت هستند")]
         public string RePassword { get; set; }
 
 
