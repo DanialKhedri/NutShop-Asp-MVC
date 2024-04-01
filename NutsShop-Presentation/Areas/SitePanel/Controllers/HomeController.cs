@@ -9,5 +9,8 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         {
             return View();
         }
+
+       
+
     }
 }

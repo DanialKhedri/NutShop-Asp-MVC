@@ -1,5 +1,4 @@
-﻿using Domain.Entities.Cart;
-using Domain.Entities.Product;
+﻿using Domain.Entities.Product;
 using Domain.Entities.Product.Category;
 using Domain.Entities.Product.SelectedCategory;
 using Domain.Entities.User;
@@ -47,8 +46,7 @@ namespace Infrastructure.Data
         public DbSet<SelectedCategory> SelectedCategories { get; set; }
 
 
-        public DbSet<Cart> Carts { get; set; }
-
+        
 
        
 

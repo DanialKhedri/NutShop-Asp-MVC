@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240329171817_locationclass")]
-    partial class locationclass
+    [Migration("20240330095037_firstmig")]
+    partial class firstmig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,65 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.Cart.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Isdelete")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SumPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("cartstatus")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Cart.Location", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Phone")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Location");
-                });
 
             modelBuilder.Entity("Domain.Entities.Product.Category.Category", b =>
                 {
@@ -119,11 +60,12 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Isdelete")
                         .HasColumnType("bit");
@@ -139,8 +81,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CartId");
 
                     b.ToTable("Products");
                 });
@@ -249,22 +189,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cart.Cart", b =>
-                {
-                    b.HasOne("Domain.Entities.Cart.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
-
-                    b.Navigation("Location");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Product.Product", b =>
-                {
-                    b.HasOne("Domain.Entities.Cart.Cart", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CartId");
-                });
-
             modelBuilder.Entity("Domain.Entities.Product.SelectedCategory.SelectedCategory", b =>
                 {
                     b.HasOne("Domain.Entities.Product.Category.Category", "Category")
@@ -301,11 +225,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Cart.Cart", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product.Category.Category", b =>

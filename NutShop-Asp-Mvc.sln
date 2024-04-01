@@ -18,14 +18,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infrastructure", "3-Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Presentation", "4-Presentation", "{6912CC8C-2EAB-468E-B232-237F168713CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{5A4344EB-4284-493B-8732-47E67A2F946B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{5A4344EB-4284-493B-8732-47E67A2F946B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{22141020-B4EC-4ADF-9744-52B0757A7500}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{22141020-B4EC-4ADF-9744-52B0757A7500}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5A4344EB-4284-493B-8732-47E67A2F946B} = {5A4344EB-4284-493B-8732-47E67A2F946B}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{26D0806A-31F2-4FA7-ACE1-CFB773BB0E04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{26D0806A-31F2-4FA7-ACE1-CFB773BB0E04}"
 	ProjectSection(ProjectDependencies) = postProject
 		{22141020-B4EC-4ADF-9744-52B0757A7500} = {22141020-B4EC-4ADF-9744-52B0757A7500}
 		{5A4344EB-4284-493B-8732-47E67A2F946B} = {5A4344EB-4284-493B-8732-47E67A2F946B}

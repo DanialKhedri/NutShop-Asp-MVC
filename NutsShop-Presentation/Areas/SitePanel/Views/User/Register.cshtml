@@ -1,0 +1,141 @@
+﻿@using Application.Dtos.UserRegisterDTO
+@model UserRegisterDTO;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Register </title>
+
+    <style>
+
+        a {
+            font-family: Arial, sans-serif;
+            text-decoration: none;
+            color: inherit;
+            text-decoration :none;
+            cursor: pointer;
+            color: #494848;
+            font-weight: bold;
+        }
+
+            a : :hover {
+                transform: scale(1.1);
+            }
+
+        body {
+           
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100%;
+            background: linear-gradient(to right, #333, #494848);
+        }
+
+        .form-container {
+            width:50%;
+            margin: 50px;
+            background-color: #fff;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 15px;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .form-group button {
+                width: 100%;
+                padding: 10px;
+                background-color: #494848;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .form-group button {
+                width: 100%;
+                padding: 10px;
+                background-color: #494848;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+                .form-group button:hover {
+                    transform: scale(1.1);
+                    font-size: 18px;
+                }
+
+    </style>
+</head>
+
+
+
+<body>
+    <div class="form-container">
+
+        <form method="post" asp-area="SitePanel" asp-controller="User" asp-action="Register">
+
+            <div class="form-group">
+                <label for="name">UserName</label>
+                <input type="text" asp-for="UserName" placeholder="Please Enter UserName">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Phone</label>
+                <input type="tel" asp-for="Phone" placeholder="Please Enter Phone Number">
+            </div>
+
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" asp-for="Password" placeholder="Please Enter Password">
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Re-Password</label>
+                <input type="password" asp-for="RePassword" placeholder="Please Enter Password Again">
+                <span style="color:red" asp-validation-for="RePassword"></span>
+            </div>
+
+            @if (TempData["Message"] != null)
+            {
+                <span style="color:red">@TempData["Message"]</span>
+            }
+            <br></br>
+
+            <div class="form-group">
+
+                <button type="submit">Register</button>
+                <br></br>
+                <a>Log in</a>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>
