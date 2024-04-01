@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
 using Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace NutsShop_Presentation.Areas.SitePanel.Controllers;
@@ -120,4 +121,16 @@ public class UserController : Controller
 
     #endregion
 
+    #region LogOut
+
+    public async Task<IActionResult> LogOut() 
+    {
+
+       await HttpContext.SignOutAsync();
+
+        return RedirectToAction("Index", "Home");
+
+    }
+
+    #endregion
 }
