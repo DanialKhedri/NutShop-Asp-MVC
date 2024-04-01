@@ -1,5 +1,6 @@
-﻿@using Application.Dtos.UserRegisterDTO
-@model UserRegisterDTO;
+﻿@using Application.Dtos.UserLogInDTO
+@model UserLogInDTO;
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title> Register </title>
+    <title> LogIn </title>
 
     <style>
 
@@ -16,7 +17,7 @@
             font-family: Arial, sans-serif;
             text-decoration: none;
             color: inherit;
-            text-decoration :none;
+            text-decoration: none;
             cursor: pointer;
             color: #494848;
             font-weight: bold;
@@ -27,7 +28,6 @@
             }
 
         body {
-           
             margin: 0;
             padding: 0;
             display: flex;
@@ -39,7 +39,7 @@
         }
 
         .form-container {
-            width:50%;
+            width: 50%;
             margin: 50px;
             background-color: #fff;
             border-radius: 25px;
@@ -100,37 +100,24 @@
 
     <div class="form-container">
 
-        <form method="post" asp-area="SitePanel" asp-controller="User" asp-action="Register">
+        <form method="post" asp-area="SitePanel" asp-controller="User" asp-action="LogIn">
 
             <div class="form-group">
-                <label for="name">UserName</label>
-                <input type="text" asp-for="UserName" placeholder="Please Enter UserName">
-                <span style="color:red" asp-validation-for="UserName"></span>
+
+                <label for="name">UserName Or Phone Number</label>
+                <input type="text" asp-for="UserNameOrPhone" placeholder="Please Enter UserName Or PhoneNumber">
+                <span style="color:red" asp-validation-for="UserNameOrPhone"></span>
 
             </div>
 
             <div class="form-group">
-                <label for="name">Phone</label>
-                <input type="tel" asp-for="Phone" placeholder="Please Enter Phone Number">
-                <span style="color:red" asp-validation-for="Phone"></span>
 
-            </div>
-
-
-            <div class="form-group">
-                <label for="password">Password</label>
+                <label for="name">Password</label>
                 <input type="password" asp-for="Password" placeholder="Please Enter Password">
                 <span style="color:red" asp-validation-for="Password"></span>
 
             </div>
 
-            <div class="form-group">
-                <label for="confirm-password">Re-Password</label>
-
-                <input type="password" asp-for="RePassword" placeholder="Please Enter Password Again">
-
-                <span style="color:red" asp-validation-for="RePassword"></span>
-            </div>
 
             @if (TempData["Message"] != null)
             {

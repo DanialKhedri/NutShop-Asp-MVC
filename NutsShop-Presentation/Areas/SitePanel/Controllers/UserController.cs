@@ -1,4 +1,5 @@
-﻿using Application.Dtos.UserRegisterDTO;
+﻿using Application.Dtos.UserLogInDTO;
+using Application.Dtos.UserRegisterDTO;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,7 @@ public class UserController : Controller
 
     private readonly IUserService _IUserService;
 
-    public UserController(IUserService userService) 
+    public UserController(IUserService userService)
     {
         _IUserService = userService;
     }
@@ -47,7 +48,7 @@ public class UserController : Controller
                 {
 
                     _IUserService.SaveChange();
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
 
                 }
 
@@ -66,7 +67,7 @@ public class UserController : Controller
                 return View();
 
             }
-          
+
         }
 
         else
@@ -80,6 +81,33 @@ public class UserController : Controller
     }
     #endregion
 
+    #region LogIn
 
+    [HttpGet]
+    public async Task<IActionResult> LogIn() 
+    {
+        return View();
+    }
+
+
+    //public Task<IActionResult> LogIn(UserLogInDTO userLogInDTO) 
+    //{
+    //    if (ModelState.IsValid)
+    //    {
+
+
+
+
+
+
+
+
+    //    }
+
+
+
+
+    //}
+    #endregion
 
 }

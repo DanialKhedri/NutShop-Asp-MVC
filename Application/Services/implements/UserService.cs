@@ -1,8 +1,10 @@
-﻿using Application.Dtos.UserRegisterDTO;
+﻿using Application.Dtos.UserLogInDTO;
+using Application.Dtos.UserRegisterDTO;
 using Application.Security;
 using Application.Services.Interfaces;
 using Domain.Entities.User;
 using Domain.IRepository;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +47,20 @@ namespace Application.Services.implements
 
 
         #endregion
+
+        public async Task<bool> LogIn(UserLogInDTO userLogInDTO) 
+        {
+
+            User user = new User()
+            {
+                UserName = userLogInDTO.UserNameOrPhone,
+                Phone = userLogInDTO.UserNameOrPhone,
+                Password = PasswordHasher.EncodePasswordMd5(userLogInDTO.Password),
+            };
+
+           return await _IUserRepository.LogIn(user);
+
+        }
 
 
         #region SavChanges

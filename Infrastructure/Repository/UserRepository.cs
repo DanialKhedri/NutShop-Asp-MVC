@@ -1,9 +1,14 @@
 ﻿using Domain.Entities.User;
 using Domain.IRepository;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,13 +19,17 @@ namespace Infrastructure.Repository
         #region Ctor 
 
         private readonly DataContext _dataContext;
+        private readonly IHttpContextAccessor _IhttpContextAccessor;
 
-        public UserRepository(DataContext dataContext)
+
+        public UserRepository(DataContext dataContext, IHttpContextAccessor httpContextAccessor)
         {
             _dataContext = dataContext;
+            _IhttpContextAccessor = httpContextAccessor;
         }
 
         #endregion
+
 
         #region Register
 
@@ -32,7 +41,7 @@ namespace Infrastructure.Repository
                 //add user to database
                 await _dataContext.Users.AddAsync(user);
 
-                
+
 
                 return true;
 
@@ -40,13 +49,57 @@ namespace Infrastructure.Repository
             else
                 return false;
 
-             
+
+        }
+        #endregion
+
+
+        #region LogIn
+        public async Task<bool> LogIn(User user)
+        {
+            if (_dataContext.Users.Any(p => p.UserName == user.UserName ||
+                                           p.Phone == user.Phone &&
+                                           p.Password == user.Password))
+            {
+
+                //Set Cookies
+
+                #region SetCoockie
+                var claims = new List<Claim>
+
+            {
+
+            new (ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new (ClaimTypes.Name, user.UserName),
+
+              };
+
+                var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(claimIdentity);
+
+                var authProps = new AuthenticationProperties();
+                //authProps.IsPersistent = model.RememberMe;
+
+                _IhttpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProps);
+
+                #endregion
+
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+
+
         }
         #endregion
 
         #region SaveChange
 
-        public void SaveChange() 
+        public void SaveChange()
         {
             _dataContext.SaveChanges();
         }
