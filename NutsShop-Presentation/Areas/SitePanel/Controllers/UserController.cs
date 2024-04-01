@@ -84,30 +84,40 @@ public class UserController : Controller
     #region LogIn
 
     [HttpGet]
-    public async Task<IActionResult> LogIn() 
+    public async Task<IActionResult> LogIn()
     {
         return View();
     }
 
+    [HttpPost]
+    public async Task<IActionResult> LogIn(UserLogInDTO userLogInDTO)
+    {
+        if (ModelState.IsValid && userLogInDTO != null)
+        {
+            var IsSucces = await _IUserService.LogIn(userLogInDTO);
 
-    //public Task<IActionResult> LogIn(UserLogInDTO userLogInDTO) 
-    //{
-    //    if (ModelState.IsValid)
-    //    {
+            if (IsSucces)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            else
+            {
+                TempData["Message"] = "This Username or Phone Not found or password Is Wrong";
+                return View();
+            }
+
+
+        }
+        else
+        {
+            return View();
+        }
 
 
 
+    }
 
-
-
-
-
-    //    }
-
-
-
-
-    //}
     #endregion
 
 }
