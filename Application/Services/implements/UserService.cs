@@ -53,8 +53,8 @@ namespace Application.Services.implements
 
             User user = new User()
             {
-                UserName = userLogInDTO.UserNameOrPhone,
-                Phone = userLogInDTO.UserNameOrPhone,
+                UserName = userLogInDTO.UserName,
+                Phone = userLogInDTO.UserName,
                 Password = PasswordHasher.EncodePasswordMd5(userLogInDTO.Password),
             };
 
