@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.UserRegisterDTO;
+using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace NutsShop_Presentation.Areas.SitePanel.Controllers;
@@ -11,7 +12,12 @@ public class UserController : Controller
 
     #region Ctor
 
-    
+    private readonly IUserService _IUserService;
+
+    public UserController(IUserService userService) 
+    {
+        _IUserService = userService;
+    }
 
     #endregion
 
@@ -32,11 +38,22 @@ public class UserController : Controller
     }
 
     [HttpPost]
-    public Task<IActionResult> Register(UserRegisterDTO userRegisterDTO)
+    public async Task<IActionResult> Register(UserRegisterDTO userRegisterDTO)
     {
+       var IsSucces = await _IUserService.Register(userRegisterDTO);
 
+        if (IsSucces)
+        {
+            _IUserService.SaveChange();
+            return Redirect("SitePanel/Home/Index");
+        }
+        else 
+        {
+            TempData["Message"] = "This Username or Phone Used Befor";
+            return View();
+        }
 
-        return View();
+        
     }
     #endregion
 

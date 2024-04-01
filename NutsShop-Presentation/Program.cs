@@ -1,4 +1,8 @@
+using Application.Services.implements;
+using Application.Services.Interfaces;
+using Domain.IRepository;
 using Infrastructure.Data;
+using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +19,11 @@ builder.Services.AddDbContext<DataContext>(option =>
 
 }
 );
+
+
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
