@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Dtos.UserRegisterDTO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace NutsShop_Presentation.Areas.SitePanel.Controllers;
 
@@ -7,10 +8,15 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers;
 [Area("SitePanel")]
 public class UserController : Controller
 {
-    public IActionResult Index()
-    {
-        return View();
-    }
+
+    #region Ctor
+
+    
+
+    #endregion
+
+
+
 
 
 
@@ -25,11 +31,13 @@ public class UserController : Controller
 
     }
 
-    //[HttpPost]
-    //public Task<IActionResult> Register() 
-    //{
+    [HttpPost]
+    public Task<IActionResult> Register(UserRegisterDTO userRegisterDTO)
+    {
 
-    //}
+
+        return View();
+    }
     #endregion
 
 }
