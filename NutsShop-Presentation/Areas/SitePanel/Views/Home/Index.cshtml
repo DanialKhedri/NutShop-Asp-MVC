@@ -1,4 +1,7 @@
-﻿<html>
+﻿@using NutsShop_Presentation.Areas.SitePanel.ViewModels
+@model IndexViewModel;
+
+<html>
 
 <style>
 
@@ -232,6 +235,12 @@
 
 
     <div class="categories">
+
+        @foreach (var item in Model.CategoryDTOs)
+        {
+            
+        }
+
         <div class="category">
             <img src="category1.jpg" alt="Category 1">
             <span>دسته بندی ۱</span>

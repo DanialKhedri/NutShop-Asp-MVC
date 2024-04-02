@@ -16,6 +16,7 @@ namespace Domain.Entities.Product.Category
 
         public string CategoryUniqueName { get; set; }
 
+        public string Image { get; set; }
 
         public bool Isdelete { get; set; } = false;
 

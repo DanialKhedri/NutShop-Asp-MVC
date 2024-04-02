@@ -14,11 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\SitePanel\Data\" />
-    <Folder Include="Areas\SitePanel\Models\" />
     <Folder Include="wwwroot\Images\Logo\" />
-    <Folder Include="wwwroot\Images\Categories\" />
-    <Folder Include="wwwroot\Images\Products\" />
   </ItemGroup>
 
   <ItemGroup>
