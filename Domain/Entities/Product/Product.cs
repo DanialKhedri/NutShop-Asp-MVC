@@ -31,6 +31,7 @@ namespace Domain.Entities.Product
 
         public ICollection<OrderDetail> orderDetails { get; set; }
         public ICollection<SelectedCategory.SelectedCategory> selectedCategories { get; set; }
+
         #endregion
     }
 }

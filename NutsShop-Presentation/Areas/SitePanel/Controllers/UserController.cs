@@ -82,6 +82,7 @@ public class UserController : Controller
     }
     #endregion
 
+
     #region LogIn
 
     [HttpGet]
@@ -121,6 +122,7 @@ public class UserController : Controller
 
     #endregion
 
+
     #region LogOut
 
     public async Task<IActionResult> LogOut() 
@@ -133,4 +135,5 @@ public class UserController : Controller
     }
 
     #endregion
+
 }

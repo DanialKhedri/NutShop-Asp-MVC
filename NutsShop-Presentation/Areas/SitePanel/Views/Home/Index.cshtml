@@ -236,10 +236,7 @@
 
     <div class="categories">
 
-        @foreach (var item in Model.CategoryDTOs)
-        {
-            
-        }
+     
 
         <div class="category">
             <img src="category1.jpg" alt="Category 1">
@@ -264,64 +261,20 @@
 
     <div class="products">
 
-        <div class="product">
-            <img src="product1.jpg" alt="Product 1">
-            <h3>محصول ۱</h3>
-            <p>توضیحات محصول ۱</p>
-            <span>قیمت: ۱۰۰ تومان</span>
-            <button>افزودن به سبد خرید</button>
-        </div>
+        @foreach (var item in Model.ProductsDTOs)
+        {
 
-        <div class="product">
-            <img src="product2.jpg" alt="Product 2">
-            <h3>محصول ۲</h3>
-            <p>توضیحات محصول ۲</p>
-            <span>قیمت: ۱۵۰ تومان</span>
-            <button>افزودن به سبد خرید</button>
-        </div>
+            <div class="product">
 
-        <div class="product">
-            <img src="product3.jpg" alt="Product 3">
-            <h3>محصول ۳</h3>
-            <p>توضیحات محصول ۳</p>
-            <span>قیمت: ۲۰۰ تومان</span>
-            <button>افزودن به سبد خرید</button>
-        </div>
+                <img src="~/Images/Products/@item.Image" alt="Product 1">
+                <h3>@item.ProductName</h3>
+                <p>توضیحات محصول ۱</p>
+                <span>@item.Price</span>
+                <button>افزودن به سبد خرید</button>
+            </div>
 
-        <div class="product">
-            <img src="product3.jpg" alt="Product 3">
-            <h3>محصول ۳</h3>
-            <p>توضیحات محصول ۳</p>
-            <span>قیمت: ۲۰۰ تومان</span>
-            <button>افزودن به سبد خرید</button>
-        </div>
-
-
-        <div class="product">
-            <img src="product3.jpg" alt="Product 3">
-            <h3>محصول ۳</h3>
-            <p>توضیحات محصول ۳</p>
-            <span>قیمت: ۲۰۰ تومان</span>
-            <button>افزودن به سبد خرید</button>
-        </div>
-
-
-        <div class="product">
-            <img src="product3.jpg" alt="Product 3">
-            <h3>محصول ۳</h3>
-            <p>توضیحات محصول ۳</p>
-            <span>قیمت: ۲۰۰ تومان</span>
-            <button>افزودن به سبد خرید</button>
-        </div>
-
-
-        <div class="product">
-            <img src="product3.jpg" alt="Product 3">
-            <h3>محصول ۳</h3>
-            <p>توضیحات محصول ۳</p>
-            <span>قیمت: ۲۰۰ تومان</span>
-            <button>افزودن به سبد خرید</button>
-        </div>
+        }
+       
 
     </div>
 

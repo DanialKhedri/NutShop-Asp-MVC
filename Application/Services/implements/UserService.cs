@@ -48,6 +48,9 @@ namespace Application.Services.implements
 
         #endregion
 
+
+        #region LogIn
+
         public async Task<bool> LogIn(UserLogInDTO userLogInDTO) 
         {
 
@@ -62,6 +65,7 @@ namespace Application.Services.implements
 
         }
 
+        #endregion
 
         #region SavChanges
 
