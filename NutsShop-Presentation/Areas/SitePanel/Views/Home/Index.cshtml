@@ -213,17 +213,18 @@
                     <label>@User.Identity.Name</label>
                 </div>
 
-               <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogOut">خروج</a></div>
+                <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogOut">خروج</a></div>
 
             }
-                
-             else{
+
+            else
+            {
 
                 <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogIn">ورود</a></div>
                 <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="Register">ثبت نام</a></div>
 
-                }
-           
+            }
+
 
 
         </div>
@@ -236,24 +237,18 @@
 
     <div class="categories">
 
-     
+        @foreach (var item in Model.CategoryDTOs)
+        {
+            <div class="category">
 
-        <div class="category">
-            <img src="category1.jpg" alt="Category 1">
-            <span>دسته بندی ۱</span>
-        </div>
-        <div class="category">
-            <img src="category2.jpg" alt="Category 2">
-            <span>دسته بندی ۲</span>
-        </div>
-        <div class="category">
-            <img src="category3.jpg" alt="Category 3">
-            <span>دسته بندی ۳</span>
-        </div>
-        <div class="category">
-            <img src="category4.jpg" alt="Category 4">
-            <span>دسته بندی ۴</span>
-        </div>
+                <img src="~/Images/Categories/@item.Image" alt="Category 1">
+                <span>@item.CategoryTitle</span>
+
+            </div>
+        }
+
+
+        
     </div>
 
 
@@ -274,7 +269,7 @@
             </div>
 
         }
-       
+
 
     </div>
 
