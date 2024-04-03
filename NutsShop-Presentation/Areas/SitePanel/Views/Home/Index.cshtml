@@ -191,16 +191,18 @@
 
         <div class="navbarleft">
 
-            <div class="menu">منو</div>
+            <div class="menu">سبد خرید</div>
             <div class="menu">منو</div>
             <div class="menu">منو</div>
 
         </div>
 
         <div class="navbarcenter">
+
             <div class="logo">
                 <img>img<img>
             </div>
+
         </div>
 
         <div class="navbarright">
@@ -263,9 +265,9 @@
 
                 <img src="~/Images/Products/@item.Image" alt="Product 1">
                 <h3>@item.ProductName</h3>
-                <p>توضیحات محصول ۱</p>
+                <p> محصول۱</p>
                 <span>@item.Price</span>
-                <button>افزودن به سبد خرید</button>
+                <a asp-area="SitePanel" asp-controller="User" asp-action="AddProductToCart">   <button>افزودن به سبد خرید</button></a>
             </div>
 
         }

@@ -1,4 +1,6 @@
-﻿using Domain.Entities.Product;
+﻿using Domain.Entities.Order;
+using Domain.Entities.Order.OrderDetail;
+using Domain.Entities.Product;
 using Domain.Entities.Product.Category;
 using Domain.Entities.Product.SelectedCategory;
 using Domain.Entities.User;
@@ -46,9 +48,11 @@ namespace Infrastructure.Data
         public DbSet<SelectedCategory> SelectedCategories { get; set; }
 
 
-        
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
        
+
 
 
         #endregion

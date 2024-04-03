@@ -136,4 +136,13 @@ public class UserController : Controller
 
     #endregion
 
+
+    public async Task<IActionResult> AddProductToCart() 
+    {
+
+
+
+        return RedirectToAction("Index", "Home");
+
+    }
 }
