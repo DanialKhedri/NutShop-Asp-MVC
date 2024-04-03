@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities.Order.OrderDetail;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,7 @@ namespace Domain.Entities.Product
 
         public int Price { get; set; }
 
-        public int? Weight { get; set; }
-
-
         public string Image { get; set; }
-
 
 
         public bool Isdelete { get; set; } = false;
@@ -32,7 +29,7 @@ namespace Domain.Entities.Product
 
         #region Navigation Properties
 
-
+        public ICollection<OrderDetail> orderDetails { get; set; }
         public ICollection<SelectedCategory.SelectedCategory> selectedCategories { get; set; }
         #endregion
     }
