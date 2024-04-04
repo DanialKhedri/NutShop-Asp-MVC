@@ -3,6 +3,7 @@ using Application.Dtos.UserRegisterDTO;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace NutsShop_Presentation.Areas.SitePanel.Controllers;
 
@@ -15,10 +16,12 @@ public class UserController : Controller
     #region Ctor
 
     private readonly IUserService _IUserService;
+    private readonly IOrderService _IOrderService;
 
-    public UserController(IUserService userService)
+    public UserController(IUserService userService,IOrderService orderService)
     {
         _IUserService = userService;
+        _IOrderService = orderService;
     }
 
     #endregion
@@ -137,10 +140,10 @@ public class UserController : Controller
     #endregion
 
 
-    public async Task<IActionResult> AddProductToCart() 
+    public async Task<IActionResult> AddProductToCart(int ProductId) 
     {
 
-
+        _IOrderService.AddProductToCart(Convert.ToInt32(ClaimTypes.NameIdentifier),ProductId);
 
         return RedirectToAction("Index", "Home");
 

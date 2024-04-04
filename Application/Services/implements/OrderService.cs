@@ -14,13 +14,19 @@ namespace Application.Services.implements
 
         private readonly IOrderRepository _IOrderRepository;
 
-        public OrderService(IOrderRepository IOrderRepository) 
+        public OrderService(IOrderRepository IOrderRepository)
         {
             _IOrderRepository = IOrderRepository;
         }
 
         #endregion
 
+
+        public async void AddProductToCart(int UserId, int ProductId) 
+        {
+            _IOrderRepository.AddProductToCart(UserId, ProductId);
+
+        }
 
 
 

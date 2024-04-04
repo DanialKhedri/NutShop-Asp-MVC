@@ -9,6 +9,7 @@ namespace Application.Services.Interfaces
     public interface IOrderService
     {
 
+        public void AddProductToCart(int UserId, int ProductId);
 
 
 
