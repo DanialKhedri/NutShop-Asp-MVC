@@ -34,7 +34,7 @@ namespace Infrastructure.Repository
 
         public async Task<Product> GetProductById(int Id) 
         {
-           var product = await _dataContext.Products.FirstOrDefaultAsync();
+           var product = await _dataContext.Products.FirstOrDefaultAsync(p => p.Id == Id);
 
             return product;
         }

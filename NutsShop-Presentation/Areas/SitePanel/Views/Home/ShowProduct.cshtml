@@ -12,15 +12,18 @@
 
     <style>
         body {
+
             width: 100%;
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+
         }
 
         .container {
+
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -35,6 +38,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
+
         }
 
         img {
@@ -73,22 +77,24 @@
             text-decoration: none;
             transition: background-color 0.3s ease;
             width: 50%;
+            font-weight:bold;
         }
 
             .buy-button:hover {
                 background-color: #45a049;
             }
 
-        hr {
+        hr{
             border: none;
             border-top: 1px solid #ccc;
             margin: 20px 0;
         }
 
         select {
+           
             margin: 20px;
             padding: 10px 20px;
-            font-size: 16px;
+            font-weight:bold;
             border-radius: 5px;
         }
 
@@ -119,6 +125,12 @@
 
             <hr></hr>
 
+            <div>
+
+                <p>@Model.Description</p>
+
+            </div>
+
             <div class="pricecontainer">
 
                 <h1 style="margin:10px;">تومان</h1>
@@ -128,9 +140,7 @@
 
             <hr></hr>
 
-            <div>
-                <p>@Model.Description</p>
-            </div>
+         
 
             <div>
 
@@ -144,7 +154,7 @@
 
                 </select>
 
-                <button class="buy-button">خرید</button>
+                <button class="buy-button">افزودن به سبد خرید</button>
 
             </div>
 

@@ -69,8 +69,8 @@ namespace Application.Services.implements
                 Id = product.Id,
                 ProductName = product.ProductName,
                 Image = product.Image,
-                Price = product.Price
-
+                Price = product.Price,
+                Description =product.Description
             };
 
             //Return
