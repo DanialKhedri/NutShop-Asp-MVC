@@ -142,10 +142,19 @@ public class UserController : Controller
 
     public async Task<IActionResult> AddProductToCart(int ProductId) 
     {
+        if (User.Identity.IsAuthenticated)
+        {
+            _IOrderService.AddProductToCart(Convert.ToInt32(ClaimTypes.NameIdentifier), ProductId);
 
-        _IOrderService.AddProductToCart(Convert.ToInt32(ClaimTypes.NameIdentifier),ProductId);
+            return RedirectToAction("Index", "Home");
+        }
 
-        return RedirectToAction("Index", "Home");
+        else
+        {
+            //Go to LogIn Page
+
+            return RedirectToAction(nameof(LogIn));
+        }
 
     }
 }

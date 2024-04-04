@@ -56,6 +56,30 @@ namespace Application.Services.implements
 
         #endregion
 
+        #region GetProductById
+
+        public async Task<ProductIndexDTO> GetProductById(int Id) 
+        {
+            //Get product By Id
+            Product product = await _IProductRepository.GetProductById(Id);
+
+            //object mapping
+            ProductIndexDTO productIndexDTO = new ProductIndexDTO()
+            {
+                Id = product.Id,
+                ProductName = product.ProductName,
+                Image = product.Image,
+                Price = product.Price
+
+            };
+
+            //Return
+
+            return productIndexDTO;
+
+
+        }
+        #endregion
 
     }
 }

@@ -37,6 +37,17 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         }
         #endregion
 
+        #region ShowProduct
 
+        public async Task<IActionResult> ShowProduct(int Id) 
+        {
+
+           var productdto = await _IProductService.GetProductById(Id);
+
+
+
+            return View(productdto);
+        }  
+        #endregion
     }
 }

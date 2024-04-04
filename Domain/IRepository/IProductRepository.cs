@@ -11,7 +11,8 @@ namespace Domain.IRepository
     {
         public Task<List<Product>> GetAllProducts();
 
-       
+        public Task<Product> GetProductById(int Id);
+
 
 
     }

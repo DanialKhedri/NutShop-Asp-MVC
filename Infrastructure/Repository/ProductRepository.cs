@@ -30,5 +30,15 @@ namespace Infrastructure.Repository
         }
         #endregion
 
+        #region GetProductById
+
+        public async Task<Product> GetProductById(int Id) 
+        {
+           var product = await _dataContext.Products.FirstOrDefaultAsync();
+
+            return product;
+        }
+        #endregion
+
     }
 }

@@ -11,5 +11,8 @@ namespace Application.Services.Interfaces
     {
         public Task<List<ProductIndexDTO>> GetAllProducts();
 
+        public Task<ProductIndexDTO> GetProductById(int Id);
+
+
     }
 }
