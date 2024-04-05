@@ -47,7 +47,19 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
 
             return View(productdto);
-        }  
+        }
+        #endregion
+
+        #region Cart
+
+        public async void ShowCart()
+        {
+
+
+
+
+        }
+
         #endregion
     }
 }

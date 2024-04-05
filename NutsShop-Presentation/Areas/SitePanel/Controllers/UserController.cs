@@ -141,6 +141,8 @@ public class UserController : Controller
     #endregion
 
 
+    #region AddProductToCart
+
     public async Task<IActionResult> AddProductToCart(int ProductId) 
     {
         if (User.Identity.IsAuthenticated)
@@ -164,4 +166,6 @@ public class UserController : Controller
         }
 
     }
+
+    #endregion
 }

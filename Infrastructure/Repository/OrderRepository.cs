@@ -2,6 +2,7 @@
 using Domain.Entities.Order.OrderDetail;
 using Domain.IRepository;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        #region AddProductToCart
         public void AddProductToCart(int UserId, int ProductId)
         {
 
@@ -55,6 +57,7 @@ namespace Infrastructure.Repository
                     Count = 1,
                     Price = _datacontext.Products.Find(ProductId).Price,
                     ProductId = ProductId,
+
                 };
 
                 _datacontext.OrderDetails.Add(neworderdetail);
@@ -89,7 +92,24 @@ namespace Infrastructure.Repository
             }
 
         }
+        #endregion
 
+
+        #region GetAllOrderDetails
+
+        public async Task<List<OrderDetail>> GetAllOrderDetails(int UserId)
+        {
+
+            Order? Order = await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId);
+
+            List<OrderDetail> orderdetails = await _datacontext.OrderDetails.Where(o => o.OrderId == Order.Id).ToListAsync();
+
+            return orderdetails;
+
+
+        }
+
+        #endregion
 
         #region SaveChange
 
