@@ -21,11 +21,11 @@ namespace Infrastructure.Repository
         #endregion
 
 
-        public async void AddProductToCart(int UserId, int ProductId)
+        public void AddProductToCart(int UserId, int ProductId)
         {
 
             Order? order = _datacontext.Orders
-                         .FirstOrDefault(o => o.UserId == UserId);
+                          .FirstOrDefault(o => o.UserId == UserId);
 
             if (order == null)
             {
@@ -43,7 +43,7 @@ namespace Infrastructure.Repository
                 };
 
                 _datacontext.Orders.Add(neworder);
-
+                SaveChange();
 
 
 
@@ -51,17 +51,16 @@ namespace Infrastructure.Repository
 
                 OrderDetail neworderdetail = new OrderDetail()
                 {
-                    OrderId = neworder.Id,
+                    OrderId = _datacontext.Orders.FirstOrDefault(o => o.UserId == UserId).Id,
                     Count = 1,
-                    Price = 1100,
+                    Price = _datacontext.Products.Find(ProductId).Price,
                     ProductId = ProductId,
                 };
 
                 _datacontext.OrderDetails.Add(neworderdetail);
 
-                //SaveChanges
+                SaveChange();
 
-                await _datacontext.SaveChangesAsync();
             }
 
 
@@ -74,7 +73,7 @@ namespace Infrastructure.Repository
 
                     OrderId = order.Id,
                     Count = 1,
-                    Price = 1100,
+                    Price = _datacontext.Products.Find(ProductId).Price,
                     ProductId = ProductId,
 
                 };
@@ -82,14 +81,22 @@ namespace Infrastructure.Repository
                 _datacontext.OrderDetails.Add(orderDetail);
 
 
-                //SaveChanges
 
-                 _datacontext.SaveChanges();
+
+
+
+
             }
 
         }
 
 
+        #region SaveChange
 
+        public void SaveChange()
+        {
+            _datacontext.SaveChanges();
+        }
+        #endregion
     }
 }

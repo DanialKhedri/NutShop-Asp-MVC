@@ -11,6 +11,7 @@ namespace Domain.IRepository
 
         public void AddProductToCart(int UserId, int ProductId);
 
+        public void SaveChange();
 
 
     }

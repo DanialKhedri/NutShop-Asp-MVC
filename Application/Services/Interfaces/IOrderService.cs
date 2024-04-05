@@ -11,6 +11,7 @@ namespace Application.Services.Interfaces
 
         public void AddProductToCart(int UserId, int ProductId);
 
+        public void SaveChange();
 
 
 
