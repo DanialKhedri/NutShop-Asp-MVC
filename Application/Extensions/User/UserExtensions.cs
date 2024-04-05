@@ -21,8 +21,6 @@ namespace Application.Extensions
             return Int32.Parse(data.Value);
 
 
-
-
         }
 
         public static int GetUserId(this IPrincipal principal)

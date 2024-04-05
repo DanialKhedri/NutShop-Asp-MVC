@@ -14,14 +14,14 @@ namespace Infrastructure.Repository
     {
         #region Ctor 
         private readonly DataContext _datacontext;
-        public OrderRepository(DataContext dataContext) 
+        public OrderRepository(DataContext dataContext)
         {
             _datacontext = dataContext;
         }
         #endregion
 
 
-        public async void AddProductToCart(int UserId,int ProductId) 
+        public async void AddProductToCart(int UserId, int ProductId)
         {
 
             Order? order = _datacontext.Orders
@@ -29,18 +29,23 @@ namespace Infrastructure.Repository
 
             if (order == null)
             {
+
                 //Add Order For User
 
                 Order neworder = new Order()
                 {
+
                     UserId = UserId,
                     CreateTime = DateTime.Now,
                     IsFinaly = false,
                     Sum = 0,
-                   
+
                 };
 
                 _datacontext.Orders.Add(neworder);
+
+
+
 
                 //Add OrderDetail
 
@@ -48,48 +53,38 @@ namespace Infrastructure.Repository
                 {
                     OrderId = neworder.Id,
                     Count = 1,
-                    Price = _datacontext.Products.Find(ProductId).Price,
+                    Price = 1100,
                     ProductId = ProductId,
                 };
 
+                _datacontext.OrderDetails.Add(neworderdetail);
+
+                //SaveChanges
+
+                await _datacontext.SaveChangesAsync();
             }
-
-
 
 
             else
             {
+                //Add OrderDetail
 
-                var orderdetail = _datacontext.OrderDetails
-                                  .FirstOrDefault(o => o.OrderId == order.Id
-                                                 && o.ProductId == ProductId);
-
-
-                if (orderdetail == null)
+                OrderDetail orderDetail = new OrderDetail()
                 {
 
-                    OrderDetail orderDetail = new OrderDetail()
-                    {
+                    OrderId = order.Id,
+                    Count = 1,
+                    Price = 1100,
+                    ProductId = ProductId,
 
-                        OrderId = order.Id,
-                        Count = 1,
-                        Price = _datacontext.Products.Find(ProductId).Price,
-                        ProductId = ProductId,
+                };
 
-                    };
-
-                    _datacontext.OrderDetails.Add(orderDetail);
-
-                }
+                _datacontext.OrderDetails.Add(orderDetail);
 
 
-                else
-                {
-                    orderdetail.Count++;
-                    _datacontext.Update(orderdetail);
-                }
+                //SaveChanges
 
-
+                 _datacontext.SaveChanges();
             }
 
         }
