@@ -50,6 +50,8 @@ namespace Application.Services.implements
                     Producttitle = item.Producttitle
                 };
 
+                orderDetailDTOs.Add(orderDetailDTO);
+
             }
 
             return orderDetailDTOs;

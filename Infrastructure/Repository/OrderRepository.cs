@@ -24,7 +24,7 @@ namespace Infrastructure.Repository
 
 
         #region AddProductToCart
-        public void AddProductToCart(int UserId, int ProductId)
+        public async void AddProductToCart(int UserId, int ProductId)
         {
 
             Order? order = _datacontext.Orders
@@ -90,7 +90,7 @@ namespace Infrastructure.Repository
                 };
 
                 _datacontext.OrderDetails.Add(orderDetail);
-
+                SaveChange();
 
             }
 
@@ -131,9 +131,9 @@ namespace Infrastructure.Repository
 
         #region SaveChange
 
-        public void SaveChange()
+        public async void SaveChange()
         {
-            _datacontext.SaveChanges();
+            _datacontext.SaveChangesAsync();
         }
         #endregion
     }

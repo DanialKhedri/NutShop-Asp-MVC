@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.CategoryDTO;
+using Application.Dtos.OrderDetailDTO;
 using Application.Dtos.ProductDTO;
 using Application.Extensions;
 using Application.Services.Interfaces;
@@ -56,13 +57,22 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
         #region Cart
 
-        public async Task<IActionResult> ShowCart()
+        
+        public async Task<IActionResult> Cart()
         {
-            int userid = User.GetUserId();
+            if (User.Identity.IsAuthenticated)
+            {
+                int userid = User.GetUserId();
 
-            var orderdetailslist = _IOrderService.GetAllOrderDetails(userid);
+                List<OrderDetailDTO> orderdetailslist = await _IOrderService.GetAllOrderDetails(userid);
 
-            return View(orderdetailslist);
+                return View(orderdetailslist);
+            }
+
+            else 
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
 
         }
