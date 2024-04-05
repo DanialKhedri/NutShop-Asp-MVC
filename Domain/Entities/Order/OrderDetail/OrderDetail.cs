@@ -18,10 +18,12 @@ namespace Domain.Entities.Order.OrderDetail
 
         public int ProductId { get; set; }
 
-
-        public int Count { get; set; }
-
         public int Price { get; set; }
+
+
+        public string? Producttitle { get; set; }
+
+        public string? ProductImage { get; set; }
 
         #endregion
 

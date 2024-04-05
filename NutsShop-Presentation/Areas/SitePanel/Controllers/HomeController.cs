@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.CategoryDTO;
 using Application.Dtos.ProductDTO;
+using Application.Extensions;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NutsShop_Presentation.Areas.SitePanel.ViewModels;
@@ -13,10 +14,13 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
         private readonly IProductService _IProductService;
         private readonly ICategoryService _ICategoryService;
-        public HomeController(IProductService productService, ICategoryService categoryService)
+        private readonly IOrderService _IOrderService;
+
+        public HomeController(IProductService productService, ICategoryService categoryService, IOrderService orderService)
         {
             _IProductService = productService;
             _ICategoryService = categoryService;
+            _IOrderService = orderService;
 
         }
         #endregion
@@ -39,10 +43,10 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
         #region ShowProduct
 
-        public async Task<IActionResult> ShowProduct(int Id) 
+        public async Task<IActionResult> ShowProduct(int Id)
         {
 
-           var productdto = await _IProductService.GetProductById(Id);
+            var productdto = await _IProductService.GetProductById(Id);
 
 
 
@@ -52,10 +56,13 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
         #region Cart
 
-        public async void ShowCart()
+        public async Task<IActionResult> ShowCart()
         {
+            int userid = User.GetUserId();
 
+            var orderdetailslist = _IOrderService.GetAllOrderDetails(userid);
 
+            return View(orderdetailslist);
 
 
         }

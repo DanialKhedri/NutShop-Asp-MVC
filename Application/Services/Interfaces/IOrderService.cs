@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Dtos.OrderDetailDTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace Application.Services.Interfaces
     {
 
         public void AddProductToCart(int UserId, int ProductId);
+
+        public Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId);
+
 
         public void SaveChange();
 

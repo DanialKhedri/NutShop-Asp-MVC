@@ -25,7 +25,7 @@ namespace Domain.Entities.Order
 
         #region Navigation Properties
 
-        public ICollection<OrderDetail.OrderDetail> orderDetails { get; set; }
+        public ICollection<OrderDetail.OrderDetail>? orderDetails { get; set; }
 
         #endregion
 

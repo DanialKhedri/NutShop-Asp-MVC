@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities.Order.OrderDetail;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace Domain.IRepository
     {
 
         public void AddProductToCart(int UserId, int ProductId);
+
+        public Task<List<OrderDetail>> GetAllOrderDetails(int UserId);
+
 
         public void SaveChange();
 

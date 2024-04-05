@@ -1,5 +1,6 @@
 ﻿using Domain.Entities.Order;
 using Domain.Entities.Order.OrderDetail;
+using Domain.Entities.Product;
 using Domain.IRepository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -49,13 +50,16 @@ namespace Infrastructure.Repository
 
 
 
+                Product? product = _datacontext.Products.Find(ProductId);
+
                 //Add OrderDetail
 
                 OrderDetail neworderdetail = new OrderDetail()
                 {
                     OrderId = _datacontext.Orders.FirstOrDefault(o => o.UserId == UserId).Id,
-                    Count = 1,
-                    Price = _datacontext.Products.Find(ProductId).Price,
+                    ProductImage = product.Image,
+                    Price = product.Price,
+                    Producttitle = product.ProductName,
                     ProductId = ProductId,
 
                 };
@@ -71,22 +75,21 @@ namespace Infrastructure.Repository
             {
                 //Add OrderDetail
 
+                Product? product = _datacontext.Products.Find(ProductId);
+
+
                 OrderDetail orderDetail = new OrderDetail()
                 {
 
                     OrderId = order.Id,
-                    Count = 1,
-                    Price = _datacontext.Products.Find(ProductId).Price,
+                    ProductImage = product.Image,
+                    Price = product.Price,
+                    Producttitle = product.ProductName,
                     ProductId = ProductId,
 
                 };
 
                 _datacontext.OrderDetails.Add(orderDetail);
-
-
-
-
-
 
 
             }
@@ -100,11 +103,26 @@ namespace Infrastructure.Repository
         public async Task<List<OrderDetail>> GetAllOrderDetails(int UserId)
         {
 
-            Order? Order = await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId);
+          
 
-            List<OrderDetail> orderdetails = await _datacontext.OrderDetails.Where(o => o.OrderId == Order.Id).ToListAsync();
 
-            return orderdetails;
+            Order? order = _datacontext.Orders.FirstOrDefault(o => o.UserId == UserId && o.IsFinaly == false);
+
+
+            if (order != null)
+            {
+                List<OrderDetail> orderdetails = await _datacontext.OrderDetails.
+                                                   Where(o => o.OrderId == order.Id).ToListAsync();
+
+
+
+                return orderdetails;
+
+
+            }
+
+            else return null;
+
 
 
         }
