@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -57,9 +58,14 @@ namespace Infrastructure.Repository
         #region LogIn
         public async Task<bool> LogIn(User user)
         {
-            if (_dataContext.Users.Any(p => p.UserName == user.UserName ||
-                                           p.Phone == user.Phone &&
-                                           p.Password == user.Password))
+
+            User? Tempuser = await _dataContext.Users.FirstOrDefaultAsync(p => p.UserName == user.UserName ||
+                                                                          p.Phone == user.Phone &&
+                                                                          p.Password == user.Password);
+             
+
+
+            if (Tempuser !=null)
             {
 
                 //Set Cookies
@@ -69,8 +75,8 @@ namespace Infrastructure.Repository
 
             {
 
-            new (ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new (ClaimTypes.Name, user.UserName),
+            new (ClaimTypes.NameIdentifier, Tempuser.Id.ToString()),
+            new (ClaimTypes.Name, Tempuser.UserName),
 
               };
 
@@ -78,6 +84,7 @@ namespace Infrastructure.Repository
                 var principal = new ClaimsPrincipal(claimIdentity);
 
                 var authProps = new AuthenticationProperties();
+
                 //authProps.IsPersistent = model.RememberMe;
 
                 _IhttpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProps);
@@ -96,6 +103,9 @@ namespace Infrastructure.Repository
 
         }
         #endregion
+
+
+      
 
 
         #region SaveChange

@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
+using Application.Extensions;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -144,7 +145,11 @@ public class UserController : Controller
     {
         if (User.Identity.IsAuthenticated)
         {
-            _IOrderService.AddProductToCart(Convert.ToInt32(ClaimTypes.NameIdentifier), ProductId);
+
+            int UserId =  UserExtensions.GetUserId(User);
+
+          
+            _IOrderService.AddProductToCart(UserId, ProductId);
 
             return RedirectToAction("Index", "Home");
         }
