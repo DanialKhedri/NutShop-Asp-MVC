@@ -14,6 +14,7 @@ namespace Application.Services.Interfaces
 
         public Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId);
 
+        public void RemoveOrderDetail(int Id);
 
         public void SaveChange();
 

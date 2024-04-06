@@ -82,7 +82,7 @@
         <h1>سبد خرید</h1>
 
         <div class="product-list">
-            
+
 
             @if (Model != null)
             {
@@ -97,7 +97,11 @@
 
                             <h2>@item.Producttitle</h2>
                             <p>@item.Price</p>
-                            <button>...</button>
+                            <button>
+                                <a asp-area="SitePanel" asp-controller="Home" asp-action="RemoveOrderDetail"
+                                   asp-route-Id="@item.Id">Remove</a>
+                            </button>
+
 
                         </div>
 
@@ -110,9 +114,9 @@
             {
                 <h1>No Order</h1>
             }
-            
 
-           
+
+
             <!-- ادامه محصولات -->
         </div>
 

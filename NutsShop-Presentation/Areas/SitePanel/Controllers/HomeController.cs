@@ -78,5 +78,17 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         }
 
         #endregion
+
+        #region RemoveOrderDetail
+
+        public async Task<IActionResult> RemoveOrderDetail(int Id) 
+        {
+            _IOrderService.RemoveOrderDetail(Id);
+
+            return RedirectToAction(nameof(Cart));
+        }
+
+
+        #endregion
     }
 }

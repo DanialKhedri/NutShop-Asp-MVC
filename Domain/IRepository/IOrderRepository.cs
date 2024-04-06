@@ -15,6 +15,9 @@ namespace Domain.IRepository
         public Task<List<OrderDetail>> GetAllOrderDetails(int UserId);
 
 
+        public void RemoveOrderDetail(int Id);
+
+
         public void SaveChange();
 
 

@@ -103,7 +103,7 @@ namespace Infrastructure.Repository
         public async Task<List<OrderDetail>> GetAllOrderDetails(int UserId)
         {
 
-          
+
 
 
             Order? order = _datacontext.Orders.FirstOrDefault(o => o.UserId == UserId && o.IsFinaly == false);
@@ -124,6 +124,30 @@ namespace Infrastructure.Repository
             else return null;
 
 
+
+        }
+
+        #endregion
+
+        #region RemoveOrderDetail
+
+        public async void RemoveOrderDetail(int Id)
+        {
+            OrderDetail orderDetail = await _datacontext.OrderDetails.FindAsync(Id);
+            _datacontext.OrderDetails.Remove(orderDetail);
+            SaveChange();
+
+            int orderId = orderDetail.OrderId;
+            
+            bool Empty = await _datacontext.OrderDetails.AnyAsync(o => o.OrderId == orderId);
+
+            if (!Empty)
+            {
+                var order = await _datacontext.Orders.FindAsync(orderId);
+                if (order != null)             
+                _datacontext.Orders.Remove(order);
+                SaveChange();
+            }
 
         }
 

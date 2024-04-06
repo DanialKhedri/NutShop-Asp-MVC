@@ -57,7 +57,15 @@ namespace Application.Services.implements
             return orderDetailDTOs;
         }
         #endregion
-        
+
+        #region RemoveOrderDetail
+
+        public async void RemoveOrderDetail(int Id) 
+        {
+            _IOrderRepository.RemoveOrderDetail(Id);
+        }
+        #endregion
+
         #region SaveChange
         public void SaveChange() 
         {
