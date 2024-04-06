@@ -131,22 +131,29 @@ namespace Infrastructure.Repository
 
         #region RemoveOrderDetail
 
-        public async void RemoveOrderDetail(int Id)
+        public void RemoveOrderDetail(int Id)
         {
-            OrderDetail orderDetail = await _datacontext.OrderDetails.FindAsync(Id);
+            OrderDetail orderDetail = _datacontext.OrderDetails.Find(Id);
+
             _datacontext.OrderDetails.Remove(orderDetail);
-            SaveChange();
+
+            _datacontext.SaveChanges();
 
             int orderId = orderDetail.OrderId;
-            
-            bool Empty = await _datacontext.OrderDetails.AnyAsync(o => o.OrderId == orderId);
+
+            bool Empty = _datacontext.OrderDetails.Any(o => o.OrderId == orderId);
 
             if (!Empty)
             {
-                var order = await _datacontext.Orders.FindAsync(orderId);
-                if (order != null)             
-                _datacontext.Orders.Remove(order);
-                SaveChange();
+                var order = _datacontext.Orders.Find(orderId);
+                if (order != null)
+                {
+
+                    _datacontext.Orders.Remove(order);
+                    _datacontext.SaveChanges();
+
+                }
+
             }
 
         }

@@ -35,22 +35,26 @@ namespace Application.Services.implements
         #region GetAllOrderDetails
         public async Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId) 
         {
-            List<OrderDetail> Orderdetails = await _IOrderRepository.GetAllOrderDetails(UserId);
+            List<OrderDetail>? Orderdetails = await _IOrderRepository.GetAllOrderDetails(UserId);
 
-            List<OrderDetailDTO> orderDetailDTOs = new List<OrderDetailDTO>();
+            List<OrderDetailDTO>? orderDetailDTOs = new List<OrderDetailDTO>();
 
-            foreach (var item in Orderdetails)
+            if (Orderdetails != null)
             {
-
-                OrderDetailDTO orderDetailDTO = new OrderDetailDTO()
+                foreach (var item in Orderdetails)
                 {
-                    Id = item.Id,
-                    Price = item.Price,
-                    ProductImage = item.ProductImage,
-                    Producttitle = item.Producttitle
-                };
 
-                orderDetailDTOs.Add(orderDetailDTO);
+                    OrderDetailDTO orderDetailDTO = new OrderDetailDTO()
+                    {
+                        Id = item.Id,
+                        Price = item.Price,
+                        ProductImage = item.ProductImage,
+                        Producttitle = item.Producttitle
+                    };
+
+                    orderDetailDTOs.Add(orderDetailDTO);
+
+                }
 
             }
 
