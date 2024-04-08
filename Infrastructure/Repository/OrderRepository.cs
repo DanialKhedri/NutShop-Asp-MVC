@@ -37,13 +37,13 @@ namespace Infrastructure.Repository
             if (order == null)
             {
 
-
                 //Add Order
                 await AddOrder(UserId);
 
 
                 //Add OrderDetail
                 await AddOrderDetail(UserId, ProductId);
+
 
                 //Update Sum
                 await UpdateSum(UserId);
@@ -78,7 +78,7 @@ namespace Infrastructure.Repository
 
             if (order != null)
             {
-                List<OrderDetail>? orderdetails = await _datacontext.OrderDetails                    
+                List<OrderDetail>? orderdetails = await _datacontext.OrderDetails
                                                                    .Where(o => o.OrderId == order.Id)
                                                                    .ToListAsync();
 
@@ -98,9 +98,9 @@ namespace Infrastructure.Repository
 
         #region RemoveOrderDetail
 
-        public async Task RemoveOrderDetail(int Id)
+        public async Task RemoveOrderDetail(int OrderDetailId)
         {
-            OrderDetail orderDetail = await _datacontext.OrderDetails.FindAsync(Id);
+            OrderDetail orderDetail = await _datacontext.OrderDetails.FindAsync(OrderDetailId);
 
             _datacontext.OrderDetails.Remove(orderDetail);
 
@@ -123,7 +123,16 @@ namespace Infrastructure.Repository
 
             }
 
-            await UpdateSum(orderId);
+
+            //Get UserId and send for UpdateSum
+
+            #region UpdateSum By User Id
+             Order? temporder = await _datacontext.Orders
+                                    .FirstOrDefaultAsync(o => o.Id == orderDetail.OrderId);
+            if (temporder != null)
+                await UpdateSum(temporder.UserId);
+            #endregion
+
         }
 
         #endregion
@@ -197,7 +206,7 @@ namespace Infrastructure.Repository
                 await SaveChange();
 
             }
-          
+
 
         }
 
@@ -217,7 +226,7 @@ namespace Infrastructure.Repository
 
 
                 _datacontext.Update(Order);
-                await _datacontext.SaveChangesAsync();
+                await SaveChange();
 
             }
 

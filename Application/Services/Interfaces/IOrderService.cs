@@ -15,7 +15,7 @@ namespace Application.Services.Interfaces
 
         public Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId);
 
-        public Task RemoveOrderDetail(int Id);
+        public Task RemoveOrderDetail(int OrderDetailId);
 
         public Task<OrderDTO?> GetOrderByUserID(int UserId);
 

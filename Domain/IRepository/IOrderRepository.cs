@@ -16,7 +16,7 @@ namespace Domain.IRepository
         public Task<List<OrderDetail>> GetAllOrderDetails(int UserId);
 
 
-        public Task RemoveOrderDetail(int Id);
+        public Task RemoveOrderDetail(int OrderDetailId);
 
         public Task<Order?> GetOrderByUserID(int UserId);
 

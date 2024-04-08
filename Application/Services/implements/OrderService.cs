@@ -68,12 +68,14 @@ namespace Application.Services.implements
         }
         #endregion
 
+
         #region RemoveOrderDetail
 
-        public async Task RemoveOrderDetail(int Id)
+        public async Task RemoveOrderDetail(int OrderDetailId)
         {
-           await _IOrderRepository.RemoveOrderDetail(Id);
+           await _IOrderRepository.RemoveOrderDetail(OrderDetailId);
         }
+
         #endregion
 
 

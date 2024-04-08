@@ -38,52 +38,14 @@
         gap: 20px;
     }
 
-    .product-item {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
 
-        .product-item img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .product-list button {
+            background-color: red;
         }
-
-    .product-details {
-        padding: 20px;
-    }
-
-        .product-details h2 {
-            margin-top: 0;
-        }
-
-        .product-details p {
-            margin-bottom: 10px;
-        }
-
-        .product-details button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-            .product-details button:hover {
-                background-color: #45a049;
-            }
-
-    .product-list button {
-        background-color: red;
-    }
 
     table {
         width: 100%;
-        border-collapse: collapse;
+        background-color: white border-collapse: collapse;
     }
 
 
@@ -92,7 +54,7 @@
         font-size: larger;
         padding: 8px;
         text-align: left;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 2px solid dimgray;
     }
 
     th {
@@ -144,10 +106,6 @@
 
                     @foreach (var item in Model.OrderDetailDTOs)
                     {
-
-
-
-
                         <tr>
                             <td>
                                 <img class="timage" src="~/Images/Products/@item.ProductImage" alt="محصول 1">
@@ -167,18 +125,17 @@
                             </td>
                         </tr>
 
-
-
                     }
+
+                    <tr>
+                        <td>جمع حساب</td>
+                        <td>@Model.OrderDTO.Sum;</td>
+                    </tr>
 
                 </table>
 
 
-                <div>
-                    <h1>
-                        @Model.OrderDTO.Sum;
-                    </h1>
-                </div>
+
 
                 <button class="Continuebtn"><a>ادامه</a></button>
 
