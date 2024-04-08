@@ -14,6 +14,7 @@ namespace Application.Dtos.OrderDetailDTO
 
         public int Price { get; set; }
 
+        public int?  Weight { get; set; }
         public string? Producttitle { get; set; }
 
         public string? ProductImage { get; set; }

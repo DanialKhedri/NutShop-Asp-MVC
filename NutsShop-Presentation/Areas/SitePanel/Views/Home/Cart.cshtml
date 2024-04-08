@@ -100,6 +100,7 @@
 
                         <th></th>
                         <th>محصول</th>
+                        <th>مقدار</th>
                         <th>قیمت</th>
                         <th></th>
                     </tr>
@@ -112,7 +113,8 @@
 
                             </td>
 
-                            <td> @item.Producttitle</td>
+                            <td>@item.Producttitle</td>
+                            <td>@item.Weight</td>
 
 
                             <td>@item.Price</td>
@@ -129,7 +131,7 @@
 
                     <tr>
                         <td>جمع حساب</td>
-                        <td>@Model.OrderDTO.Sum;</td>
+                        <td>@Model.OrderDTO.Sum</td>
                     </tr>
 
                 </table>

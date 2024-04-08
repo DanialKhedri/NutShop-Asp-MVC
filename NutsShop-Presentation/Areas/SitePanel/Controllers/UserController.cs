@@ -143,7 +143,7 @@ public class UserController : Controller
 
     #region AddProductToCart
 
-    public async Task<IActionResult> AddProductToCart(int ProductId)
+    public async Task<IActionResult> AddProductToCart(int ProductId,int Weight)
     {
         if (User.Identity.IsAuthenticated)
         {
@@ -151,18 +151,20 @@ public class UserController : Controller
             int UserId = UserExtensions.GetUserId(User);
 
 
-            await _IOrderService.AddProductToCart(UserId, ProductId);
+            await _IOrderService.AddProductToCart(UserId, ProductId, Weight);
+
 
             //_IOrderService.SaveChange();
-
             return RedirectToAction("Index", "Home");
+
         }
 
         else
         {
-            //Go to LogIn Page
 
+            //Go to LogIn Page
             return RedirectToAction(nameof(LogIn));
+
         }
 
     }
@@ -181,4 +183,5 @@ public class UserController : Controller
 
 
     #endregion
+
 }

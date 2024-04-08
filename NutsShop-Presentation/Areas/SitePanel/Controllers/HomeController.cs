@@ -55,15 +55,14 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
             var productdto = await _IProductService.GetProductById(Id);
 
 
-
             return View(productdto);
+
         }
+
         #endregion
 
 
         #region Cart
-
-
         public async Task<IActionResult> Cart()
         {
 

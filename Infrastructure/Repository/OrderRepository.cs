@@ -24,48 +24,6 @@ namespace Infrastructure.Repository
         #endregion
 
 
-        #region Main Methods
-
-        #region AddProductToCart
-
-        public async Task AddProductToCart(int UserId, int ProductId)
-        {
-
-            Order? order = await _datacontext.Orders
-                                 .FirstOrDefaultAsync(o => o.UserId == UserId);
-
-            if (order == null)
-            {
-
-                //Add Order
-                await AddOrder(UserId);
-
-
-                //Add OrderDetail
-                await AddOrderDetail(UserId, ProductId);
-
-
-                //Update Sum
-                await UpdateSum(UserId);
-
-
-            }
-
-
-            else
-            {
-
-                //Add OrderDetail
-                await AddOrderDetail(UserId, ProductId);
-
-                //Update Sum And SaveChanges
-                await UpdateSum(UserId);
-
-            }
-
-        }
-        #endregion
-
 
         #region GetAllOrderDetails
 
@@ -100,14 +58,18 @@ namespace Infrastructure.Repository
 
         public async Task RemoveOrderDetail(int OrderDetailId)
         {
+
+            #region Remove OrderDetail
             OrderDetail orderDetail = await _datacontext.OrderDetails.FindAsync(OrderDetailId);
-
             _datacontext.OrderDetails.Remove(orderDetail);
-
             await SaveChange();
+            #endregion
+
+
+
+            #region Remove Order if Empty
 
             int orderId = orderDetail.OrderId;
-
             bool Empty = _datacontext.OrderDetails.Any(o => o.OrderId == orderId);
 
             if (!Empty)
@@ -123,12 +85,13 @@ namespace Infrastructure.Repository
 
             }
 
+            #endregion
 
-            //Get UserId and send for UpdateSum
+
 
             #region UpdateSum By User Id
-             Order? temporder = await _datacontext.Orders
-                                    .FirstOrDefaultAsync(o => o.Id == orderDetail.OrderId);
+            Order? temporder = await _datacontext.Orders
+                                   .FirstOrDefaultAsync(o => o.Id == orderDetail.OrderId);
             if (temporder != null)
                 await UpdateSum(temporder.UserId);
             #endregion
@@ -147,70 +110,67 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        #region OrderIsExist
+
+        public async Task<bool> OrderIsExist(int UserId)
+        {
+            return await _datacontext.Orders
+                              .AnyAsync(o => o.UserId == UserId);
+        }
+        #endregion
+
+
+        #region Get Product By Id
+
+        public async Task<Product?> GetProductById(int ProductId)
+        {
+            return await _datacontext.Products.FindAsync(ProductId);
+        }
+
+        #endregion
+
+        #region Get Order By Id
+
+        public async Task<Order?> GetOrderById(int UserId)
+        {
+            return await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId);
+        }
 
         #endregion
 
 
 
 
-        #region Micro Methods
+        #region Cart Methods-Add Product
 
 
         #region AddOrder
 
-        public async Task AddOrder(int UserId)
+        public async Task AddOrder(Order order)
         {
-            //Object Mapping
-            Order neworder = new Order()
-            {
-                UserId = UserId,
-                CreateTime = DateTime.Now,
-                IsFinaly = false,
-                Sum = 0,
-            };
-
 
             //Add New Order
-            await _datacontext.Orders.AddAsync(neworder);
+            await _datacontext.Orders.AddAsync(order);
             await SaveChange();
 
         }
 
         #endregion
 
+
         #region AddOrderDetal
 
-        public async Task AddOrderDetail(int UserId, int ProductId)
+        public async Task AddOrderDetail(OrderDetail orderDetail)
         {
-            Product? product = await _datacontext.Products.FindAsync(ProductId);
+            //add orderdetail to database
 
-            Order? order = await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId);
-
-            if (product != null && order != null)
-            {
-
-                //object mapping
-                OrderDetail neworderdetail = new OrderDetail()
-                {
-
-                    OrderId = order.Id,
-                    ProductImage = product.Image,
-                    Price = product.Price,
-                    Producttitle = product.ProductName,
-                    ProductId = ProductId,
-
-                };
-
-                //add orderdetail to database
-                await _datacontext.OrderDetails.AddAsync(neworderdetail);
-                await SaveChange();
-
-            }
-
+            await _datacontext.OrderDetails.AddAsync(orderDetail);
+            await SaveChange();
 
         }
 
         #endregion
+
 
         #region UpdateSum
         public async Task UpdateSum(int UserId)
@@ -224,7 +184,6 @@ namespace Infrastructure.Repository
                                                .Select(o => o.Price)
                                                .Sum();
 
-
                 _datacontext.Update(Order);
                 await SaveChange();
 
@@ -233,14 +192,14 @@ namespace Infrastructure.Repository
         }
         #endregion
 
+
+        #endregion
+
         #region SaveChange
         public async Task SaveChange()
         {
             await _datacontext.SaveChangesAsync();
         }
-        #endregion
-
-
         #endregion
 
     }

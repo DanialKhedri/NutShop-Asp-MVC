@@ -11,7 +11,7 @@ namespace Application.Services.Interfaces
     public interface IOrderService
     {
 
-        public Task AddProductToCart(int UserId, int ProductId);
+        public Task AddProductToCart(int UserId, int ProductId, int Weight);
 
         public Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId);
 
@@ -19,7 +19,8 @@ namespace Application.Services.Interfaces
 
         public Task<OrderDTO?> GetOrderByUserID(int UserId);
 
-     
+       
+
 
 
 

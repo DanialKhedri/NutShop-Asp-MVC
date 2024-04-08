@@ -111,7 +111,8 @@
 
     <div class="container">
 
-        <form asp-area="SitePanel" asp-controller="User" asp-action="AddProductToCart" asp-route-ProductId="@Model.Id">
+        <form asp-area="SitePanel" asp-controller="User" 
+        asp-action="AddProductToCart" asp-route-ProductId="@Model.Id" asp-route-Weight="Weight">
 
             <img src="~/Images/Products/@Model.Image" alt="تصویر محصول"></img>
 
@@ -140,7 +141,7 @@
 
             <div>
 
-                <select asp-for="Weight">
+                <select name="Weight">
 
                     <option value="250">250 G</option>
                     <option value="500">500 G</option>

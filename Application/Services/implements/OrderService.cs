@@ -3,6 +3,8 @@ using Application.Dtos.OrderDTO;
 using Application.Services.Interfaces;
 using Domain.Entities.Order;
 using Domain.Entities.Order.OrderDetail;
+using Domain.Entities.Product;
+using Domain.Entities.User;
 using Domain.IRepository;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
@@ -29,9 +31,41 @@ namespace Application.Services.implements
 
 
         #region AddProductToCart
-        public async Task AddProductToCart(int UserId, int ProductId)
+        public async Task AddProductToCart(int UserId, int ProductId, int Weight)
         {
-           await _IOrderRepository.AddProductToCart(UserId, ProductId);
+
+            bool OrderIsExist = await _IOrderRepository.OrderIsExist(UserId);
+
+            if (OrderIsExist == false)
+            {
+
+                await AddUser(UserId);
+
+
+                await AddOrderDetail(UserId, ProductId, Weight);
+
+
+                await _IOrderRepository.UpdateSum(UserId);
+
+         
+
+            }
+
+
+            else
+            {
+
+                await AddOrderDetail(UserId, ProductId, Weight);
+
+
+                await _IOrderRepository.UpdateSum(UserId);
+          
+
+            }
+
+
+
+
 
         }
         #endregion
@@ -55,7 +89,9 @@ namespace Application.Services.implements
                         Id = item.Id,
                         Price = item.Price,
                         ProductImage = item.ProductImage,
-                        Producttitle = item.Producttitle
+                        Producttitle = item.Producttitle,
+                        Weight = item.Weight
+                        
                     };
 
                     orderDetailDTOs.Add(orderDetailDTO);
@@ -73,7 +109,7 @@ namespace Application.Services.implements
 
         public async Task RemoveOrderDetail(int OrderDetailId)
         {
-           await _IOrderRepository.RemoveOrderDetail(OrderDetailId);
+            await _IOrderRepository.RemoveOrderDetail(OrderDetailId);
         }
 
         #endregion
@@ -104,8 +140,63 @@ namespace Application.Services.implements
             return null;
         }
 
-        #endregion 
+        #endregion
 
-     
+
+        #region Add To cart Methods
+        private async Task AddUser(int UserId)
+        {
+
+
+            #region AddOrder
+            //Object Mapping
+            Order Neworder = new Order()
+            {
+                UserId = UserId,
+                IsFinaly = false,
+                Sum = 0,
+            };
+
+            await _IOrderRepository.AddOrder(Neworder);
+
+            #endregion
+
+        }
+
+        private async Task AddOrderDetail(int UserId, int ProductId,int weight)
+        {
+
+
+            #region AddOrderDetail
+            Product? product = await _IOrderRepository.GetProductById(ProductId);
+            Order? order = await _IOrderRepository.GetOrderByUserID(UserId);
+
+            if (product != null && order != null)
+            {
+
+                //object mapping
+                OrderDetail neworderdetail = new OrderDetail()
+                {
+
+                    OrderId = order.Id,
+                    ProductImage = product.Image,
+                    Price = product.Price,
+                    Producttitle = product.ProductName,
+                    ProductId = ProductId,
+                    Weight = weight
+
+
+                };
+
+                await _IOrderRepository.AddOrderDetail(neworderdetail);
+
+            }
+
+            #endregion
+
+
+        }
+
+        #endregion
     }
 }
