@@ -46,7 +46,7 @@ namespace Infrastructure.Repository
                 };
 
                 _datacontext.Orders.Add(neworder);
-                SaveChange();
+                await _datacontext.SaveChangesAsync();
 
 
 

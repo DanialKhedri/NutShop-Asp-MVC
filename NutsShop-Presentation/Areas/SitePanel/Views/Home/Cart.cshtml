@@ -1,6 +1,11 @@
 ﻿@using Application.Dtos.OrderDetailDTO
 @model List<OrderDetailDTO>;
 
+@{
+    Layout = "_SiteLayout";
+}
+
+
 <html lang="en">
 
 
@@ -14,13 +19,20 @@
     }
 
     .container {
+        display: flex;
+        justify-content: center;
         max-width: 800px;
         margin: 20px auto;
         padding: 0 20px;
+        flex-direction: column;
+        align-items: center;
     }
 
     .product-list {
-        display: grid;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items:center;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
     }
@@ -64,6 +76,41 @@
                 background-color: #45a049;
             }
 
+    .product-list button {
+        background-color: red;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+
+
+    th, td {
+        font-size: larger;
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .timage {
+        width: 150px;
+        height: 150px;
+    }
+
+    .Continuebtn
+    {
+        width:60%;
+        height:50px;
+
+        background-color:dodgerblue;
+    
+    }
 </style>
 
 
@@ -84,29 +131,53 @@
         <div class="product-list">
 
 
-            @if (Model != null)
+            @if (Model.Count != 0)
             {
 
-                @foreach (var item in Model)
-                {
-                    <div class="product-item">
+                <table>
 
-                        <img src="~/Images/Products/@item.ProductImage" alt="محصول 1">
+                    <tr>
 
-                        <div class="product-details">
+                        <th></th>
+                        <th>محصول</th>
+                        <th>قیمت</th>
+                        <th></th>
+                    </tr>
 
-                            <h2>@item.Producttitle</h2>
-                            <p>@item.Price</p>
-                            <button>
-                                <a asp-area="SitePanel" asp-controller="Home" asp-action="RemoveOrderDetail"
-                                   asp-route-Id="@item.Id">Remove</a>
-                            </button>
+                    @foreach (var item in Model)
+                    {
 
 
-                        </div>
 
-                    </div>
-                }
+
+                        <tr>
+                            <td>
+                                <img class="timage" src="~/Images/Products/@item.ProductImage" alt="محصول 1">
+
+                            </td>
+
+                            <td> @item.Producttitle</td>
+
+
+                            <td>@item.Price</td>
+
+                            <td>
+                                <button>
+                                    <a asp-area="SitePanel" asp-controller="Home" asp-action="RemoveOrderDetail"
+                                       asp-route-Id="@item.Id">Remove</a>
+                                </button>
+                            </td>
+                        </tr>
+
+
+
+                    }
+
+                </table>
+
+
+
+                <button class="Continuebtn"><a>ادامه</a></button>
 
             }
 

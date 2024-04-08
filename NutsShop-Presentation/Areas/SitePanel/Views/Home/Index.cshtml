@@ -1,10 +1,20 @@
 ﻿@using NutsShop_Presentation.Areas.SitePanel.ViewModels
 @model IndexViewModel;
 
+@{
+    Layout = "_SiteLayout";
+}
+
+    
+
 <html>
 
 <style>
 
+    body
+    {
+        margin:0;
+    }
     a {
         font-family: Arial, sans-serif;
         text-decoration: none;
@@ -31,7 +41,7 @@
         flex-direction: row;
     }
 
-    a
+    
 
     .navbarright {
         display: flex;
@@ -188,57 +198,9 @@
 
 </style>
 
+
 <body>
-    <div class="navbar">
-
-        <div class="navbarleft">
-
-            <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Cart">سبد خرید</a></div>
-            <div class="menu">منو</div>
-            <div class="menu">منو</div>
-
-        </div>
-
-        <div class="navbarcenter">
-
-            <div class="logo">
-                <img>img<img>
-            </div>
-
-        </div>
-
-        <div class="navbarright">
-
-            @if (User.Identity.IsAuthenticated == true)
-            {
-
-                <div class="menu">
-                    <img></img>
-                    <label>@User.Identity.Name</label>
-                   
-                </div>
-
-                <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogOut">خروج</a></div>
-
-            }
-
-            else
-            {
-
-                <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogIn">ورود</a></div>
-                <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="Register">ثبت نام</a></div>
-
-            }
-
-
-
-        </div>
-
-
-
-    </div>
-
-
+    
 
     <div class="categories">
 
@@ -255,8 +217,6 @@
 
         
     </div>
-
-
 
 
     <div class="products">
@@ -279,9 +239,6 @@
     </div>
 
 
-
-    <footer class="footer">
-    </footer>
 
 </body>
 

@@ -28,7 +28,7 @@
         flex-direction: row;
     }
 
-    a
+    
 
     .navbarright {
         display: flex;
@@ -186,12 +186,13 @@
 </style>
 
 <body>
+
     <div class="navbar">
 
         <div class="navbarleft">
 
             <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Cart">سبد خرید</a></div>
-            <div class="menu">منو</div>
+            <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Index">خانه</a></div>
             <div class="menu">منو</div>
 
         </div>
@@ -199,7 +200,7 @@
         <div class="navbarcenter">
 
             <div class="logo">
-                <img>img<img>
+                <img>آجیل و خشکبار دانیال<img>
             </div>
 
         </div>
@@ -236,10 +237,11 @@
     </div>
 
 
+    <!--Content--></>
     <div>
         @RenderBody();
+
     </div>
- 
 
 
 
