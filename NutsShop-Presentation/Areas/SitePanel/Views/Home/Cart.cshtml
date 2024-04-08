@@ -1,5 +1,6 @@
-﻿@using Application.Dtos.OrderDetailDTO
-@model List<OrderDetailDTO>;
+﻿@using NutsShop_Presentation.Areas.SitePanel.ViewModels
+@model CartViewModel;
+
 
 @{
     Layout = "_SiteLayout";
@@ -32,7 +33,7 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        align-items:center;
+        align-items: center;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
     }
@@ -103,13 +104,10 @@
         height: 150px;
     }
 
-    .Continuebtn
-    {
-        width:60%;
-        height:50px;
-
-        background-color:dodgerblue;
-    
+    .Continuebtn {
+        width: 60%;
+        height: 50px;
+        background-color: dodgerblue;
     }
 </style>
 
@@ -131,7 +129,7 @@
         <div class="product-list">
 
 
-            @if (Model.Count != 0)
+            @if (Model.OrderDetailDTOs.Count != 0)
             {
 
                 <table>
@@ -144,7 +142,7 @@
                         <th></th>
                     </tr>
 
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.OrderDetailDTOs)
                     {
 
 
@@ -163,7 +161,7 @@
 
                             <td>
                                 <button>
-                                    <a asp-area="SitePanel" asp-controller="Home" asp-action="RemoveOrderDetail"
+                                    <a asp-area="SitePanel" asp-controller="User" asp-action="RemoveOrderDetail"
                                        asp-route-Id="@item.Id">Remove</a>
                                 </button>
                             </td>
@@ -176,6 +174,11 @@
                 </table>
 
 
+                <div>
+                    <h1>
+                        @Model.OrderDTO.Sum;
+                    </h1>
+                </div>
 
                 <button class="Continuebtn"><a>ادامه</a></button>
 

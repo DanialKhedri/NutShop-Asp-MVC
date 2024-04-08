@@ -1,5 +1,7 @@
 ﻿using Application.Dtos.OrderDetailDTO;
+using Application.Dtos.OrderDTO;
 using Application.Services.Interfaces;
+using Domain.Entities.Order;
 using Domain.Entities.Order.OrderDetail;
 using Domain.IRepository;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -24,16 +26,20 @@ namespace Application.Services.implements
 
         #endregion
 
+
+
         #region AddProductToCart
-        public async void AddProductToCart(int UserId, int ProductId)
+        public async Task AddProductToCart(int UserId, int ProductId)
         {
-            _IOrderRepository.AddProductToCart(UserId, ProductId);
+           await _IOrderRepository.AddProductToCart(UserId, ProductId);
 
         }
         #endregion
 
+
+
         #region GetAllOrderDetails
-        public async Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId) 
+        public async Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId)
         {
             List<OrderDetail>? Orderdetails = await _IOrderRepository.GetAllOrderDetails(UserId);
 
@@ -64,17 +70,40 @@ namespace Application.Services.implements
 
         #region RemoveOrderDetail
 
-        public async void RemoveOrderDetail(int Id) 
+        public async Task RemoveOrderDetail(int Id)
         {
-            _IOrderRepository.RemoveOrderDetail(Id);
+           await _IOrderRepository.RemoveOrderDetail(Id);
         }
         #endregion
 
-        #region SaveChange
-        public void SaveChange() 
+
+        #region GetOrderByUserId
+
+        public async Task<OrderDTO?> GetOrderByUserID(int UserId)
         {
-            _IOrderRepository.SaveChange();
+            Order? order = await _IOrderRepository.GetOrderByUserID(UserId);
+
+            if (order != null)
+            {
+                //Object Mapping
+                OrderDTO? tempOrderDTO = new OrderDTO()
+                {
+                    Id = order.Id,
+                    UserId = order.UserId,
+                    CreateTime = order.CreateTime,
+                    Sum = order.Sum,
+                    IsFinaly = order.IsFinaly,
+
+                };
+
+                return tempOrderDTO;
+            }
+
+            return null;
         }
-        #endregion
+
+        #endregion 
+
+     
     }
 }

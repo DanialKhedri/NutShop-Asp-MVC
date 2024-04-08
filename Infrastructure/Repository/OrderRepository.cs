@@ -1,6 +1,7 @@
 ﻿using Domain.Entities.Order;
 using Domain.Entities.Order.OrderDetail;
 using Domain.Entities.Product;
+using Domain.Entities.User;
 using Domain.IRepository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -23,74 +24,42 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        #region Main Methods
+
         #region AddProductToCart
-        public async void AddProductToCart(int UserId, int ProductId)
+
+        public async Task AddProductToCart(int UserId, int ProductId)
         {
 
-            Order? order = _datacontext.Orders
-                          .FirstOrDefault(o => o.UserId == UserId);
+            Order? order = await _datacontext.Orders
+                                 .FirstOrDefaultAsync(o => o.UserId == UserId);
 
             if (order == null)
             {
 
-                //Add Order For User
 
-                Order neworder = new Order()
-                {
+                //Add Order
+                await AddOrder(UserId);
 
-                    UserId = UserId,
-                    CreateTime = DateTime.Now,
-                    IsFinaly = false,
-                    Sum = 0,
-
-                };
-
-                _datacontext.Orders.Add(neworder);
-                await _datacontext.SaveChangesAsync();
-
-
-
-                Product? product = _datacontext.Products.Find(ProductId);
 
                 //Add OrderDetail
+                await AddOrderDetail(UserId, ProductId);
 
-                OrderDetail neworderdetail = new OrderDetail()
-                {
-                    OrderId = _datacontext.Orders.FirstOrDefault(o => o.UserId == UserId).Id,
-                    ProductImage = product.Image,
-                    Price = product.Price,
-                    Producttitle = product.ProductName,
-                    ProductId = ProductId,
+                //Update Sum
+                await UpdateSum(UserId);
 
-                };
-
-                _datacontext.OrderDetails.Add(neworderdetail);
-
-                SaveChange();
 
             }
 
 
             else
             {
+
                 //Add OrderDetail
+                await AddOrderDetail(UserId, ProductId);
 
-                Product? product = _datacontext.Products.Find(ProductId);
-
-
-                OrderDetail orderDetail = new OrderDetail()
-                {
-
-                    OrderId = order.Id,
-                    ProductImage = product.Image,
-                    Price = product.Price,
-                    Producttitle = product.ProductName,
-                    ProductId = ProductId,
-
-                };
-
-                _datacontext.OrderDetails.Add(orderDetail);
-                SaveChange();
+                //Update Sum And SaveChanges
+                await UpdateSum(UserId);
 
             }
 
@@ -103,25 +72,22 @@ namespace Infrastructure.Repository
         public async Task<List<OrderDetail>> GetAllOrderDetails(int UserId)
         {
 
-
-
-
-            Order? order = _datacontext.Orders.FirstOrDefault(o => o.UserId == UserId && o.IsFinaly == false);
+            Order? order = _datacontext.Orders
+                          .FirstOrDefault(o => o.UserId == UserId && o.IsFinaly == false);
 
 
             if (order != null)
             {
-                List<OrderDetail> orderdetails = await _datacontext.OrderDetails.
-                                                   Where(o => o.OrderId == order.Id).ToListAsync();
-
-
+                List<OrderDetail>? orderdetails = await _datacontext.OrderDetails                    
+                                                                   .Where(o => o.OrderId == order.Id)
+                                                                   .ToListAsync();
 
                 return orderdetails;
 
-
             }
 
-            else return null;
+            else
+                return null;
 
 
 
@@ -129,15 +95,16 @@ namespace Infrastructure.Repository
 
         #endregion
 
+
         #region RemoveOrderDetail
 
-        public void RemoveOrderDetail(int Id)
+        public async Task RemoveOrderDetail(int Id)
         {
-            OrderDetail orderDetail = _datacontext.OrderDetails.Find(Id);
+            OrderDetail orderDetail = await _datacontext.OrderDetails.FindAsync(Id);
 
             _datacontext.OrderDetails.Remove(orderDetail);
 
-            _datacontext.SaveChanges();
+            await SaveChange();
 
             int orderId = orderDetail.OrderId;
 
@@ -150,22 +117,122 @@ namespace Infrastructure.Repository
                 {
 
                     _datacontext.Orders.Remove(order);
-                    _datacontext.SaveChanges();
+                    await SaveChange();
 
                 }
 
             }
 
+            await UpdateSum(orderId);
         }
 
+        #endregion
+
+
+        #region GetOrderByUserID
+
+        public async Task<Order?> GetOrderByUserID(int UserId)
+        {
+            return await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId && o.IsFinaly == false);
+        }
+        #endregion
+
+
+
+        #endregion
+
+
+
+
+        #region Micro Methods
+
+
+        #region AddOrder
+
+        public async Task AddOrder(int UserId)
+        {
+            //Object Mapping
+            Order neworder = new Order()
+            {
+                UserId = UserId,
+                CreateTime = DateTime.Now,
+                IsFinaly = false,
+                Sum = 0,
+            };
+
+
+            //Add New Order
+            await _datacontext.Orders.AddAsync(neworder);
+            await SaveChange();
+
+        }
+
+        #endregion
+
+        #region AddOrderDetal
+
+        public async Task AddOrderDetail(int UserId, int ProductId)
+        {
+            Product? product = await _datacontext.Products.FindAsync(ProductId);
+
+            Order? order = await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId);
+
+            if (product != null && order != null)
+            {
+
+                //object mapping
+                OrderDetail neworderdetail = new OrderDetail()
+                {
+
+                    OrderId = order.Id,
+                    ProductImage = product.Image,
+                    Price = product.Price,
+                    Producttitle = product.ProductName,
+                    ProductId = ProductId,
+
+                };
+
+                //add orderdetail to database
+                await _datacontext.OrderDetails.AddAsync(neworderdetail);
+                await SaveChange();
+
+            }
+          
+
+        }
+
+        #endregion
+
+        #region UpdateSum
+        public async Task UpdateSum(int UserId)
+        {
+            Order? Order = await _datacontext.Orders.FirstOrDefaultAsync(O => O.UserId == UserId);
+
+            if (Order != null)
+            {
+
+                Order.Sum = _datacontext.OrderDetails.Where(o => o.OrderId == Order.Id)
+                                               .Select(o => o.Price)
+                                               .Sum();
+
+
+                _datacontext.Update(Order);
+                await _datacontext.SaveChangesAsync();
+
+            }
+
+        }
         #endregion
 
         #region SaveChange
-
-        public async void SaveChange()
+        public async Task SaveChange()
         {
-            _datacontext.SaveChangesAsync();
+            await _datacontext.SaveChangesAsync();
         }
         #endregion
+
+
+        #endregion
+
     }
 }

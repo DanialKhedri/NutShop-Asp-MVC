@@ -19,7 +19,7 @@ public class UserController : Controller
     private readonly IUserService _IUserService;
     private readonly IOrderService _IOrderService;
 
-    public UserController(IUserService userService,IOrderService orderService)
+    public UserController(IUserService userService, IOrderService orderService)
     {
         _IUserService = userService;
         _IOrderService = orderService;
@@ -129,10 +129,10 @@ public class UserController : Controller
 
     #region LogOut
 
-    public async Task<IActionResult> LogOut() 
+    public async Task<IActionResult> LogOut()
     {
 
-       await HttpContext.SignOutAsync();
+        await HttpContext.SignOutAsync();
 
         return RedirectToAction("Index", "Home");
 
@@ -143,15 +143,15 @@ public class UserController : Controller
 
     #region AddProductToCart
 
-    public async Task<IActionResult> AddProductToCart(int ProductId) 
+    public async Task<IActionResult> AddProductToCart(int ProductId)
     {
         if (User.Identity.IsAuthenticated)
         {
 
-            int UserId =  UserExtensions.GetUserId(User);
+            int UserId = UserExtensions.GetUserId(User);
 
-          
-            _IOrderService.AddProductToCart(UserId, ProductId);
+
+            await _IOrderService.AddProductToCart(UserId, ProductId);
 
             //_IOrderService.SaveChange();
 
@@ -166,6 +166,19 @@ public class UserController : Controller
         }
 
     }
+
+    #endregion
+
+
+    #region RemoveOrderDetail
+
+    public async Task<IActionResult> RemoveOrderDetail(int Id)
+    {
+        await _IOrderService.RemoveOrderDetail(Id);
+
+        return RedirectToAction("Cart", "Home");
+    }
+
 
     #endregion
 }

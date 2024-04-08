@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Order.OrderDetail;
+﻿using Domain.Entities.Order;
+using Domain.Entities.Order.OrderDetail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,16 @@ namespace Domain.IRepository
     public interface IOrderRepository
     {
 
-        public void AddProductToCart(int UserId, int ProductId);
+        public Task AddProductToCart(int UserId, int ProductId);
 
         public Task<List<OrderDetail>> GetAllOrderDetails(int UserId);
 
 
-        public void RemoveOrderDetail(int Id);
+        public Task RemoveOrderDetail(int Id);
 
+        public Task<Order?> GetOrderByUserID(int UserId);
 
-        public void SaveChange();
+        public Task SaveChange();
 
 
     }

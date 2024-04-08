@@ -1,8 +1,10 @@
 ﻿using Application.Dtos.CategoryDTO;
 using Application.Dtos.OrderDetailDTO;
+using Application.Dtos.OrderDTO;
 using Application.Dtos.ProductDTO;
 using Application.Extensions;
 using Application.Services.Interfaces;
+using Domain.Entities.Order;
 using Microsoft.AspNetCore.Mvc;
 using NutsShop_Presentation.Areas.SitePanel.ViewModels;
 
@@ -26,9 +28,11 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         }
         #endregion
 
+
         #region Index
         public async Task<IActionResult> Index()
         {
+
             List<ProductIndexDTO> Products = await _IProductService.GetAllProducts();
             List<CategoryIndexDTO> categories = await _ICategoryService.GetAllCategories();
 
@@ -41,6 +45,7 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
             return View(indexViewModel);
         }
         #endregion
+
 
         #region ShowProduct
 
@@ -55,21 +60,26 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         }
         #endregion
 
+
         #region Cart
 
-        
+
         public async Task<IActionResult> Cart()
         {
+
             if (User.Identity.IsAuthenticated)
             {
                 int userid = User.GetUserId();
 
-                List<OrderDetailDTO> orderdetailslist = await _IOrderService.GetAllOrderDetails(userid);
+                CartViewModel cartViewModel = new CartViewModel();
 
-                return View(orderdetailslist);
+                cartViewModel.OrderDTO = await _IOrderService.GetOrderByUserID(userid);
+                cartViewModel.OrderDetailDTOs = await _IOrderService.GetAllOrderDetails(userid);
+
+                return View(cartViewModel);
             }
 
-            else 
+            else
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -79,16 +89,6 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
         #endregion
 
-        #region RemoveOrderDetail
-
-        public async Task<IActionResult> RemoveOrderDetail(int Id) 
-        {
-            _IOrderService.RemoveOrderDetail(Id);
-
-            return RedirectToAction(nameof(Cart));
-        }
-
-
-        #endregion
+       
     }
 }
