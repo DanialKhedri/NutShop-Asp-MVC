@@ -1,7 +1,9 @@
-﻿using Application.Dtos.OrderDetailDTO;
+﻿using Application.Dtos.LocationDTO;
+using Application.Dtos.OrderDetailDTO;
 using Application.Dtos.OrderDTO;
 using Application.Services.Interfaces;
 using Domain.Entities.Order;
+using Domain.Entities.Order.Location;
 using Domain.Entities.Order.OrderDetail;
 using Domain.Entities.Product;
 using Domain.Entities.User;
@@ -47,7 +49,7 @@ namespace Application.Services.implements
 
                 await _IOrderRepository.UpdateSum(UserId);
 
-         
+
 
             }
 
@@ -59,7 +61,7 @@ namespace Application.Services.implements
 
 
                 await _IOrderRepository.UpdateSum(UserId);
-          
+
 
             }
 
@@ -91,7 +93,7 @@ namespace Application.Services.implements
                         ProductImage = item.ProductImage,
                         Producttitle = item.Producttitle,
                         Weight = item.Weight
-                        
+
                     };
 
                     orderDetailDTOs.Add(orderDetailDTO);
@@ -113,6 +115,26 @@ namespace Application.Services.implements
         }
 
         #endregion
+
+
+        public async Task AddOrderLocation(LocationDTO locationDTO, int UserId)
+        {
+
+            Location location = new Location()
+            {
+                FirstName = locationDTO.FirstName,
+                LastName = locationDTO.LastName,
+                State = locationDTO.State,
+                City = locationDTO.City,
+                Address = locationDTO.Address,
+                PhoneNumber = locationDTO.PhoneNumber,
+                PostCode = locationDTO.PostCode,
+
+            };
+
+            await _IOrderRepository.AddOrderLocation(location,UserId);
+
+        }
 
 
         #region GetOrderByUserId
@@ -163,7 +185,7 @@ namespace Application.Services.implements
 
         }
 
-        private async Task AddOrderDetail(int UserId, int ProductId,int weight)
+        private async Task AddOrderDetail(int UserId, int ProductId, int weight)
         {
 
 

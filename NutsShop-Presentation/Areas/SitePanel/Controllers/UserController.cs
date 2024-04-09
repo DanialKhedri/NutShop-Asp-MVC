@@ -144,7 +144,7 @@ public class UserController : Controller
 
     #region AddProductToCart
 
-    public async Task<IActionResult> AddProductToCart(int ProductId,int Weight)
+    public async Task<IActionResult> AddProductToCart(int ProductId, int Weight)
     {
         if (User.Identity.IsAuthenticated)
         {
@@ -198,6 +198,8 @@ public class UserController : Controller
     public async Task<IActionResult> SetOrderLocation(LocationDTO locationDTO)
     {
 
+        int UserId = User.GetUserId();
+        await _IOrderService.AddOrderLocation(locationDTO, UserId);
         return View();
 
     }

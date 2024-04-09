@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Order;
+using Domain.Entities.Order.Location;
 using Domain.Entities.Order.OrderDetail;
 using Domain.Entities.Product;
 using Domain.Entities.User;
@@ -129,7 +130,7 @@ namespace Infrastructure.Repository
 
         #endregion
 
-        #region Get Order By Id
+        #region Get Order By UserId
 
         public async Task<Order?> GetOrderById(int UserId)
         {
@@ -141,10 +142,15 @@ namespace Infrastructure.Repository
 
         #region AddOrderLocation
 
-        public async Task AddOrderLocation() 
+        public async Task AddOrderLocation(Location location,int UserId)
         {
 
+            int OrderId = GetOrderById(UserId).Id;
 
+            location.OrderId = OrderId;
+
+            await _datacontext.Locations.AddAsync(location);
+            await _datacontext.SaveChangesAsync();
 
         }
 

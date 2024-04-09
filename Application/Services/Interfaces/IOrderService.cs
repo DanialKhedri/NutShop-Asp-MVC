@@ -1,4 +1,5 @@
-﻿using Application.Dtos.OrderDetailDTO;
+﻿using Application.Dtos.LocationDTO;
+using Application.Dtos.OrderDetailDTO;
 using Application.Dtos.OrderDTO;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace Application.Services.Interfaces
 
         public Task<OrderDTO?> GetOrderByUserID(int UserId);
 
-       
+        public Task AddOrderLocation(LocationDTO locationDTO, int UserId);
+
 
 
 

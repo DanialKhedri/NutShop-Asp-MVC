@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Order;
+using Domain.Entities.Order.Location;
 using Domain.Entities.Order.OrderDetail;
 using Domain.Entities.Product;
 using System;
@@ -22,7 +23,7 @@ namespace Domain.IRepository
         public Task<bool> OrderIsExist(int UserId);
 
         public Task AddOrderDetail(OrderDetail orderDetail);
-
+        public Task AddOrderLocation(Location location,int UserId);
 
         public Task UpdateSum(int UserId);
 
