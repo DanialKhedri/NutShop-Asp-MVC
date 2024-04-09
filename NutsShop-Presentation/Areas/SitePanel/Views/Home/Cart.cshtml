@@ -103,6 +103,7 @@
                         <th>مقدار</th>
                         <th>قیمت</th>
                         <th></th>
+
                     </tr>
 
                     @foreach (var item in Model.OrderDetailDTOs)
@@ -125,6 +126,7 @@
                                        asp-route-Id="@item.Id">Remove</a>
                                 </button>
                             </td>
+
                         </tr>
 
                     }
@@ -139,7 +141,12 @@
 
 
 
-                <button class="Continuebtn"><a>ادامه</a></button>
+                <button  class="Continuebtn">
+
+                    <a asp-area="SitePanel" asp-controller="User" asp-action="SetOrderLocation" asp-route-OrderId="@Model.OrderDTO.Id">
+                        ادامه</a>
+
+                    </button>
 
             }
 

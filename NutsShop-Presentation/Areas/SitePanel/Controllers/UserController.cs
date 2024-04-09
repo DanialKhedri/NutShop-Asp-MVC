@@ -1,4 +1,5 @@
-﻿using Application.Dtos.UserLogInDTO;
+﻿using Application.Dtos.LocationDTO;
+using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
 using Application.Extensions;
 using Application.Services.Interfaces;
@@ -183,5 +184,32 @@ public class UserController : Controller
 
 
     #endregion
+
+
+    [HttpGet]
+    public async Task<IActionResult> SetOrderLocation()
+    {
+
+        return View();
+
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> SetOrderLocation(LocationDTO locationDTO)
+    {
+
+        return View();
+
+    }
+
+
+    //[HttpPost]
+    //public async Task<IActionResult> SetOrderLocation() 
+    //{
+
+    //    return View();
+
+    //}
+
 
 }

@@ -139,6 +139,16 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        #region AddOrderLocation
+
+        public async Task AddOrderLocation() 
+        {
+
+
+
+        }
+
+        #endregion
 
 
         #region Cart Methods-Add Product

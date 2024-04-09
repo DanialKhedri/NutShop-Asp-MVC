@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Order;
+using Domain.Entities.Order.Location;
 using Domain.Entities.Order.OrderDetail;
 using Domain.Entities.Product;
 using Domain.Entities.Product.Category;
@@ -51,7 +52,8 @@ namespace Infrastructure.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
-       
+
+        public DbSet<Location> Locations { get; set; }
 
 
 
