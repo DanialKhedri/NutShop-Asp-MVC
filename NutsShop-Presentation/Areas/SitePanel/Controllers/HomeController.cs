@@ -83,6 +83,28 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
         #endregion
 
+        #region ShowProductsByCategory
+
+        public async Task<IActionResult> ShowProductByCategory(int CategoryId)
+        {
+
+            List<ProductIndexDTO>? productsDTOList = await _IProductService.GetProductsByCategoryId(CategoryId);
+
+            ShowProductByCategoryIdViewModel showProductByCategoryIdViewModel = new ShowProductByCategoryIdViewModel()
+            {
+
+
+                productIndexDTOs = productsDTOList,
+
+               
+            };
+
+
+            return View(showProductByCategoryIdViewModel);
+        }
+
+        #endregion
+
         #region Cart
         public async Task<IActionResult> Cart()
         {

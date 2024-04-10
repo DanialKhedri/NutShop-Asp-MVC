@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.LocationDTO;
 using Application.Dtos.OrderDetailDTO;
 using Application.Dtos.OrderDTO;
+using Application.Dtos.ProductDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace Application.Services.Interfaces
         public Task RemoveOrderDetail(int OrderDetailId);
 
         public Task<OrderDTO?> GetOrderByUserID(int UserId);
+
+
 
         public Task AddOrderLocation(LocationDTO locationDTO, int UserId);
 

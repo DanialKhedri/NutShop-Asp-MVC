@@ -81,5 +81,37 @@ namespace Application.Services.implements
         }
         #endregion
 
+        #region GetproductByCategoryId
+
+        public async Task<List<ProductIndexDTO>> GetProductsByCategoryId(int CategoryId)
+        {
+
+            List<Product> products = await _IProductRepository.GetProductsByCategoryId(CategoryId);
+
+            List<ProductIndexDTO> productIndexDTOs = new List<ProductIndexDTO>();
+
+            foreach (var item in products)
+            {
+                ProductIndexDTO dTO = new ProductIndexDTO
+                {
+                    Id = item.Id,
+                    ProductName = item.ProductName,
+                    Price = item.Price,
+                    Image = item.Image,
+                    Description = item.Description,
+
+                };
+
+
+                productIndexDTOs.Add(dTO);
+
+
+            }
+
+            return productIndexDTOs;
+
+        }
+
+        #endregion
     }
 }

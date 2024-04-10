@@ -13,6 +13,7 @@ namespace Application.Services.Interfaces
 
         public Task<ProductIndexDTO> GetProductById(int Id);
 
+        public Task<List<ProductIndexDTO>> GetProductsByCategoryId(int CategoryId);
 
     }
 }

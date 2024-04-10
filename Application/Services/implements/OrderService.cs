@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.LocationDTO;
 using Application.Dtos.OrderDetailDTO;
 using Application.Dtos.OrderDTO;
+using Application.Dtos.ProductDTO;
 using Application.Services.Interfaces;
 using Domain.Entities.Order;
 using Domain.Entities.Order.Location;
@@ -132,9 +133,12 @@ namespace Application.Services.implements
 
             };
 
-            await _IOrderRepository.AddOrderLocation(location,UserId);
+            await _IOrderRepository.AddOrderLocation(location, UserId);
 
         }
+
+    
+
 
 
         #region GetOrderByUserId

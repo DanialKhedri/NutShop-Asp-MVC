@@ -40,5 +40,18 @@ namespace Infrastructure.Repository
         }
         #endregion
 
+        #region GetProductsByCategoryId
+
+        public async Task<List<Product>> GetProductsByCategoryId(int CategoryId)
+        {
+            List<Product> Products = await _dataContext.SelectedCategories.Where(s => s.CategoryId == CategoryId)
+                                                                          .Select(s => s.Product)
+                                                                          .ToListAsync();
+
+
+
+            return Products;
+        }
+        #endregion
     }
 }
