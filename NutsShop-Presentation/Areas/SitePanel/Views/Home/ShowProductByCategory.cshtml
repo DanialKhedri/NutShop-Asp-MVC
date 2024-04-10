@@ -1,5 +1,5 @@
 ﻿@using NutsShop_Presentation.Areas.SitePanel.ViewModels
-@model ShowProductsViewModel;
+@model ShowProductByCategoryIdViewModel;
 
 @{
     Layout = "_SiteLayout";
@@ -204,7 +204,7 @@
     <div class="products">
 
 
-        @foreach (var item in Model.ProductsDTOs)
+        @foreach (var item in Model.productIndexDTOs)
         {
 
             <div class="product">
