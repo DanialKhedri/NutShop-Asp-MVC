@@ -62,6 +62,27 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         #endregion
 
 
+        #region ShowAllProducts
+
+        public async Task<IActionResult> ShowAllProducts()
+        {
+
+            List<ProductIndexDTO> products = await _IProductService.GetAllProducts();
+
+
+            ShowProductsViewModel showProductsViewModel = new ShowProductsViewModel()
+            {
+
+                ProductsDTOs = products,
+            };
+
+            return View(showProductsViewModel);
+
+
+        }
+
+        #endregion
+
         #region Cart
         public async Task<IActionResult> Cart()
         {
@@ -88,6 +109,6 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
         #endregion
 
-       
+
     }
 }

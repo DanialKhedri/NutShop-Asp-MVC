@@ -22,11 +22,9 @@ namespace Application.Dtos.LocationDTO
 
         public string Address { get; set; }
 
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public int PostCode { get; set; }
-
-
+        public string PostCode { get; set; }
 
 
     }

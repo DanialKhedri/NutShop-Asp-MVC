@@ -1,5 +1,5 @@
 ﻿@using NutsShop_Presentation.Areas.SitePanel.ViewModels
-@model IndexViewModel;
+@model ShowProductsViewModel;
 
 @{
     Layout = "_SiteLayout";
@@ -201,81 +201,29 @@
 
 <body>
 
-
-    <div class="categories">
-
-        @foreach (var item in Model.CategoryDTOs)
-        {
-            <div class="category">
-
-                <img src="~/Images/Categories/@item.Image" alt="Category 1">
-                <span>@item.CategoryTitle</span>
-
-            </div>
-        }
-
-    </div>
-
-
     <div class="products">
 
 
-        @{
-            var count = Model.ProductsDTOs.Count;
+        @foreach (var item in Model.ProductsDTOs)
+        {
 
-            if (count > 9)
-            {
-                @for (int i = 0; i < 9; i++)
-                {
-                    <div class="product">
+            <div class="product">
 
-                        <img src="~/Images/Products/@Model.ProductsDTOs[i].Image" alt="Product 1">
-                        <h3>@Model.ProductsDTOs[i].ProductName</h3>
-                        <p> محصول۱</p>
-                        <span>@Model.ProductsDTOs[i].Price</span>
-                        <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProduct" asp-route-Id="@Model.ProductsDTOs[i].Id">   <button>خرید</button></a>
-                    </div>
-                }
+                <img src="~/Images/Products/@item.Image" alt="Product 1">
+                <h3>@item.ProductName</h3>
+                <p> محصول۱</p>
+                <span>@item.Price</span>
+                <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProduct" asp-route-Id="@item.Id"><button>خرید</button></a>
 
-            }
-            else
-            {
-                @for (int i = 0; i < count; i++)
-                {
-                    <div class="product">
-
-                        <img src="~/Images/Products/@Model.ProductsDTOs[i].Image" alt="Product 1">
-                        <h3>@Model.ProductsDTOs[i].ProductName</h3>
-                        <p> محصول۱</p>
-                        <span>@Model.ProductsDTOs[i].Price</span>
-                        <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProduct" asp-route-Id="@Model.ProductsDTOs[i].Id">   <button>خرید</button></a>
-                    </div>
-                }
-            }
+            </div>
 
         }
 
 
 
-
-
-
-
-
-        <div class="product">
-
-            <img src="" alt="Product 1">
-
-
-
-            <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowAllProducts"><button>نمایش همه محصولات</button></a>
-        </div>
-
-
     </div>
 
-
-
 </body>
+
 
 </html>

@@ -24,9 +24,9 @@ namespace Domain.Entities.Order.Location
 
         public string Address { get; set; }
 
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public int PostCode { get; set; }
+        public string PostCode { get; set; }
 
         #endregion
 
@@ -35,8 +35,6 @@ namespace Domain.Entities.Order.Location
         public Order order { get; set; }
 
         #endregion
-
-
 
 
     }

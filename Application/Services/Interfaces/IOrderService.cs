@@ -23,13 +23,6 @@ namespace Application.Services.Interfaces
         public Task AddOrderLocation(LocationDTO locationDTO, int UserId);
 
 
-
-
-
-
-
-
-
     }
 
 }

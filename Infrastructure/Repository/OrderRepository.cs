@@ -142,15 +142,43 @@ namespace Infrastructure.Repository
 
         #region AddOrderLocation
 
-        public async Task AddOrderLocation(Location location,int UserId)
+        public async Task AddOrderLocation(Location location, int UserId)
         {
 
-            int OrderId = GetOrderById(UserId).Id;
+            Order? order = await GetOrderById(UserId);
 
-            location.OrderId = OrderId;
 
-            await _datacontext.Locations.AddAsync(location);
-            await _datacontext.SaveChangesAsync();
+            Location? templocation = await _datacontext.Locations
+                                    .FirstOrDefaultAsync(l => l.OrderId == order.Id);
+
+
+
+            if (templocation != null)
+            {
+
+                templocation.FirstName = location.FirstName;
+                templocation.LastName = location.LastName;
+                templocation.State = location.State;
+                templocation.City = location.City;
+                templocation.Address = location.Address;
+                templocation.PhoneNumber = location.PhoneNumber;
+                templocation.PostCode = location.PostCode;
+
+
+                _datacontext.Update(templocation);
+                await _datacontext.SaveChangesAsync();
+
+            }
+
+
+            else
+            {
+
+                location.OrderId = order.Id;
+                await _datacontext.Locations.AddAsync(location);
+                await _datacontext.SaveChangesAsync();
+
+            }
 
         }
 
