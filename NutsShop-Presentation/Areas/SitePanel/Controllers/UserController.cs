@@ -29,6 +29,7 @@ public class UserController : Controller
     #endregion
 
 
+
     #region Register
 
 
@@ -88,6 +89,7 @@ public class UserController : Controller
     #endregion
 
 
+
     #region LogIn
 
     [HttpGet]
@@ -128,6 +130,7 @@ public class UserController : Controller
     #endregion
 
 
+
     #region LogOut
 
     public async Task<IActionResult> LogOut()
@@ -140,6 +143,7 @@ public class UserController : Controller
     }
 
     #endregion
+
 
 
     #region AddProductToCart
@@ -173,7 +177,8 @@ public class UserController : Controller
     #endregion
 
 
-    #region RemoveOrderDetail
+
+    #region RemoveOrderDetailFromCart
 
     public async Task<IActionResult> RemoveOrderDetail(int Id)
     {
@@ -186,6 +191,7 @@ public class UserController : Controller
     #endregion
 
 
+    #region SetOrderLocation
     [HttpGet]
     public async Task<IActionResult> SetOrderLocation()
     {
@@ -203,15 +209,9 @@ public class UserController : Controller
         return View();
 
     }
+    #endregion
 
-
-    //[HttpPost]
-    //public async Task<IActionResult> SetOrderLocation() 
-    //{
-
-    //    return View();
-
-    //}
+   
 
 
 }

@@ -83,6 +83,7 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
         #endregion
 
+
         #region ShowProductsByCategory
 
         public async Task<IActionResult> ShowProductByCategory(int CategoryId)
@@ -104,6 +105,7 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         }
 
         #endregion
+
 
         #region Cart
         public async Task<IActionResult> Cart()
