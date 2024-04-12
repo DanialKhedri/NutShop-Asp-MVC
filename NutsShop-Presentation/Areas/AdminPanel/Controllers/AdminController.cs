@@ -35,14 +35,6 @@ public class AdminController : Controller
     #endregion
 
 
-
-
-
-
-
-
-
-
     #region Index
 
     [HttpGet]
@@ -57,6 +49,7 @@ public class AdminController : Controller
     #region Products Managment
 
 
+    //Get All Products
 
     [HttpGet]
     public async Task<IActionResult> GetAllProducts()
@@ -70,11 +63,16 @@ public class AdminController : Controller
         return View(ProductList);
     }
 
+
+
     //Add
+
     public async Task<IActionResult> AddProduct()
     {
         return View();
     }
+
+
 
     [HttpPost]
     public async Task<IActionResult> AddProduct(ProductDTO productDTO) 
@@ -85,10 +83,11 @@ public class AdminController : Controller
     }
 
 
+
     //Edit
 
     [HttpGet]
-    public async Task<IActionResult> EditProduct(int ItemId) 
+    public async Task<IActionResult> EditProduct(int ProductId) 
     {
 
 
@@ -105,11 +104,16 @@ public class AdminController : Controller
         return View();
     }
 
+
     //Remove
 
+    public async Task<IActionResult> RemoveProduct(int ProductId) 
+    {
 
 
 
+        return View();
+    }
 
 
 
