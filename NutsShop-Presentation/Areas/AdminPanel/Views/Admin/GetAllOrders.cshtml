@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول محصولات</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<style>
+
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        max-width: 100px;
+        height: auto;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+</style>
+
+
+
+
+
+
+<body>
+
+    <div class="container">
+
+        <h1>لیست سفارشات</h1>
+
+        <table>
+
+            <tr>
+                <th>تصویر</th>
+                <th>نام محصول</th>
+                <th>قیمت</th>
+                <th>توضیحات</th>
+            </tr>
+
+            <tr>
+                <td><img src="product1.jpg" alt="محصول 1"></td>
+                <td>محصول 1</td>
+                <td>۱۰۰,۰۰۰ تومان</td>
+                <td>توضیحات محصول 1</td>
+            </tr>
+
+            <tr>
+                <td><img src="product2.jpg" alt="محصول 2"></td>
+                <td>محصول 2</td>
+                <td>۱۵۰,۰۰۰ تومان</td>
+                <td>توضیحات محصول 2</td>
+            </tr>
+
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,73 +1,7 @@
-﻿<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Sidebar Menu</title>
-
-    <style>
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            right: 0; /* تغییر این خط از left به right */
-            background-color: #111;
-            padding-top: 60px;
-        }
-
-            .sidebar a {
-                margin: 20px;
-                padding: 10px;
-                text-decoration: none;
-                font-size: 22px;
-                color: #ccc;
-                display: block;
-                transition: 0.3s;
-                cursor: pointer;
-            }
-
-                .sidebar a:hover {
-                    color: #fff;
-                }
-
-        .content {
-            margin-right: 250px; /* تغییر این خط از margin-left به margin-right */
-            padding: 20px;
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <div class="sidebar">
+﻿
+@{
+    Layout = "_AdminLayout";
+}
 
 
-        <a href="#">مدیریت محصولات</a>
-        <a href="#">مدیریت دسته بندی</a>
-        <a href="#">مدیریت کاربران</a>
-        <a href="#">مدیریت سفارشات</a>
-        <a href="#"></a>
-        <a href="#">خانه</a>
-
-    </div>
-
-    <div class="content">
-
-        <h2>Main Content</h2>
-        <p>This is the main content area.</p>
-
-    </div>
-
-
-</body>
-
-</html>
+<h1>Hi This Is Admin Index</h1>

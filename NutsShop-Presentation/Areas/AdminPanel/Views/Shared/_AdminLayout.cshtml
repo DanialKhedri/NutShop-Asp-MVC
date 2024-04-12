@@ -1,0 +1,78 @@
+﻿<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Sidebar Menu</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0; /* تغییر این خط از left به right */
+            background-color: #111;
+            padding-top: 60px;
+        }
+
+            .sidebar a {
+                margin: 20px;
+                padding: 10px;
+                text-decoration: none;
+                font-size: 22px;
+                color: #ccc;
+                display: block;
+                transition: 0.3s;
+                cursor: pointer;
+            }
+
+                .sidebar a:hover {
+                    color: #fff;
+                }
+
+        .content {
+            margin-right: 250px; /* تغییر این خط از margin-left به margin-right */
+            padding: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+
+        <a asp-area="AdminPanel" asp-controller="Admin" asp-action="GetAllProducts"> مدیریت محصولات </a>
+
+        <a asp-area="AdminPanel" asp-controller="Admin" asp-action="GetAllCategories"> مدیریت دسته بندی </a>
+
+        <a asp-area="AdminPanel" asp-controller="Admin" asp-action="GetAllUsers"> مدیریت کاربران </a>
+
+        <a asp-area="AdminPanel" asp-controller="Admin" asp-action="GetAllOrders"> مدیریت سفارشات </a>
+
+        <br />
+
+        <a asp-area="SitePanel" asp-controller="Home" asp-action="Index"> خانه </a>
+
+
+    </div>
+
+    <div class="content">
+
+        @RenderBody();
+
+    </div>
+
+
+</body>
+
+</html>
