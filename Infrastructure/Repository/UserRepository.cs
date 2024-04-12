@@ -32,6 +32,20 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        #region GetAllUsers
+
+        public async Task<List<User>> GetAllUser()
+        {
+
+
+
+            return await _dataContext.Users.ToListAsync();
+
+        }
+
+        #endregion
+
+
         #region Register
 
         public async Task<bool> Register(User user)
@@ -62,10 +76,10 @@ namespace Infrastructure.Repository
             User? Tempuser = await _dataContext.Users.FirstOrDefaultAsync(p => p.UserName == user.UserName ||
                                                                           p.Phone == user.Phone &&
                                                                           p.Password == user.Password);
-             
 
 
-            if (Tempuser !=null)
+
+            if (Tempuser != null)
             {
 
                 //Set Cookies
@@ -103,9 +117,6 @@ namespace Infrastructure.Repository
 
         }
         #endregion
-
-
-      
 
 
         #region SaveChange

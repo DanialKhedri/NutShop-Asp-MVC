@@ -13,18 +13,20 @@ public class AdminController : Controller
     private readonly IOrderService _IOrderService;
     private readonly IUserService _IUserService;
     private readonly ICategoryService _ICategoryService;
-
+    private readonly IRoleService _IRoleService;
 
     public AdminController(IProductService productService,
-        IOrderService orderService, 
+        IOrderService orderService,
         IUserService userService,
-        ICategoryService categoryService)
+        ICategoryService categoryService,
+        IRoleService roleService)
     {
 
         _IProductService = productService;
         _IOrderService = orderService;
         _IUserService = userService;
         _ICategoryService = categoryService;
+        _IRoleService = roleService;
 
     }
 
@@ -91,16 +93,30 @@ public class AdminController : Controller
     {
 
 
-      
+        var UserDTOs = await _IUserService.GetAllUser();
 
 
-        return View();
+        return View(UserDTOs);
 
     }
 
 
     #endregion
 
+
+    #region RoleManagment
+
+    public async Task<IActionResult> GetAllRoles() 
+    {
+
+      var Roles = await _IRoleService.GetAllRoles();
+
+
+        return View(Roles);
+    
+    }
+
+    #endregion
 
     #region Orders Managment
 

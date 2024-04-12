@@ -26,6 +26,39 @@ namespace Application.Services.implements
         #endregion
 
 
+        #region GetAllUsers
+
+        public async Task<List<UserAdminPanelDTO>> GetAllUser()
+        {
+
+            List<User> users = await _IUserRepository.GetAllUser();
+
+            List<UserAdminPanelDTO> userAdminPanelDTOs = new List<UserAdminPanelDTO>();
+
+            foreach (var item in users)
+            {
+
+                UserAdminPanelDTO userAdminPanelDTO = new UserAdminPanelDTO()
+                {
+
+                    Id = item.Id,
+                    UserName = item.UserName,
+                    Phone = item.Phone,
+                    CreateDate = item.CreateDate,                 
+                    Password = item.Password,
+
+                };
+
+
+                userAdminPanelDTOs.Add(userAdminPanelDTO);
+            }
+
+            return userAdminPanelDTOs;
+        }
+
+        #endregion
+
+
         #region Register 
         public async Task<bool> Register(UserRegisterDTO userRegisterDTO)
         {
@@ -51,7 +84,7 @@ namespace Application.Services.implements
 
         #region LogIn
 
-        public async Task<bool> LogIn(UserLogInDTO userLogInDTO) 
+        public async Task<bool> LogIn(UserLogInDTO userLogInDTO)
         {
 
             User user = new User()
@@ -61,7 +94,7 @@ namespace Application.Services.implements
                 Password = PasswordHasher.EncodePasswordMd5(userLogInDTO.Password),
             };
 
-           return await _IUserRepository.LogIn(user);
+            return await _IUserRepository.LogIn(user);
 
         }
 
@@ -69,7 +102,7 @@ namespace Application.Services.implements
 
         #region SavChanges
 
-        public void SaveChange() 
+        public void SaveChange()
         {
             _IUserRepository.SaveChange();
         }

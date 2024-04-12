@@ -66,6 +66,7 @@ namespace Application.Services.implements
 
         #endregion
 
+
         #region AddProductToCart
         public async Task AddProductToCart(int UserId, int ProductId, int Weight)
         {
@@ -202,6 +203,7 @@ namespace Application.Services.implements
 
 
         #region Add To cart Methods
+
         private async Task AddUser(int UserId)
         {
 

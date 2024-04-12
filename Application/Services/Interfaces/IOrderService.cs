@@ -15,9 +15,12 @@ namespace Application.Services.Interfaces
 
         public Task AddProductToCart(int UserId, int ProductId, int Weight);
 
+
         public Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId);
 
+
         public Task RemoveOrderDetail(int OrderDetailId);
+
 
         public Task<OrderDTO?> GetOrderByUserID(int UserId);
 

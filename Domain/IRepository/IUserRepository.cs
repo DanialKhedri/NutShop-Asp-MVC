@@ -9,6 +9,9 @@ namespace Domain.IRepository
 {
     public interface IUserRepository
     {
+        public Task<List<User>> GetAllUser();
+ 
+
         public Task<bool> Register(User user);
 
         public Task<bool> LogIn(User user);

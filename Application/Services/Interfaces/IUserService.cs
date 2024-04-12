@@ -10,6 +10,8 @@ namespace Application.Services.Interfaces
 {
     public interface IUserService
     {
+        public Task<List<UserAdminPanelDTO>> GetAllUser();
+
         public Task<bool> Register(UserRegisterDTO userRegisterDTO);
 
         public Task<bool> LogIn(UserLogInDTO userLogInDTO);

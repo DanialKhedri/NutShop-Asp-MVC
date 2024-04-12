@@ -37,6 +37,7 @@ namespace Infrastructure.Repository
 
         #endregion
 
+
         #region GetAllOrderDetails
 
         public async Task<List<OrderDetail>> GetAllOrderDetails(int UserId)
@@ -140,6 +141,7 @@ namespace Infrastructure.Repository
         }
 
         #endregion
+
 
         #region Get Order By UserId
 
@@ -250,6 +252,7 @@ namespace Infrastructure.Repository
 
 
         #endregion
+
 
         #region SaveChange
         public async Task SaveChange()
