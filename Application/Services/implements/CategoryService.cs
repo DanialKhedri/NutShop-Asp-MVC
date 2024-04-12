@@ -24,15 +24,15 @@ namespace Application.Services.implements
 
         #region GetAllCategories
 
-        public async Task<List<CategoryIndexDTO>> GetAllCategories() 
+        public async Task<List<CategoryDTO>> GetAllCategories() 
         {
             List<Category> categories = await _ICategoryRepository.GetAllCategories();
 
-            List<CategoryIndexDTO> CategoryDTOList = new List<CategoryIndexDTO>();
+            List<CategoryDTO> CategoryDTOList = new List<CategoryDTO>();
 
             foreach (var item in categories)
             {
-                CategoryIndexDTO categoryIndexDTO = new CategoryIndexDTO()
+                CategoryDTO categoryIndexDTO = new CategoryDTO()
                 {
                     Id = item.Id,
                     CategoryTitle = item.CategoryTitle,

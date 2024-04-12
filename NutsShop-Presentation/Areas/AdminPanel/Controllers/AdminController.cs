@@ -12,13 +12,19 @@ public class AdminController : Controller
     private readonly IProductService _IProductService;
     private readonly IOrderService _IOrderService;
     private readonly IUserService _IUserService;
+    private readonly ICategoryService _ICategoryService;
 
-    public AdminController(IProductService productService, IOrderService orderService, IUserService userService)
+
+    public AdminController(IProductService productService,
+        IOrderService orderService, 
+        IUserService userService,
+        ICategoryService categoryService)
     {
 
         _IProductService = productService;
         _IOrderService = orderService;
         _IUserService = userService;
+        _ICategoryService = categoryService;
 
     }
 
@@ -34,6 +40,7 @@ public class AdminController : Controller
 
 
 
+    #region Index
 
     [HttpGet]
     public async Task<IActionResult> Index()
@@ -41,6 +48,7 @@ public class AdminController : Controller
         return View();
     }
 
+    #endregion
 
 
     #region Products Managment
@@ -49,9 +57,12 @@ public class AdminController : Controller
     public async Task<IActionResult> GetAllProducts()
     {
 
-        return View();
+
+        var ProductList = await _IProductService.GetAllProducts();
 
 
+
+        return View(ProductList);
     }
 
     #endregion
@@ -63,7 +74,7 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> GetAllCategories()
     {
-
+        var Categories = await _ICategoryService.GetAllCategories();
 
 
         return View();

@@ -26,17 +26,17 @@ namespace Application.Services.implements
 
         #region GetAllProducts
 
-        public async Task<List<ProductIndexDTO>> GetAllProducts() 
+        public async Task<List<ProductDTO>> GetAllProducts() 
         {
 
             List<Product> products = await _IProductRepository.GetAllProducts();
 
-            List<ProductIndexDTO> productDtoList = new List<ProductIndexDTO>();
+            List<ProductDTO> productDtoList = new List<ProductDTO>();
 
             foreach (var item in products)
             {
 
-                ProductIndexDTO productIndexDTO = new ProductIndexDTO()
+                ProductDTO productDTO = new ProductDTO()
                 {
 
                     Id = item.Id,
@@ -46,7 +46,7 @@ namespace Application.Services.implements
 
                 };
 
-                productDtoList.Add(productIndexDTO);
+                productDtoList.Add(productDTO);
 
             }
 
@@ -58,13 +58,13 @@ namespace Application.Services.implements
 
         #region GetProductById
 
-        public async Task<ProductIndexDTO> GetProductById(int Id) 
+        public async Task<ProductDTO> GetProductById(int Id) 
         {
             //Get product By Id
             Product product = await _IProductRepository.GetProductById(Id);
 
             //object mapping
-            ProductIndexDTO productIndexDTO = new ProductIndexDTO()
+            ProductDTO productDTO = new ProductDTO()
             {
                 Id = product.Id,
                 ProductName = product.ProductName,
@@ -75,7 +75,7 @@ namespace Application.Services.implements
 
             //Return
 
-            return productIndexDTO;
+            return productDTO;
 
 
         }
@@ -83,16 +83,16 @@ namespace Application.Services.implements
 
         #region GetproductByCategoryId
 
-        public async Task<List<ProductIndexDTO>> GetProductsByCategoryId(int CategoryId)
+        public async Task<List<ProductDTO>> GetProductsByCategoryId(int CategoryId)
         {
 
             List<Product> products = await _IProductRepository.GetProductsByCategoryId(CategoryId);
 
-            List<ProductIndexDTO> productIndexDTOs = new List<ProductIndexDTO>();
+            List<ProductDTO> productIndexDTOs = new List<ProductDTO>();
 
             foreach (var item in products)
             {
-                ProductIndexDTO dTO = new ProductIndexDTO
+                ProductDTO dTO = new ProductDTO
                 {
                     Id = item.Id,
                     ProductName = item.ProductName,

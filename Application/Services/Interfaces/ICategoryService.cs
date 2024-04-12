@@ -9,7 +9,7 @@ namespace Application.Services.Interfaces
 {
     public interface ICategoryService
     {
-        public Task<List<CategoryIndexDTO>> GetAllCategories();
+        public Task<List<CategoryDTO>> GetAllCategories();
 
     }
 }

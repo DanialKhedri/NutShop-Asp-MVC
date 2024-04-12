@@ -33,8 +33,8 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         public async Task<IActionResult> Index()
         {
 
-            List<ProductIndexDTO> Products = await _IProductService.GetAllProducts();
-            List<CategoryIndexDTO> categories = await _ICategoryService.GetAllCategories();
+            List<ProductDTO> Products = await _IProductService.GetAllProducts();
+            List<CategoryDTO> categories = await _ICategoryService.GetAllCategories();
 
             IndexViewModel indexViewModel = new IndexViewModel()
             {
@@ -67,7 +67,7 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         public async Task<IActionResult> ShowAllProducts()
         {
 
-            List<ProductIndexDTO> products = await _IProductService.GetAllProducts();
+            List<ProductDTO> products = await _IProductService.GetAllProducts();
 
 
             ShowProductsViewModel showProductsViewModel = new ShowProductsViewModel()
@@ -89,7 +89,7 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
         public async Task<IActionResult> ShowProductByCategory(int CategoryId)
         {
 
-            List<ProductIndexDTO>? productsDTOList = await _IProductService.GetProductsByCategoryId(CategoryId);
+            List<ProductDTO>? productsDTOList = await _IProductService.GetProductsByCategoryId(CategoryId);
 
             ShowProductByCategoryIdViewModel showProductByCategoryIdViewModel = new ShowProductByCategoryIdViewModel()
             {

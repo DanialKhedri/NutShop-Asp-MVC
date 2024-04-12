@@ -1,4 +1,10 @@
-﻿@{
+﻿
+
+
+
+
+
+@{
     Layout = "_AdminLayout";
 }
 
@@ -6,10 +12,12 @@
 <html lang="fa">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>جدول محصولات</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 
@@ -62,6 +70,10 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
+    .btn {
+        height: 40px;
+        width: 40%;
+    }
 </style>
 
 
@@ -82,6 +94,7 @@
                 <th>نام محصول</th>
                 <th>قیمت</th>
                 <th>توضیحات</th>
+                <th></th>
             </tr>
 
             <tr>
@@ -89,6 +102,12 @@
                 <td>محصول 1</td>
                 <td>۱۰۰,۰۰۰ تومان</td>
                 <td>توضیحات محصول 1</td>
+
+                <td>
+                    <button class="btn">ویرایش</button>
+                    <button class="btn">حذف</button>
+                </td>
+
             </tr>
 
             <tr>

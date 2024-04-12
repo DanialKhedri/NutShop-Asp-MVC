@@ -7,7 +7,7 @@ namespace NutsShop_Presentation.Areas.SitePanel.ViewModels;
 public class ShowProductsViewModel
 {
 
-    public List<ProductIndexDTO> ProductsDTOs { get; set; }
+    public List<ProductDTO> ProductsDTOs { get; set; }
 
 
 

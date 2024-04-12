@@ -1,5 +1,5 @@
-﻿
-
+﻿@using Application.Dtos.ProductDTO
+@model List<ProductDTO>;
 
 @{
     Layout = "_AdminLayout";
@@ -9,14 +9,18 @@
 <html lang="fa">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>جدول محصولات</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 
 <style>
+
+
 
 
     body {
@@ -66,6 +70,14 @@
     }
 
 
+
+    .btn
+    {
+        height:40px;
+        width:40%;
+
+    }
+
 </style>
 
 
@@ -86,23 +98,43 @@
                 <th>نام محصول</th>
                 <th>قیمت</th>
                 <th>توضیحات</th>
+                <th></th>
             </tr>
+            @if (Model != null)
+            {
 
-            <tr>
-                <td><img src="product1.jpg" alt="محصول 1"></td>
-                <td>محصول 1</td>
-                <td>۱۰۰,۰۰۰ تومان</td>
-                <td>توضیحات محصول 1</td>
-            </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
 
-            <tr>
-                <td><img src="product2.jpg" alt="محصول 2"></td>
-                <td>محصول 2</td>
-                <td>۱۵۰,۰۰۰ تومان</td>
-                <td>توضیحات محصول 2</td>
-            </tr>
+                        <td><img src="~/Images/Products/@item.Image" alt="محصول 1"></td>
+                        <td>@item.ProductName</td>
+                        <td>@item.Price</td>
+                        <td>@item.Description</td>
 
-           
+                        <td>
+                            <button class="btn">ویرایش</button>
+                            <button class="btn">حذف</button>
+                        </td>
+
+                    </tr>
+                }
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
         </table>
 
     </div>

@@ -9,11 +9,11 @@ namespace Application.Services.Interfaces
 {
     public interface IProductService
     {
-        public Task<List<ProductIndexDTO>> GetAllProducts();
+        public Task<List<ProductDTO>> GetAllProducts();
 
-        public Task<ProductIndexDTO> GetProductById(int Id);
+        public Task<ProductDTO> GetProductById(int Id);
 
-        public Task<List<ProductIndexDTO>> GetProductsByCategoryId(int CategoryId);
+        public Task<List<ProductDTO>> GetProductsByCategoryId(int CategoryId);
 
     }
 }
