@@ -1,4 +1,5 @@
-﻿using Application.Services.Interfaces;
+﻿using Application.Dtos.ProductDTO;
+using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace NutsShop_Presentation.Areas.AdminPanel.Controllers;
@@ -70,8 +71,39 @@ public class AdminController : Controller
     }
 
     //Add
+    public async Task<IActionResult> AddProduct()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddProduct(ProductDTO productDTO) 
+    {
+
+
+        return View();
+    }
+
 
     //Edit
+
+    [HttpGet]
+    public async Task<IActionResult> EditProduct(int ItemId) 
+    {
+
+
+
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditProduct(ProductDTO productDTO)
+    {
+
+
+
+        return View();
+    }
 
     //Remove
 
