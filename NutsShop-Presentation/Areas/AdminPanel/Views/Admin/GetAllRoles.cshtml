@@ -1,5 +1,5 @@
-﻿@using Application.Dtos.UserLogInDTO
-@model List<UserAdminPanelDTO>;
+﻿@using Application.Dtos.RoleDTO
+@model List<RoleDTO>;
 
 
 @{
@@ -85,6 +85,14 @@
         width: 40%;
     }
 
+    .Addbtn
+    {
+        margin:30px;
+        height: 40px;
+        width: 40%;
+
+    }
+
 </style>
 
 
@@ -94,10 +102,12 @@
 
 <body>
 
+    <h1>لیست نقش ها</h1>
+    <button class="Addbtn">اضافه کردن</button>
+
     <div class="container">
 
-        <h1>لیست کاربران</h1>
-
+      
         <table>
 
             <tr>
@@ -117,10 +127,9 @@
                 {
                     <tr>
 
-                        <td>@item.UserName</td>
-                        <td>@item.Phone</td>
-                        <td>@item.CreateDate</td>
-                        <td>@item.Password</td>
+                        <td>@item.RoleTitle</td>
+                        <td>@item.RoleUniqueName</td>
+                     
 
 
 

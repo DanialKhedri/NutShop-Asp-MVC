@@ -55,6 +55,8 @@ public class AdminController : Controller
 
     #region Products Managment
 
+
+
     [HttpGet]
     public async Task<IActionResult> GetAllProducts()
     {
@@ -66,6 +68,18 @@ public class AdminController : Controller
 
         return View(ProductList);
     }
+
+    //Add
+
+    //Edit
+
+    //Remove
+
+
+
+
+
+
 
     #endregion
 
@@ -106,14 +120,14 @@ public class AdminController : Controller
 
     #region RoleManagment
 
-    public async Task<IActionResult> GetAllRoles() 
+    public async Task<IActionResult> GetAllRoles()
     {
 
-      var Roles = await _IRoleService.GetAllRoles();
+        var Roles = await _IRoleService.GetAllRoles();
 
 
         return View(Roles);
-    
+
     }
 
     #endregion
