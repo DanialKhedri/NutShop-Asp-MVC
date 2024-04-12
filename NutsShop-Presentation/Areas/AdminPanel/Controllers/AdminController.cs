@@ -77,7 +77,7 @@ public class AdminController : Controller
         var Categories = await _ICategoryService.GetAllCategories();
 
 
-        return View();
+        return View(Categories);
 
     }
 
@@ -107,7 +107,7 @@ public class AdminController : Controller
     public async Task<IActionResult> GetAllOrders()
     {
 
-
+        
 
 
         return View();
