@@ -33,6 +33,39 @@ namespace Application.Services.implements
 
 
 
+        #region Get All Orders
+
+        public async Task<List<OrderDTO>> GetAllOrdersForAdminPanel()
+        {
+
+            List<Order> Orders = await _IOrderRepository.GetAllOrdersForAdminPanel();
+
+            List<OrderDTO> orderDTOs = new List<OrderDTO>();
+
+            foreach (var item in Orders)
+            {
+
+                OrderDTO orderDTO = new OrderDTO()
+                {
+
+                    Id = item.Id,
+                    UserId = item.UserId,
+                    CreateTime = item.CreateTime,
+                    Sum = item.Sum,
+
+                };
+
+                orderDTOs.Add(orderDTO);
+
+            }
+
+
+            return orderDTOs;
+
+        }
+
+        #endregion
+
         #region AddProductToCart
         public async Task AddProductToCart(int UserId, int ProductId, int Weight)
         {
@@ -118,6 +151,7 @@ namespace Application.Services.implements
         #endregion
 
 
+        #region AddOrderLocation
         public async Task AddOrderLocation(LocationDTO locationDTO, int UserId)
         {
 
@@ -136,9 +170,7 @@ namespace Application.Services.implements
             await _IOrderRepository.AddOrderLocation(location, UserId);
 
         }
-
-    
-
+        #endregion
 
 
         #region GetOrderByUserId
@@ -152,12 +184,12 @@ namespace Application.Services.implements
                 //Object Mapping
                 OrderDTO? tempOrderDTO = new OrderDTO()
                 {
+
                     Id = order.Id,
                     UserId = order.UserId,
                     CreateTime = order.CreateTime,
                     Sum = order.Sum,
-                    IsFinaly = order.IsFinaly,
-
+                  
                 };
 
                 return tempOrderDTO;
@@ -224,5 +256,6 @@ namespace Application.Services.implements
         }
 
         #endregion
+
     }
 }

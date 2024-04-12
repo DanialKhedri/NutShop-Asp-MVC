@@ -25,6 +25,17 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        #region GetAllOrders
+        public async Task<List<Order>> GetAllOrdersForAdminPanel ()
+        {
+
+            return await _datacontext.Orders.Where(o => o.IsFinaly == true)
+                                            .ToListAsync();
+
+
+        }
+
+        #endregion
 
         #region GetAllOrderDetails
 
@@ -184,7 +195,7 @@ namespace Infrastructure.Repository
 
         #endregion
 
-    
+
 
         #region Cart Methods-Add Product
 

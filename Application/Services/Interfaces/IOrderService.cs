@@ -22,6 +22,8 @@ namespace Application.Services.Interfaces
         public Task<OrderDTO?> GetOrderByUserID(int UserId);
 
 
+        public Task<List<OrderDTO>> GetAllOrdersForAdminPanel();
+
 
         public Task AddOrderLocation(LocationDTO locationDTO, int UserId);
 

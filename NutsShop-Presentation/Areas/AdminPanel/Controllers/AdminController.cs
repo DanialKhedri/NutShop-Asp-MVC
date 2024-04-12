@@ -91,7 +91,7 @@ public class AdminController : Controller
     {
 
 
-
+      
 
 
         return View();
@@ -107,10 +107,10 @@ public class AdminController : Controller
     public async Task<IActionResult> GetAllOrders()
     {
 
-        
+        var OrdersList = await _IOrderService.GetAllOrdersForAdminPanel();
 
 
-        return View();
+        return View(OrdersList);
 
     }
     #endregion

@@ -16,7 +16,6 @@ namespace Application.Dtos.OrderDTO
 
         public int Sum { get; set; }
 
-        public bool IsFinaly { get; set; }
 
     }
 }
