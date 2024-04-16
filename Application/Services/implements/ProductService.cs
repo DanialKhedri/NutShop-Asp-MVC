@@ -1,6 +1,8 @@
 ﻿using Application.Dtos.ProductDTO;
+using Application.Extensions.NameGenerator;
 using Application.Services.Interfaces;
 using Domain.Entities.Product;
+using Domain.Entities.User;
 using Domain.IRepository;
 using Microsoft.Identity.Client;
 using System;
@@ -18,7 +20,7 @@ namespace Application.Services.implements
 
         private readonly IProductRepository _IProductRepository;
 
-        public ProductService(IProductRepository productRepository) 
+        public ProductService(IProductRepository productRepository)
         {
             _IProductRepository = productRepository;
         }
@@ -26,7 +28,7 @@ namespace Application.Services.implements
 
         #region GetAllProducts
 
-        public async Task<List<ProductDTO>> GetAllProducts() 
+        public async Task<List<ProductDTO>> GetAllProducts()
         {
 
             List<Product> products = await _IProductRepository.GetAllProducts();
@@ -58,7 +60,7 @@ namespace Application.Services.implements
 
         #region GetProductById
 
-        public async Task<ProductDTO> GetProductById(int Id) 
+        public async Task<ProductDTO> GetProductById(int Id)
         {
             //Get product By Id
             Product product = await _IProductRepository.GetProductById(Id);
@@ -70,7 +72,7 @@ namespace Application.Services.implements
                 ProductName = product.ProductName,
                 Image = product.Image,
                 Price = product.Price,
-                Description =product.Description
+                Description = product.Description
             };
 
             //Return
@@ -117,13 +119,37 @@ namespace Application.Services.implements
 
         #region AddProduct
 
-        public async Task AddProduct(ProductDTO productDTO) 
+        public async Task AddProduct(ProductDTO productDTO)
         {
-            
 
 
+            Product product = new Product()
+            {
+
+                ProductName = productDTO.ProductName,
+                Description = productDTO.Description,
+                Price = productDTO.Price,
 
 
+            };
+
+            #region AddImage 
+
+            if (productDTO.ImageIformFile != null)
+            {
+                //Save New Image
+                product.Image = NameGenerator.GenerateUniqCode() + Path.GetExtension(productDTO.ImageIformFile.FileName);
+
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", productDTO.Image);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    productDTO.ImageIformFile.CopyTo(stream);
+                }
+            }
+
+            #endregion
+
+            await _IProductRepository.AddProduct(product);
         }
 
         #endregion

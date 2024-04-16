@@ -68,10 +68,10 @@ public class AdminController : Controller
     //Add
 
     [HttpGet]
-    public async Task<IActionResult> AddProduct(int ProductId)
+    public async Task<IActionResult> AddProduct()
     {
 
-    
+
 
         return View();
     }
@@ -79,9 +79,9 @@ public class AdminController : Controller
 
 
     [HttpPost]
-    public async Task<IActionResult> AddProduct(ProductDTO productDTO) 
+    public async Task<IActionResult> AddProduct(ProductDTO productDTO)
     {
-
+        await _IProductService.AddProduct(productDTO);
 
         return View();
     }
@@ -91,7 +91,7 @@ public class AdminController : Controller
     //Edit
 
     [HttpGet]
-    public async Task<IActionResult> EditProduct(int ProductId) 
+    public async Task<IActionResult> EditProduct(int ProductId)
     {
 
 
@@ -111,7 +111,7 @@ public class AdminController : Controller
 
     //Remove
 
-    public async Task<IActionResult> RemoveProduct(int ProductId) 
+    public async Task<IActionResult> RemoveProduct(int ProductId)
     {
 
 
