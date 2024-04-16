@@ -155,6 +155,40 @@ namespace Application.Services.implements
 
         #endregion
 
+        #region EditProduct
+
+        public async Task EditProduct(ProductDTO productDTO) 
+        {
+            Product product = new Product()
+            {
+                Id = productDTO.Id,
+                ProductName = productDTO.ProductName,
+                Description = productDTO.Description,
+                Price = productDTO.Price,
+           
+            };
+
+
+            #region AddImage 
+
+            if (productDTO.ImageIformFile != null)
+            {
+                //Save New Image
+                product.Image = NameGenerator.GenerateUniqCode() + Path.GetExtension(productDTO.ImageIformFile.FileName);
+
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Products", product.Image);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    productDTO.ImageIformFile.CopyTo(stream);
+                }
+            }
+
+            #endregion
+
+            await _IProductRepository.EditProduct(product);
+        }
+
+        #endregion
 
     }
 }

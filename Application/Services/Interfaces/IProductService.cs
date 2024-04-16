@@ -16,6 +16,7 @@ namespace Application.Services.Interfaces
         public Task<List<ProductDTO>> GetProductsByCategoryId(int CategoryId);
 
         public Task AddProduct(ProductDTO productDTO);
+        public Task EditProduct(ProductDTO productDTO);
 
 
     }

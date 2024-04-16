@@ -17,5 +17,7 @@ namespace Domain.IRepository
 
 
         public Task AddProduct(Product product);
+        public Task EditProduct(Product product);
+
     }
 }

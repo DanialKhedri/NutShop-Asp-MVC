@@ -40,9 +40,16 @@
 
             <div class="contant-section px-3 px-lg-4 pb-4" id="contact">
 
-                <form method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="AddProduct" enctype="multipart/form-data">
+                <form method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="EditProduct" enctype="multipart/form-data">
 
                     <div class="row">
+
+                        <div class="col-6">
+                            <label>Id</label>
+                            <input readonly class="form-control" style="margin: 10px" type="text"
+                                   asp-for="Id" placeholder="Product Name" required="">
+                        </div>
+
 
                         <!--Product Name-->
 
@@ -82,9 +89,7 @@
                     <div class="col-6">
 
 
-                        <img class="form-control" style="margin: 10px;width :50%;height:50%" type="file" id="image" name="image" placeholder="Your E-mail">
-
-
+                        <img class="form-control" style="margin: 10px;width :50%;height:50%" type="file" id="image" name="image" >
 
 
                         <input id="UserAvatarIFromFIle" type="file" asp-for="ImageIformFile"></>

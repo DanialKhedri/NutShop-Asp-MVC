@@ -2,6 +2,7 @@
 using Domain.IRepository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,17 +25,17 @@ namespace Infrastructure.Repository
         #endregion
 
         #region GetAllProducts
-        public async Task<List<Product>> GetAllProducts() 
+        public async Task<List<Product>> GetAllProducts()
         {
-           return await _dataContext.Products.ToListAsync();
+            return await _dataContext.Products.ToListAsync();
         }
         #endregion
 
         #region GetProductById
 
-        public async Task<Product> GetProductById(int Id) 
+        public async Task<Product> GetProductById(int Id)
         {
-           var product = await _dataContext.Products.FirstOrDefaultAsync(p => p.Id == Id);
+            var product = await _dataContext.Products.FirstOrDefaultAsync(p => p.Id == Id);
 
             return product;
         }
@@ -57,12 +58,36 @@ namespace Infrastructure.Repository
 
         #region AddProduct
 
-        public async Task AddProduct(Product product) 
+        public async Task AddProduct(Product product)
         {
 
-           await _dataContext.Products.AddAsync(product);
-           await _dataContext.SaveChangesAsync();
+            await _dataContext.Products.AddAsync(product);
+            await _dataContext.SaveChangesAsync();
 
+        }
+
+
+        #endregion
+
+        #region EditProduct
+
+        public async Task EditProduct(Product product)
+        {
+
+             Product originproduct = await  GetProductById(product.Id);
+
+            originproduct.ProductName = product.ProductName;
+            originproduct.Description = product.Description;
+            originproduct.Price = product.Price;
+
+            if (product.Image != null)
+                originproduct.Image = product.Image;
+
+               
+          
+
+            _dataContext.Update(originproduct);
+            await _dataContext.SaveChangesAsync();
         }
 
 

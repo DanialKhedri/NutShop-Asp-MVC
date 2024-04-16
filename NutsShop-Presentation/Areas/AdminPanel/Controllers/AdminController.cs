@@ -91,7 +91,7 @@ public class AdminController : Controller
     public async Task<IActionResult> EditProduct(int ProductId)
     {
 
-       var product = await _IProductService.GetProductById(ProductId);
+        var product = await _IProductService.GetProductById(ProductId);
 
         return View(product);
 
@@ -101,9 +101,9 @@ public class AdminController : Controller
     public async Task<IActionResult> EditProduct(ProductDTO productDTO)
     {
 
+        await _IProductService.EditProduct(productDTO);
 
-
-        return View();
+        return RedirectToAction(nameof(Index));
     }
 
 
