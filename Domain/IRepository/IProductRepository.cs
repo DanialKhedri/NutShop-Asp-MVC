@@ -16,5 +16,6 @@ namespace Domain.IRepository
         public Task<List<Product>> GetProductsByCategoryId(int CategoryId);
 
 
+        public Task AddProduct(Product product);
     }
 }

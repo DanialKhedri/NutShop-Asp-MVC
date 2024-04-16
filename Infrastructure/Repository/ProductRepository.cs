@@ -53,5 +53,19 @@ namespace Infrastructure.Repository
             return Products;
         }
         #endregion
+
+
+        #region AddProduct
+
+        public async Task AddProduct(Product product) 
+        {
+
+           await _dataContext.Products.AddAsync(product);
+           await _dataContext.SaveChangesAsync();
+
+        }
+
+
+        #endregion
     }
 }

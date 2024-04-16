@@ -67,8 +67,12 @@ public class AdminController : Controller
 
     //Add
 
-    public async Task<IActionResult> AddProduct()
+    [HttpGet]
+    public async Task<IActionResult> AddProduct(int ProductId)
     {
+
+    
+
         return View();
     }
 
