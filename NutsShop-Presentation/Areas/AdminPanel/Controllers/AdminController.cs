@@ -1,4 +1,5 @@
-﻿using Application.Dtos.ProductDTO;
+﻿using Application.Dtos.CategoryDTO;
+using Application.Dtos.ProductDTO;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -137,6 +138,58 @@ public class AdminController : Controller
 
     #endregion
 
+
+    //Add 
+
+    [HttpGet]
+    public async Task<IActionResult> AddCategory()
+    {
+
+
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddCategory(CategoryDTO CategoryDTO)
+    {
+
+
+        await _ICategoryService.AddCategory(CategoryDTO);
+
+
+        return RedirectToAction(nameof(GetAllCategories));
+
+
+    }
+
+    //Edit
+
+    public async Task<IActionResult> EditCategory(int CategoryId)
+    {
+        CategoryDTO Category = await _ICategoryService.GetCategorybyId(CategoryId);
+
+        return View(Category);
+
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditCategory(CategoryDTO categoryDTO)
+    {
+
+        await _ICategoryService.EditCategory(categoryDTO);
+
+        return RedirectToAction(nameof(GetAllCategories));
+
+    }
+
+
+    //Remove
+
+    public async Task<IActionResult> RemoveCategory(int CategoryId)
+    {
+        await _ICategoryService.RemoveCategory(CategoryId);
+        return RedirectToAction(nameof(GetAllCategories));
+    }
 
     #region User Managment
 

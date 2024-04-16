@@ -12,6 +12,14 @@ namespace Domain.IRepository
 
 
         public Task<List<Category>> GetAllCategories();
+        public Task<Category> GetCategoryById(int CategoryId);
+
+
+
+        public Task AddCategory(Category category);
+        public Task EditCategory(Category category);
+        public Task RemoveCategory(int CategoryId);
+
 
     }
 }

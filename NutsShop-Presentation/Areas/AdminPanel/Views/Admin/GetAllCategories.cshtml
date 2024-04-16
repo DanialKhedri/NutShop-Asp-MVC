@@ -76,14 +76,11 @@
         width: 40%;
     }
 
-    .Addbtn
-    {
-        margin:30px;
+    .Addbtn {
+        margin: 30px;
         height: 40px;
         width: 40%;
-
     }
-
 
 </style>
 
@@ -92,7 +89,8 @@
 
 
     <h1>لیست دسته بندی</h1>
-    <button class="Addbtn">اضافه کردن</button>
+
+    <a asp-area="AdminPanel" asp-controller="Admin" asp-action="AddCategory"> <button class="Addbtn">اضافه کردن</button> </a>
 
     <div class="container">
 
@@ -101,7 +99,7 @@
 
             <tr>
 
-                <th>تصویر</th>       
+                <th>تصویر</th>
                 <th>عنوان دسته بندی</th>
                 <th>نام خاص دسته بندی</th>
                 <th></th>
@@ -119,11 +117,12 @@
                         <td><img src="~/Images/Categories/@item.Image" alt="محصول 1"></td>
                         <td>@item.CategoryTitle</td>
                         <td>@item.CategoryUniqueName</td>
-                 
+
 
                         <td>
-                            <button class="btn">ویرایش</button>
-                            <button class="btn">حذف</button>
+                            <a asp-area="AdminPanel" asp-controller="Admin" asp-action="EditCategory" asp-route-CategoryId="@item.Id"> <button class="btn">ویرایش</button> </a>
+                            <a asp-area="AdminPanel" asp-controller="Admin" asp-action="RemoveCategory" asp-route-CategoryId="@item.Id"> <button class="btn">حذف</button> </a>
+
                         </td>
 
                     </tr>

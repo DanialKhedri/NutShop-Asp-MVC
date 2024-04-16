@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,8 @@ namespace Application.Dtos.CategoryDTO
         public string CategoryUniqueName { get; set; }
 
         public string Image { get; set; }
+
+        public IFormFile ImageIFormFile { get; set; }
 
     }
 }

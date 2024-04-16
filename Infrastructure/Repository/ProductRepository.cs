@@ -69,7 +69,6 @@ namespace Infrastructure.Repository
 
         #endregion
 
-
         #region EditProduct
 
         public async Task EditProduct(Product product)
