@@ -190,5 +190,15 @@ namespace Application.Services.implements
 
         #endregion
 
+        #region Remove Product
+
+        public async Task RemoveProduct(int ProductId) 
+        {
+           await _IProductRepository.RemoveProduct(ProductId);
+        }
+
+        #endregion
+
+
     }
 }

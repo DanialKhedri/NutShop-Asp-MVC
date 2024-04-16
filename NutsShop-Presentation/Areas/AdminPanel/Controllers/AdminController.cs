@@ -103,7 +103,7 @@ public class AdminController : Controller
 
         await _IProductService.EditProduct(productDTO);
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(GetAllProducts));
     }
 
 
@@ -111,10 +111,10 @@ public class AdminController : Controller
 
     public async Task<IActionResult> RemoveProduct(int ProductId)
     {
+        await _IProductService.RemoveProduct(ProductId);
 
 
-
-        return View();
+        return RedirectToAction(nameof(GetAllProducts));
     }
 
 

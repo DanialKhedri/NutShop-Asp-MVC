@@ -125,7 +125,8 @@
 
                         <td>
                             <a asp-area="AdminPanel" asp-controller="Admin" asp-action="EditProduct" asp-route-ProductId="@item.Id"> <button class="btn">ویرایش</button> </a>
-                            <button class="btn">حذف</button>
+                            <a asp-area="AdminPanel" asp-controller="Admin" asp-action="RemoveProduct" asp-route-ProductId="@item.Id"> <button class="btn">حذف</button> </a>
+
                         </td>
 
                     </tr>

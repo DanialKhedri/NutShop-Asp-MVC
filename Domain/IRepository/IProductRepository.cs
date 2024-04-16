@@ -18,6 +18,8 @@ namespace Domain.IRepository
 
         public Task AddProduct(Product product);
         public Task EditProduct(Product product);
+        public Task RemoveProduct(int ProductId);
+
 
     }
 }

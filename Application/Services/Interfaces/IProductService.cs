@@ -17,6 +17,7 @@ namespace Application.Services.Interfaces
 
         public Task AddProduct(ProductDTO productDTO);
         public Task EditProduct(ProductDTO productDTO);
+        public Task RemoveProduct(int ProductId);
 
 
     }

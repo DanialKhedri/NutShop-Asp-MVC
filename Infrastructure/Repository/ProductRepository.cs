@@ -27,7 +27,7 @@ namespace Infrastructure.Repository
         #region GetAllProducts
         public async Task<List<Product>> GetAllProducts()
         {
-            return await _dataContext.Products.ToListAsync();
+            return await _dataContext.Products.Where(p => p.Isdelete == false).ToListAsync();
         }
         #endregion
 
@@ -69,6 +69,7 @@ namespace Infrastructure.Repository
 
         #endregion
 
+
         #region EditProduct
 
         public async Task EditProduct(Product product)
@@ -92,5 +93,21 @@ namespace Infrastructure.Repository
 
 
         #endregion
+
+        #region RemoveProduct
+
+        public async Task RemoveProduct(int ProductId) 
+        {
+            var Product = await _dataContext.Products.FirstOrDefaultAsync( p => p.Id == ProductId);
+
+            Product.Isdelete = true;
+
+            _dataContext.Update(Product);
+           await _dataContext.SaveChangesAsync();
+
+        }
+
+        #endregion
+
     }
 }
