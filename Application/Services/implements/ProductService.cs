@@ -113,5 +113,21 @@ namespace Application.Services.implements
         }
 
         #endregion
+
+
+        #region AddProduct
+
+        public async Task AddProduct(ProductDTO productDTO) 
+        {
+            
+
+
+
+
+        }
+
+        #endregion
+
+
     }
 }
