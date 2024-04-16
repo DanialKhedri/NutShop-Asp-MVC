@@ -70,9 +70,6 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> AddProduct()
     {
-
-
-
         return View();
     }
 
@@ -94,9 +91,10 @@ public class AdminController : Controller
     public async Task<IActionResult> EditProduct(int ProductId)
     {
 
+       var product = await _IProductService.GetProductById(ProductId);
 
+        return View(product);
 
-        return View();
     }
 
     [HttpPost]

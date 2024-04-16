@@ -123,7 +123,7 @@
                         <td>@item.Description</td>
 
                         <td>
-                            <button class="btn">ویرایش</button>
+                            <a asp-area="AdminPanel" asp-controller="Admin" asp-action="EditProduct" asp-route-ProductId="@item.Id"> <button class="btn">ویرایش</button> </a>
                             <button class="btn">حذف</button>
                         </td>
 

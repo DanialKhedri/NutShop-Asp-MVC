@@ -122,7 +122,7 @@ namespace Application.Services.implements
         public async Task AddProduct(ProductDTO productDTO)
         {
 
-
+            //object mapping
             Product product = new Product()
             {
 
@@ -140,7 +140,7 @@ namespace Application.Services.implements
                 //Save New Image
                 product.Image = NameGenerator.GenerateUniqCode() + Path.GetExtension(productDTO.ImageIformFile.FileName);
 
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", productDTO.Image);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Products", product.Image);
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
                     productDTO.ImageIformFile.CopyTo(stream);
@@ -150,6 +150,7 @@ namespace Application.Services.implements
             #endregion
 
             await _IProductRepository.AddProduct(product);
+
         }
 
         #endregion
