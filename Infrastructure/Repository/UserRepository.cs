@@ -1,4 +1,6 @@
-﻿using Domain.Entities.User;
+﻿using Application.Dtos.ProductDTO;
+using Domain.Entities.Product;
+using Domain.Entities.User;
 using Domain.IRepository;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication;
@@ -37,13 +39,75 @@ namespace Infrastructure.Repository
         public async Task<List<User>> GetAllUser()
         {
 
+            return await _dataContext.Users.Where(u => u.Isdelete == false)
+                                           .ToListAsync();
 
-
-            return await _dataContext.Users.ToListAsync();
 
         }
 
         #endregion
+
+
+        #region GetUserById
+
+        public async Task<User> GetUserById(int UserId)
+        {
+            var User = await _dataContext.Users.FirstOrDefaultAsync(p => p.Id == UserId);
+
+            return User;
+        }
+        #endregion
+
+
+        #region EditUser
+
+        public async Task EditUser(User user)
+        {
+
+            User originUser = await GetUserById(user.Id);
+
+            originUser.UserName = user.UserName;
+            originUser.Phone = user.Phone;
+
+            _dataContext.Update(originUser);
+            await _dataContext.SaveChangesAsync();
+
+        }
+
+
+        #endregion
+
+        #region RemoveUser
+
+        public async Task RemoveUser(int UserId)
+        {
+            var user = await _dataContext.Users.FirstOrDefaultAsync(p => p.Id == UserId);
+
+            user.Isdelete = true;
+
+            _dataContext.Update(user);
+            await _dataContext.SaveChangesAsync();
+
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         #region Register
@@ -124,6 +188,11 @@ namespace Infrastructure.Repository
         public void SaveChange()
         {
             _dataContext.SaveChanges();
+        }
+
+        public Task AddUser(User user)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

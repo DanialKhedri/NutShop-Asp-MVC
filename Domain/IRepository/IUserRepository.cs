@@ -10,11 +10,20 @@ namespace Domain.IRepository
     public interface IUserRepository
     {
         public Task<List<User>> GetAllUser();
- 
+        public  Task<User> GetUserById(int UserId);
+
 
         public Task<bool> Register(User user);
 
         public Task<bool> LogIn(User user);
+
+
+
+     
+        public Task EditUser(User user);
+        public Task RemoveUser(int UserId);
+
+
 
 
         public void SaveChange();

@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.CategoryDTO;
 using Application.Dtos.ProductDTO;
+using Application.Dtos.UserLogInDTO;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +46,7 @@ public class AdminController : Controller
     }
 
     #endregion
+
 
 
     #region Products Managment
@@ -136,9 +138,6 @@ public class AdminController : Controller
 
     }
 
-    #endregion
-
-
     //Add 
 
     [HttpGet]
@@ -191,6 +190,11 @@ public class AdminController : Controller
         return RedirectToAction(nameof(GetAllCategories));
     }
 
+
+    #endregion
+
+
+
     #region User Managment
 
     [HttpGet]
@@ -204,6 +208,42 @@ public class AdminController : Controller
         return View(UserDTOs);
 
     }
+
+
+
+    //Edit
+
+    [HttpGet]
+    public async Task<IActionResult> EditUser(int UserId)
+    {
+
+        var user = await _IUserService.GetUserById(UserId);
+
+        return View(user);
+
+
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditUser(UserAdminPanelDTO userAdminPanelDTO)
+    {
+
+        await _IUserService.EditUser(userAdminPanelDTO);
+
+        return RedirectToAction(nameof(GetAllUsers));
+    }
+
+    //Remove
+
+    public async Task<IActionResult> RemoveUser(int UserId)
+    {
+        await _IUserService.RemoveProduct(UserId);
+
+        return RedirectToAction(nameof(GetAllUsers));
+
+    }
+
+
 
 
     #endregion
@@ -226,6 +266,7 @@ public class AdminController : Controller
 
     #region Orders Managment
 
+    //Get All Orders
     public async Task<IActionResult> GetAllOrders()
     {
 
@@ -235,6 +276,12 @@ public class AdminController : Controller
         return View(OrdersList);
 
     }
+
+    //Detail
+
+
+    //Remove
+
     #endregion
 
 

@@ -11,11 +11,15 @@ namespace Application.Services.Interfaces
     public interface IUserService
     {
         public Task<List<UserAdminPanelDTO>> GetAllUser();
+        public Task<UserAdminPanelDTO> GetUserById(int UserId);
 
         public Task<bool> Register(UserRegisterDTO userRegisterDTO);
 
         public Task<bool> LogIn(UserLogInDTO userLogInDTO);
 
+        public Task EditUser(UserAdminPanelDTO UserDTO);
+
+        public Task RemoveProduct(int UserId);
 
         public void SaveChange();
 

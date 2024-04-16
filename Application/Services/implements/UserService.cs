@@ -1,7 +1,10 @@
-﻿using Application.Dtos.UserLogInDTO;
+﻿using Application.Dtos.ProductDTO;
+using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
+using Application.Extensions.NameGenerator;
 using Application.Security;
 using Application.Services.Interfaces;
+using Domain.Entities.Product;
 using Domain.Entities.User;
 using Domain.IRepository;
 using Microsoft.Identity.Client;
@@ -44,7 +47,7 @@ namespace Application.Services.implements
                     Id = item.Id,
                     UserName = item.UserName,
                     Phone = item.Phone,
-                    CreateDate = item.CreateDate,                 
+                    CreateDate = item.CreateDate,
                     Password = item.Password,
 
                 };
@@ -54,6 +57,62 @@ namespace Application.Services.implements
             }
 
             return userAdminPanelDTOs;
+        }
+
+        #endregion
+
+
+
+        #region GetUserById
+
+        public async Task<UserAdminPanelDTO> GetUserById(int UserId)
+        {
+            //Get User By Id
+            User User = await _IUserRepository.GetUserById(UserId);
+
+            //object mapping
+            UserAdminPanelDTO userDTO = new UserAdminPanelDTO()
+            {
+                Id = User.Id,
+                UserName = User.UserName,
+                Phone = User.Phone,
+                Password = User.Password,
+                CreateDate = User.CreateDate
+
+            };
+
+            //Return
+
+            return userDTO;
+
+
+        }
+        #endregion
+
+        #region EditUser
+
+        public async Task EditUser(UserAdminPanelDTO UserDTO)
+        {
+            User user = new User()
+            {
+
+                Phone = UserDTO.Phone,
+                UserName = UserDTO.UserName,
+
+
+            };
+
+            await _IUserRepository.EditUser(user);
+
+        }
+
+        #endregion
+
+        #region Remove User
+
+        public async Task RemoveProduct(int UserId)
+        {
+            await _IUserRepository.RemoveUser(UserId);
         }
 
         #endregion

@@ -102,7 +102,7 @@
 
 
     <h1>لیست کاربران</h1>
-    <button class="Addbtn">اضافه کردن</button>
+  
 
     <div class="container">
 
@@ -134,8 +134,8 @@
 
 
                         <td>
-                            <button class="btn">ویرایش</button>
-                            <button class="btn">حذف</button>
+                            <a asp-area="AdminPanel" asp-controller="Admin" asp-action="EditUser" asp-route-UserId="@item.Id"><button class="btn">ویرایش</button></a>
+                            <a asp-area="AdminPanel" asp-controller="Admin" asp-action="RemoveUser" asp-route-UserId="@item.Id"><button class="btn">ویرایش</button></a>
                         </td>
 
                     </tr>
