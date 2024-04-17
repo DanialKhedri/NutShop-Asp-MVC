@@ -23,22 +23,24 @@ namespace Application.Services.implements
         #region Ctor 
 
         private readonly IOrderRepository _IOrderRepository;
-
-        public OrderService(IOrderRepository IOrderRepository)
+        private readonly IProductRepository _IProductRepository;
+        public OrderService(IOrderRepository OrderRepository, IProductRepository productRepository)
         {
-            _IOrderRepository = IOrderRepository;
+            _IOrderRepository = OrderRepository;
+            _IProductRepository = productRepository;
         }
 
         #endregion
 
 
+        //Get All Orders
 
-        #region Get All Orders
+        #region GetAllUnFinalOrders
 
-        public async Task<List<OrderDTO>> GetAllOrdersForAdminPanel()
+        public async Task<List<OrderDTO>> GetAllUnFinaledOrders()
         {
 
-            List<Order> Orders = await _IOrderRepository.GetAllOrdersForAdminPanel();
+            List<Order> Orders = await _IOrderRepository.GetAllUnFinaledOrders();
 
             List<OrderDTO> orderDTOs = new List<OrderDTO>();
 
@@ -66,6 +68,226 @@ namespace Application.Services.implements
 
         #endregion
 
+        #region GetAllFinalOrders
+
+        public async Task<List<OrderDTO>> GetAllFinaledOrders()
+        {
+
+            List<Order> Orders = await _IOrderRepository.GetAllFinaledOrders();
+
+            List<OrderDTO> orderDTOs = new List<OrderDTO>();
+
+            foreach (var item in Orders)
+            {
+
+                OrderDTO orderDTO = new OrderDTO()
+                {
+
+                    Id = item.Id,
+                    UserId = item.UserId,
+                    CreateTime = item.CreateTime,
+                    Sum = item.Sum,
+
+                };
+
+                orderDTOs.Add(orderDTO);
+
+            }
+
+
+            return orderDTOs;
+
+        }
+
+        #endregion
+
+        #region GetAllOrderDetails
+
+        public async Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId)
+        {
+            var order = _IOrderRepository.GetOrderByUserId(UserId);
+
+            List<OrderDetail>? Orderdetails = await _IOrderRepository.GetAllOrderDetailsByOrderId(order.Id);
+
+            List<OrderDetailDTO>? orderDetailDTOs = new List<OrderDetailDTO>();
+
+            if (Orderdetails != null)
+            {
+                foreach (var item in Orderdetails)
+                {
+
+                    OrderDetailDTO orderDetailDTO = new OrderDetailDTO()
+                    {
+                        Id = item.Id,
+                        Price = item.Price,
+                        ProductImage = item.ProductImage,
+                        Producttitle = item.Producttitle,
+                        Weight = item.Weight
+
+                    };
+
+                    orderDetailDTOs.Add(orderDetailDTO);
+
+                }
+
+            }
+
+            return orderDetailDTOs;
+        }
+        #endregion
+
+        #region GetAllOrderDetailsByOrderId
+        public async Task<List<OrderDetailDTO>> GetAllOrderDetailsByOrderId(int OrderId)
+        {
+            List<OrderDetail>? Orderdetails = await _IOrderRepository.GetAllOrderDetailsByOrderId(OrderId);
+
+            List<OrderDetailDTO>? orderDetailDTOs = new List<OrderDetailDTO>();
+
+            if (Orderdetails != null)
+            {
+                foreach (var item in Orderdetails)
+                {
+
+                    OrderDetailDTO orderDetailDTO = new OrderDetailDTO()
+                    {
+                        Id = item.Id,
+                        Price = item.Price,
+                        ProductImage = item.ProductImage,
+                        Producttitle = item.Producttitle,
+                        Weight = item.Weight
+
+                    };
+
+                    orderDetailDTOs.Add(orderDetailDTO);
+
+                }
+
+            }
+
+            return orderDetailDTOs;
+        }
+        #endregion
+
+
+        //Get Order
+
+        #region GetOrderByUserId
+        public async Task<OrderDTO?> GetOrderByUserId(int UserId)
+        {
+            var Order = await _IOrderRepository.GetOrderByUserId(UserId);
+
+            OrderDTO? orderDTO = new OrderDTO()
+            {
+                Id = Order.Id,
+                Sum = Order.Sum,
+                CreateTime = Order.CreateTime
+
+            };
+
+            return orderDTO;
+        }
+        #endregion
+
+        #region GetUnFinaledOrderByUserId
+        public async Task<OrderDTO?> GetUnFinaledOrderByUserId(int UserId)
+        {
+
+            var Order = await _IOrderRepository.GetUnFinaledOrderByUserID(UserId);
+
+            if (Order != null)
+            {
+
+                OrderDTO? orderDTO = new OrderDTO()
+                {
+                    Id = Order.Id,
+                    Sum = Order.Sum,
+                    CreateTime = Order.CreateTime
+
+                };
+                return orderDTO;
+            }
+
+
+            return null;
+
+        }
+        #endregion
+
+        #region GetFinalyOrderByUserID
+        public async Task<OrderDTO?> GetFinalyOrderByUserId(int UserId)
+        {
+
+            var Order = await _IOrderRepository.GetFinalyOrderByUserID(UserId);
+
+            if (Order != null)
+            {
+
+                OrderDTO? orderDTO = new OrderDTO()
+                {
+                    Id = Order.Id,
+                    Sum = Order.Sum,
+                    CreateTime = Order.CreateTime
+
+                };
+                return orderDTO;
+            }
+
+
+            return null;
+        }
+
+        #endregion
+
+        #region Get UnFinaledOrderByOrderId
+        public async Task<OrderDTO?> GetUnFinaledOrderByOrderId(int OrderId)
+        {
+            var Order = await _IOrderRepository.GetUnFinaledOrderByOrderId(OrderId);
+
+            if (Order != null)
+            {
+
+                OrderDTO? orderDTO = new OrderDTO()
+                {
+                    Id = Order.Id,
+                    Sum = Order.Sum,
+                    CreateTime = Order.CreateTime
+
+                };
+                return orderDTO;
+            }
+
+
+            return null;
+
+        }
+        #endregion
+
+        #region GetFinaledOrderByOrderId
+        public async Task<OrderDTO?> GetFinalyOrderByOrderId(int OrderId)
+        {
+            var Order = await _IOrderRepository.GetFinalyOrderByOrderId(OrderId);
+
+            if (Order != null)
+            {
+
+                OrderDTO? orderDTO = new OrderDTO()
+                {
+                    Id = Order.Id,
+                    Sum = Order.Sum,
+                    CreateTime = Order.CreateTime
+
+                };
+
+                return orderDTO;
+            }
+
+
+            return null;
+        }
+        #endregion
+
+
+        //Add Product
 
         #region AddProductToCart
         public async Task AddProductToCart(int UserId, int ProductId, int Weight)
@@ -107,40 +329,23 @@ namespace Application.Services.implements
         }
         #endregion
 
+        //Remove
 
+        #region Remove Order
 
-        #region GetAllOrderDetails
-        public async Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId)
+        public async Task RemoveOrder(int OrderId)
         {
-            List<OrderDetail>? Orderdetails = await _IOrderRepository.GetAllOrderDetails(UserId);
 
-            List<OrderDetailDTO>? orderDetailDTOs = new List<OrderDetailDTO>();
+            await _IOrderRepository.RemoveOrder(OrderId);
 
-            if (Orderdetails != null)
-            {
-                foreach (var item in Orderdetails)
-                {
 
-                    OrderDetailDTO orderDetailDTO = new OrderDetailDTO()
-                    {
-                        Id = item.Id,
-                        Price = item.Price,
-                        ProductImage = item.ProductImage,
-                        Producttitle = item.Producttitle,
-                        Weight = item.Weight
 
-                    };
-
-                    orderDetailDTOs.Add(orderDetailDTO);
-
-                }
-
-            }
-
-            return orderDetailDTOs;
         }
+
         #endregion
 
+
+        //Remove OrderDetail
 
         #region RemoveOrderDetail
 
@@ -151,6 +356,7 @@ namespace Application.Services.implements
 
         #endregion
 
+        //Add Order Location
 
         #region AddOrderLocation
         public async Task AddOrderLocation(LocationDTO locationDTO, int UserId)
@@ -174,33 +380,7 @@ namespace Application.Services.implements
         #endregion
 
 
-        #region GetOrderByUserId
-
-        public async Task<OrderDTO?> GetOrderByUserID(int UserId)
-        {
-            Order? order = await _IOrderRepository.GetOrderByUserID(UserId);
-
-            if (order != null)
-            {
-                //Object Mapping
-                OrderDTO? tempOrderDTO = new OrderDTO()
-                {
-
-                    Id = order.Id,
-                    UserId = order.UserId,
-                    CreateTime = order.CreateTime,
-                    Sum = order.Sum,
-                  
-                };
-
-                return tempOrderDTO;
-            }
-
-            return null;
-        }
-
-        #endregion
-
+        //add to cart methods
 
         #region Add To cart Methods
 
@@ -228,8 +408,9 @@ namespace Application.Services.implements
 
 
             #region AddOrderDetail
-            Product? product = await _IOrderRepository.GetProductById(ProductId);
-            Order? order = await _IOrderRepository.GetOrderByUserID(UserId);
+
+            Product? product = await _IProductRepository.GetProductById(ProductId);
+            Order? order = await _IOrderRepository.GetUnFinaledOrderByUserID(UserId);
 
             if (product != null && order != null)
             {

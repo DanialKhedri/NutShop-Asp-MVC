@@ -24,9 +24,22 @@ namespace Infrastructure.Repository
         }
         #endregion
 
+        //Get All Orders
 
-        #region GetAllOrders
-        public async Task<List<Order>> GetAllOrdersForAdminPanel ()
+        #region GetAllUnFinaledOrders
+        public async Task<List<Order>> GetAllUnFinaledOrders()
+        {
+
+            return await _datacontext.Orders.Where(o => o.IsFinaly == false)
+                                            .ToListAsync();
+
+
+        }
+
+        #endregion
+
+        #region GetAllFinaledOrders
+        public async Task<List<Order>> GetAllFinaledOrders()
         {
 
             return await _datacontext.Orders.Where(o => o.IsFinaly == true)
@@ -38,13 +51,63 @@ namespace Infrastructure.Repository
         #endregion
 
 
-        #region GetAllOrderDetails
+        //Get Order
 
-        public async Task<List<OrderDetail>> GetAllOrderDetails(int UserId)
+        #region GetOrderByUserID
+        public async Task<Order?> GetOrderByUserId(int UserId)
+        {
+            return await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId);
+        }
+
+
+        #endregion
+
+        #region GetUnFinaledOrderByUserID
+
+        public async Task<Order?> GetUnFinaledOrderByUserID(int UserId)
+        {
+            return await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId && o.IsFinaly == false);
+        }
+
+        #endregion
+
+        #region GetFinalOrderByUserID
+
+        public async Task<Order?> GetFinalyOrderByUserID(int UserId)
+        {
+            return await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId && o.IsFinaly == true);
+        }
+
+        #endregion
+
+        #region GetUnFinaledOrderByUserID
+
+        public async Task<Order?> GetUnFinaledOrderByOrderId(int OrderId)
+        {
+            return await _datacontext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId && o.IsFinaly == false);
+        }
+
+        #endregion
+
+        #region GetFinalOrderByOrderId
+
+        public async Task<Order?> GetFinalyOrderByOrderId(int OrderId)
+        {
+            return await _datacontext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId && o.IsFinaly == true);
+        }
+
+        #endregion
+
+
+        //Get all Order Details By Order Id
+
+        #region GetAllOrderDetailsByOrderId
+
+        public async Task<List<OrderDetail>> GetAllOrderDetailsByOrderId(int OrderId)
         {
 
             Order? order = _datacontext.Orders
-                          .FirstOrDefault(o => o.UserId == UserId && o.IsFinaly == false);
+                          .FirstOrDefault(o => o.Id == OrderId);
 
 
             if (order != null)
@@ -67,15 +130,39 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        //Remove
+
+        #region Remove Order
+
+        public async Task RemoveOrder(int OrderId)
+        {
+            var order = await _datacontext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId);
+
+            if (order != null)
+            {
+                order.IsDelete = true;
+                _datacontext.Update(order);
+                await _datacontext.SaveChangesAsync();
+            }
+
+           
+        }
+
+        #endregion
+
         #region RemoveOrderDetail
 
         public async Task RemoveOrderDetail(int OrderDetailId)
         {
 
             #region Remove OrderDetail
-            OrderDetail orderDetail = await _datacontext.OrderDetails.FindAsync(OrderDetailId);
-            _datacontext.OrderDetails.Remove(orderDetail);
-            await SaveChange();
+            OrderDetail? orderDetail = await _datacontext.OrderDetails.FindAsync(OrderDetailId);
+            if (orderDetail != null)
+            {
+                _datacontext.OrderDetails.Remove(orderDetail);
+                await SaveChange();
+            }
+
             #endregion
 
 
@@ -114,14 +201,6 @@ namespace Infrastructure.Repository
         #endregion
 
 
-        #region GetOrderByUserID
-
-        public async Task<Order?> GetOrderByUserID(int UserId)
-        {
-            return await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId && o.IsFinaly == false);
-        }
-        #endregion
-
 
         #region OrderIsExist
 
@@ -133,32 +212,14 @@ namespace Infrastructure.Repository
         #endregion
 
 
-        #region Get Product By Id
-
-        public async Task<Product?> GetProductById(int ProductId)
-        {
-            return await _datacontext.Products.FindAsync(ProductId);
-        }
-
-        #endregion
-
-
-        #region Get Order By UserId
-
-        public async Task<Order?> GetOrderById(int UserId)
-        {
-            return await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId);
-        }
-
-        #endregion
-
+        //Add Order Location
 
         #region AddOrderLocation
 
         public async Task AddOrderLocation(Location location, int UserId)
         {
 
-            Order? order = await GetOrderById(UserId);
+            Order? order = await GetUnFinaledOrderByUserID(UserId);
 
 
             Location? templocation = await _datacontext.Locations
@@ -198,6 +259,7 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        //Add Product methods
 
         #region Cart Methods-Add Product
 

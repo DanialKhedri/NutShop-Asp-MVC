@@ -14,11 +14,13 @@ namespace Domain.Entities.Order
 
         public int UserId { get; set; }
 
-        public DateTime CreateTime { get; set; }
+        public DateTime CreateTime { get; set; } =DateTime.Now;
 
         public int Sum { get; set; }
 
-        public bool IsFinaly { get; set; }
+        public bool IsFinaly { get; set; } = false;
+
+        public bool IsDelete { get; set; } = false;
 
         #endregion
 

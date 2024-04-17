@@ -13,21 +13,37 @@ namespace Application.Services.Interfaces
     public interface IOrderService
     {
 
+        //Get All Orders
+
+        public Task<List<OrderDTO>> GetAllUnFinaledOrders();
+
+        public Task<List<OrderDTO>> GetAllFinaledOrders();
+
+        public Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId);
+        public Task<List<OrderDetailDTO>> GetAllOrderDetailsByOrderId(int OrderId);
+
+        //Get Order
+
+        public Task<OrderDTO?> GetOrderByUserId(int UserId);
+        public Task<OrderDTO?> GetUnFinaledOrderByUserId(int UserId);
+        public Task<OrderDTO?> GetFinalyOrderByUserId(int UserId);
+
+        public Task<OrderDTO?> GetUnFinaledOrderByOrderId(int OrderId);
+        public Task<OrderDTO?> GetFinalyOrderByOrderId(int OrderId);
+
+
+
+        //Add Product To Cart
         public Task AddProductToCart(int UserId, int ProductId, int Weight);
 
 
-        public Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId);
-
+        //Remove
+        public Task RemoveOrder(int OrderId);
 
         public Task RemoveOrderDetail(int OrderDetailId);
 
 
-        public Task<OrderDTO?> GetOrderByUserID(int UserId);
-
-
-        public Task<List<OrderDTO>> GetAllOrdersForAdminPanel();
-
-
+        //Add Order Location
         public Task AddOrderLocation(LocationDTO locationDTO, int UserId);
 
 

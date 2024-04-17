@@ -12,35 +12,43 @@ namespace Domain.IRepository
 {
     public interface IOrderRepository
     {
+        //Get All
+        public Task<List<Order>> GetAllUnFinaledOrders();
+        public Task<List<Order>> GetAllFinaledOrders();
+        public Task<List<OrderDetail>> GetAllOrderDetailsByOrderId(int OrderId);
 
-        public Task<List<OrderDetail>> GetAllOrderDetails(int UserId);
+        //Get Order
+        public Task<Order?> GetOrderByUserId(int UserId);
+
+        public Task<Order?> GetUnFinaledOrderByUserID(int UserId);
+        public Task<Order?> GetFinalyOrderByUserID(int UserId);
+
+        public Task<Order?> GetUnFinaledOrderByOrderId(int OrderId);
+        public Task<Order?> GetFinalyOrderByOrderId(int OrderId);
 
 
-        public  Task<List<Order>> GetAllOrdersForAdminPanel();
 
+
+        //Remove
+        public Task RemoveOrder(int OrderId);
 
         public Task RemoveOrderDetail(int OrderDetailId);
 
 
+        //Add Order
         public Task AddOrder(Order order);
-
 
         public Task<bool> OrderIsExist(int UserId);
 
-
+        //Add orderdetail
         public Task AddOrderDetail(OrderDetail orderDetail);
 
 
-        public Task AddOrderLocation(Location location,int UserId);
+        //Add orderLocation
+        public Task AddOrderLocation(Location location, int UserId);
 
-
+        //Update Sum
         public Task UpdateSum(int UserId);
-
-
-        public Task<Order?> GetOrderByUserID(int UserId);
-
-
-        public Task<Product?> GetProductById(int ProductId);
 
 
         public Task SaveChange();

@@ -119,7 +119,7 @@
                         <td>@item.Sum</td>
 
                         <td>
-                            <button class="btn">مشاهده</button>
+                            <a asp-area="AdminPanel" asp-controller="Admin" asp-action="GetOrderDetails" asp-route-OrderId="@item.Id"><button class="btn">مشاهده</button></a>
                             <button class="btn">حذف</button>
                         </td>
 

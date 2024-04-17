@@ -1,8 +1,14 @@
 ﻿using Application.Dtos.CategoryDTO;
+using Application.Dtos.OrderDetailDTO;
+using Application.Dtos.OrderDTO;
 using Application.Dtos.ProductDTO;
 using Application.Dtos.UserLogInDTO;
+using Application.Extensions;
 using Application.Services.Interfaces;
+using Domain.Entities.Order;
+using Domain.Entities.Order.OrderDetail;
 using Microsoft.AspNetCore.Mvc;
+using NutsShop_Presentation.Areas.AdminPanel.ViewModels;
 
 namespace NutsShop_Presentation.Areas.AdminPanel.Controllers;
 
@@ -35,6 +41,7 @@ public class AdminController : Controller
 
 
     #endregion
+
 
 
     #region Index
@@ -249,38 +256,55 @@ public class AdminController : Controller
     #endregion
 
 
-    #region RoleManagment
 
-    public async Task<IActionResult> GetAllRoles()
-    {
-
-        var Roles = await _IRoleService.GetAllRoles();
-
-
-        return View(Roles);
-
-    }
-
-    #endregion
 
 
     #region Orders Managment
 
     //Get All Orders
+
     public async Task<IActionResult> GetAllOrders()
     {
 
-        var OrdersList = await _IOrderService.GetAllOrdersForAdminPanel();
+        var OrdersList = await _IOrderService.GetAllFinaledOrders();
 
 
         return View(OrdersList);
 
     }
 
-    //Detail
+    //Details
+
+    [HttpGet]
+    public async Task<IActionResult> GetOrderDetails(int OrderId)
+    {
+
+        //Get Order By Order Id
+        var Order = await _IOrderService.GetFinalyOrderByOrderId(OrderId);
+
+        //Get orderDetails By Order Id
+        List<OrderDetailDTO>? orderDetails = await _IOrderService.GetAllOrderDetailsByOrderId(Order.Id);
+
+        GetOrderDetailsViewModel getOrderDetailsViewModel = new GetOrderDetailsViewModel()
+        {
+            OrderDTO = Order,
+            orderDetails = orderDetails,
+
+        };
+
+        return View(getOrderDetailsViewModel);
+
+    }
 
 
     //Remove
+
+    public async Task<IActionResult> RemoveOrder(int OrderId)
+    {
+        await _IOrderService.RemoveOrder(OrderId);
+
+        return RedirectToAction(nameof(GetAllOrders));
+    }
 
     #endregion
 
