@@ -1,4 +1,5 @@
-﻿using Application.Dtos.OrderDetailDTO;
+﻿using Application.Dtos.LocationDTO;
+using Application.Dtos.OrderDetailDTO;
 using Application.Dtos.OrderDTO;
 using Domain.Entities.Order.OrderDetail;
 
@@ -8,10 +9,10 @@ namespace NutsShop_Presentation.Areas.AdminPanel.ViewModels
     {
 
         public OrderDTO? OrderDTO { get; set; }
-            
+
         public List<OrderDetailDTO>? orderDetails { get; set; }
 
-
+        public LocationDTO? LocationDTO { get; set; }
 
 
 

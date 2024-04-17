@@ -43,10 +43,6 @@ namespace Domain.IRepository
         //Add orderdetail
         public Task AddOrderDetail(OrderDetail orderDetail);
 
-
-        //Add orderLocation
-        public Task AddOrderLocation(Location location, int UserId);
-
         //Update Sum
         public Task UpdateSum(int UserId);
 
@@ -54,5 +50,10 @@ namespace Domain.IRepository
         public Task SaveChange();
 
 
+
+        //Add orderLocation
+        public Task AddOrderLocation(Location location, int UserId);
+        //GetLocation By Order Id
+        public Task<Location?> GetLocationByOrderId(int OrderId);
     }
 }

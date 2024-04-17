@@ -20,6 +20,7 @@ namespace Application.Services.implements
 {
     public class OrderService : IOrderService
     {
+
         #region Ctor 
 
         private readonly IOrderRepository _IOrderRepository;
@@ -101,40 +102,7 @@ namespace Application.Services.implements
 
         #endregion
 
-        #region GetAllOrderDetails
 
-        public async Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId)
-        {
-            var order = _IOrderRepository.GetOrderByUserId(UserId);
-
-            List<OrderDetail>? Orderdetails = await _IOrderRepository.GetAllOrderDetailsByOrderId(order.Id);
-
-            List<OrderDetailDTO>? orderDetailDTOs = new List<OrderDetailDTO>();
-
-            if (Orderdetails != null)
-            {
-                foreach (var item in Orderdetails)
-                {
-
-                    OrderDetailDTO orderDetailDTO = new OrderDetailDTO()
-                    {
-                        Id = item.Id,
-                        Price = item.Price,
-                        ProductImage = item.ProductImage,
-                        Producttitle = item.Producttitle,
-                        Weight = item.Weight
-
-                    };
-
-                    orderDetailDTOs.Add(orderDetailDTO);
-
-                }
-
-            }
-
-            return orderDetailDTOs;
-        }
-        #endregion
 
         #region GetAllOrderDetailsByOrderId
         public async Task<List<OrderDetailDTO>> GetAllOrderDetailsByOrderId(int OrderId)
@@ -329,7 +297,7 @@ namespace Application.Services.implements
         }
         #endregion
 
-        //Remove
+        //Remove Order
 
         #region Remove Order
 
@@ -354,29 +322,6 @@ namespace Application.Services.implements
             await _IOrderRepository.RemoveOrderDetail(OrderDetailId);
         }
 
-        #endregion
-
-        //Add Order Location
-
-        #region AddOrderLocation
-        public async Task AddOrderLocation(LocationDTO locationDTO, int UserId)
-        {
-
-            Location location = new Location()
-            {
-                FirstName = locationDTO.FirstName,
-                LastName = locationDTO.LastName,
-                State = locationDTO.State,
-                City = locationDTO.City,
-                Address = locationDTO.Address,
-                PhoneNumber = locationDTO.PhoneNumber,
-                PostCode = locationDTO.PostCode,
-
-            };
-
-            await _IOrderRepository.AddOrderLocation(location, UserId);
-
-        }
         #endregion
 
 
@@ -421,7 +366,7 @@ namespace Application.Services.implements
 
                     OrderId = order.Id,
                     ProductImage = product.Image,
-                    Price = product.Price,
+                    Price = product.Price / 1000 * weight,
                     Producttitle = product.ProductName,
                     ProductId = ProductId,
                     Weight = weight
@@ -438,6 +383,59 @@ namespace Application.Services.implements
 
         }
 
+        #endregion
+
+
+        //Add Order Location
+
+        #region AddOrderLocation
+        public async Task AddOrderLocation(LocationDTO locationDTO, int UserId)
+        {
+
+            Location location = new Location()
+            {
+                FirstName = locationDTO.FirstName,
+                LastName = locationDTO.LastName,
+                State = locationDTO.State,
+                City = locationDTO.City,
+                Address = locationDTO.Address,
+                PhoneNumber = locationDTO.PhoneNumber,
+                PostCode = locationDTO.PostCode,
+
+            };
+
+            await _IOrderRepository.AddOrderLocation(location, UserId);
+
+        }
+        #endregion
+
+        //Get Location By Order Id
+
+        #region GetLocationByOrderId
+        public async Task<LocationDTO?> GetLocationByOrderId(int OrderId)
+        {
+            Location? location = await _IOrderRepository.GetLocationByOrderId(OrderId);
+
+            if (location != null)
+            {
+                LocationDTO locationdto = new LocationDTO()
+                {
+
+                    FirstName = location.FirstName,
+                    LastName = location.LastName,
+                    State = location.State,
+                    City = location.City,
+                    Address = location.Address,
+                    PhoneNumber = location.PhoneNumber,
+                    PostCode = location.PostCode,
+
+                };
+
+                return locationdto;
+            }
+
+            return null;
+        }
         #endregion
 
     }

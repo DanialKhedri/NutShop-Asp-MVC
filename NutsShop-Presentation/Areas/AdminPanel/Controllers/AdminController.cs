@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.CategoryDTO;
+using Application.Dtos.LocationDTO;
 using Application.Dtos.OrderDetailDTO;
 using Application.Dtos.OrderDTO;
 using Application.Dtos.ProductDTO;
@@ -285,10 +286,15 @@ public class AdminController : Controller
         //Get orderDetails By Order Id
         List<OrderDetailDTO>? orderDetails = await _IOrderService.GetAllOrderDetailsByOrderId(Order.Id);
 
+        //Location
+        LocationDTO? location = await _IOrderService.GetLocationByOrderId(Order.Id);
+
+
         GetOrderDetailsViewModel getOrderDetailsViewModel = new GetOrderDetailsViewModel()
         {
             OrderDTO = Order,
             orderDetails = orderDetails,
+            LocationDTO = location,
 
         };
 

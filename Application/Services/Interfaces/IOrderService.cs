@@ -19,7 +19,7 @@ namespace Application.Services.Interfaces
 
         public Task<List<OrderDTO>> GetAllFinaledOrders();
 
-        public Task<List<OrderDetailDTO>> GetAllOrderDetails(int UserId);
+        
         public Task<List<OrderDetailDTO>> GetAllOrderDetailsByOrderId(int OrderId);
 
         //Get Order
@@ -45,6 +45,7 @@ namespace Application.Services.Interfaces
 
         //Add Order Location
         public Task AddOrderLocation(LocationDTO locationDTO, int UserId);
+        public Task<LocationDTO?> GetLocationByOrderId(int OrderId);
 
 
     }

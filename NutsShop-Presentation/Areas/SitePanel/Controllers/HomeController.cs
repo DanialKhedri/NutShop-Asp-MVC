@@ -117,8 +117,13 @@ namespace NutsShop_Presentation.Areas.SitePanel.Controllers
 
                 CartViewModel cartViewModel = new CartViewModel();
 
-                cartViewModel.OrderDTO = await _IOrderService.GetUnFinaledOrderByOrderId(userid);
-                cartViewModel.OrderDetailDTOs = await _IOrderService.GetAllOrderDetails(userid);
+                cartViewModel.OrderDTO = await _IOrderService.GetUnFinaledOrderByUserId(userid);
+
+                if (cartViewModel.OrderDTO != null)
+                {
+                    cartViewModel.OrderDetailDTOs = await _IOrderService.GetAllOrderDetailsByOrderId(cartViewModel.OrderDTO.Id);
+                }
+              
 
                 return View(cartViewModel);
             }

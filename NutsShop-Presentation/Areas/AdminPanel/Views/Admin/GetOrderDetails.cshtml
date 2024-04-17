@@ -1,117 +1,156 @@
-﻿@using NutsShop_Presentation.Areas.AdminPanel.ViewModels
-@model GetOrderDetailsViewModel;
+﻿
+@using NutsShop_Presentation.Areas.AdminPanel.ViewModels
+@model GetOrderDetailsViewModel
 
 @{
     Layout = "_AdminLayout";
 }
 
 
+<html lang="fa">
 
 <head>
 
-    <noscript>
-
-        <style>
-
-            [data-aos] {
-                opacity: 1 !important;
-                transform: translate(0) scale(1) !important;
-            }
-
-        </style>
-
-
-    </noscript>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول محصولات</title>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 
+<style>
+
+
+
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        max-width: 100px;
+        height: auto;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+
+    .btn {
+        height: 40px;
+        width: 40%;
+    }
+
+    .Addbtn {
+        margin: 30px;
+        height: 40px;
+        width: 40%;
+    }
+
+</style>
+
 
 <body>
 
-    <div class="InputContainer" style="display: flex; flex-direction: column;align-content: center; justify-content: center; align-items: center;">
 
-        <div style="display:flex; align-items: center; margin-top: 20px;">
-        </div>
+    <h1> جزییات سفارش </h1>
+  
+
+    <div class="container">
 
 
+        <table>
 
-        <div>
+            <tr>
 
-            <div class="contant-section px-3 px-lg-4 pb-4" id="contact">
+                <th>نام محصول</th>
+                <th>وزن</th>
+                <th> مبلغ </th>
+                <th></th>
 
-                <table>
+            </tr>
 
+
+            @if (Model.orderDetails != null &&
+            Model.OrderDTO != null &&
+            Model.LocationDTO != null)
+
+            {
+
+                @foreach (var item in Model.orderDetails)
+                {
                     <tr>
 
-                        <th></th>
-                        <th>محصول</th>
-                        <th>مقدار</th>
-                        <th>قیمت</th>
-                        <th></th>
+                        <td>
+                            <img src="~/Images/Products/@item.ProductImage" />
+                        </td>
+
+                        <td>@item.Producttitle</td>
+                        <td>@item.Weight</td>
+                        <td>@item.Price</td>
 
                     </tr>
 
-                    @foreach (var item in Model.orderDetails)
-                    {
-                        <tr>
-                            <td>
-                                <img class="timage" src="~/Images/Products/@item.ProductImage" alt="محصول 1">
-
-                            </td>
-
-                            <td>@item.Producttitle</td>
-                            <td>@item.Weight</td>
-
-
-                            <td>@item.Price</td>
-
-                           
-
-                        </tr>
-
-                    }
-
-                    <tr>
-                        <td>جمع حساب</td>
-                        <td>@Model.OrderDTO.Sum</td>
-                    </tr>
-
-                </table>
-
-
+                }
 
                 <h1>مجموع</h1>
                 <h1>@Model.OrderDTO.Sum</h1>
 
 
-            </div>
 
-        </div>
+                <h1>@Model.LocationDTO.FirstName</h1>
+                <h1>@Model.LocationDTO.LastName</h1>
+                <h1>@Model.LocationDTO.PhoneNumber</h1>
+                <h1>@Model.LocationDTO.State</h1>
+                <h1>@Model.LocationDTO.City</h1>
+                <h1>@Model.LocationDTO.Address</h1>         
+                <h1>@Model.LocationDTO.PostCode</h1>
+             
 
+            }
+
+
+        </table>
 
     </div>
 
-    <hr style="height: 5px; color: black;"></hr>
-
 </body>
 
-<script>
+</html>
 
-    const fileInput = document.getElementById('UserAvatarIFromFIle');
-
-    const image = document.getElementById('image');
-
-    fileInput.addEventListener('change', function () {
-
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            image.src = e.target.result;
-        }
-
-        reader.readAsDataURL(file);
-    });
-
-</script>
