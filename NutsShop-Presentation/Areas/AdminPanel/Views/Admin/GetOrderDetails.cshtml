@@ -1,5 +1,4 @@
-﻿
-@using NutsShop_Presentation.Areas.AdminPanel.ViewModels
+﻿@using NutsShop_Presentation.Areas.AdminPanel.ViewModels
 @model GetOrderDetailsViewModel
 
 @{
@@ -90,7 +89,7 @@
 
 
     <h1> جزییات سفارش </h1>
-  
+
 
     <div class="container">
 
@@ -99,18 +98,16 @@
 
             <tr>
 
+                <th></th>
                 <th>نام محصول</th>
                 <th>وزن</th>
-                <th> مبلغ </th>
-                <th></th>
+                <th>مبلغ</th>
 
             </tr>
 
 
             @if (Model.orderDetails != null &&
-            Model.OrderDTO != null &&
-            Model.LocationDTO != null)
-
+            Model.OrderDTO != null)
             {
 
                 @foreach (var item in Model.orderDetails)
@@ -129,24 +126,37 @@
 
                 }
 
-                <h1>مجموع</h1>
-                <h1>@Model.OrderDTO.Sum</h1>
-
-
-
-                <h1>@Model.LocationDTO.FirstName</h1>
-                <h1>@Model.LocationDTO.LastName</h1>
-                <h1>@Model.LocationDTO.PhoneNumber</h1>
-                <h1>@Model.LocationDTO.State</h1>
-                <h1>@Model.LocationDTO.City</h1>
-                <h1>@Model.LocationDTO.Address</h1>         
-                <h1>@Model.LocationDTO.PostCode</h1>
-             
-
             }
 
-
         </table>
+
+        <h1>مجموع</h1>
+        <h1>@Model.OrderDTO.Sum</h1>
+
+    </div>
+
+    <div class="location">
+
+
+        <h1>اطلاعات مشتری</h1>
+
+        @if (Model.LocationDTO !=null)
+        {
+
+            <h3>@Model.LocationDTO.FirstName</h3>
+            <h3>@Model.LocationDTO.LastName</h3>
+            <h3>@Model.LocationDTO.PhoneNumber</h3>
+            <h3>@Model.LocationDTO.State</h3>
+            <h3>@Model.LocationDTO.City</h3>
+            <h3>@Model.LocationDTO.Address</h3>
+            <h3>@Model.LocationDTO.PostCode</h3>
+
+        }
+        
+      
+
+
+
 
     </div>
 
