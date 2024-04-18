@@ -1,5 +1,5 @@
-﻿@using Application.Dtos.UserLogInDTO
-@model UserAdminPanelDTO;
+﻿@using NutsShop_Presentation.Areas.AdminPanel.ViewModels
+@model EditUserViewModel;
 
 @{
     Layout = "_AdminLayout";
@@ -48,7 +48,7 @@
 
                             <label>Id</label>
                             <input readonly class="form-control" style="margin: 10px" type="text"
-                                   asp-for="Id" placeholder="Product Name" required="">
+                                   asp-for="@Model.UserAdminPanelDTO.Id" placeholder="Product Name" required="">
                         </div>
 
 
@@ -58,7 +58,7 @@
 
                             <label>User Name</label>
                             <input class="form-control" style="margin: 10px" type="text"
-                                   asp-for="UserName" placeholder="Product Name" required="">
+                                   asp-for="@Model.UserAdminPanelDTO.UserName" placeholder="Product Name" required="">
                         </div>
 
 
@@ -67,13 +67,41 @@
                         <div class="col-6">
 
                             <label>Phone</label>
-                            <textarea class="form-control" style="margin: 10px" type="text" asp-for="Phone" placeholder="Description" required=""></textarea>
+                            <textarea class="form-control" style="margin: 10px" type="text" asp-for="@Model.UserAdminPanelDTO.Phone" placeholder="Description" required=""></textarea>
 
                         </div>
 
                         <br>
 
-                     
+
+
+
+                    </div>
+
+
+                    <div class="Roles">
+
+                       
+                        
+                            @if (Model.Roles != null)
+                            {
+
+
+                                @foreach (var item in Model.Roles)
+                                {
+
+                                    <label>@item.RoleUniqueName</label>
+                                    <input type="checkbox" value="@item.Id" name="SelectedRoles" />
+                                    <br></br>
+
+                                }
+
+
+
+                            }
+
+                        
+
 
 
                     </div>

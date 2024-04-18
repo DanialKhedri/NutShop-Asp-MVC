@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.User.Role;
+using Domain.Entities.User.SelectedRole;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ public interface IRoleRepository
 
     public Task<List<Role>> GetAllRoles();
 
-
+    public Task AddSelectedRole(SelectedRole SelectedRole); 
 
 
 

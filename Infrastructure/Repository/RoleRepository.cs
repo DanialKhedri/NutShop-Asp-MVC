@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.User.Role;
+using Domain.Entities.User.SelectedRole;
 using Domain.IRepository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,8 @@ namespace Infrastructure.Repository
             _datacontext = dataContext;
         }
 
+
+
         #endregion
 
 
@@ -41,7 +44,23 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        #region AddSelectedRole
 
+        public async Task AddSelectedRole(SelectedRole SelectedRole)
+        {
+            if (SelectedRole != null)
+            {
+                var Lastselectedrole = await _datacontext.SelectedRoles.FirstOrDefaultAsync(s => s.UserId == SelectedRole.UserId);
+                _datacontext.SelectedRoles.Remove(Lastselectedrole);
+                await _datacontext.SaveChangesAsync();
+
+                await _datacontext.SelectedRoles.AddAsync(SelectedRole);
+                await _datacontext.SaveChangesAsync();
+            }
+
+        }
+
+        #endregion
 
     }
 

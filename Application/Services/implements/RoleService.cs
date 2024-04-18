@@ -1,6 +1,9 @@
 ﻿using Application.Dtos.RoleDTO;
+using Application.Dtos.UserLogInDTO;
 using Application.Services.Interfaces;
+using Domain.Entities.User;
 using Domain.Entities.User.Role;
+using Domain.Entities.User.SelectedRole;
 using Domain.IRepository;
 using System;
 using System.Collections.Generic;
@@ -57,7 +60,25 @@ namespace Application.Services.implements
 
         }
 
+        public async Task AddSelectedRole(List<int> SelectedRoles,UserAdminPanelDTO UserDTO) 
+        {
 
+
+            foreach (int item in SelectedRoles)
+            {
+                SelectedRole TempselectedRole = new SelectedRole
+                {
+                    UserId = UserDTO.Id,
+                    RoleId = item,
+                };
+
+              await  _IRoleRepository.AddSelectedRole(TempselectedRole);
+            }
+
+
+
+
+        }
 
 
 

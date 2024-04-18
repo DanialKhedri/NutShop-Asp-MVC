@@ -95,7 +95,7 @@ namespace Application.Services.implements
         {
             User user = new User()
             {
-
+                Id = UserDTO.Id,
                 Phone = UserDTO.Phone,
                 UserName = UserDTO.UserName,
 

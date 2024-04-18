@@ -66,11 +66,15 @@ namespace Infrastructure.Repository
 
             User originUser = await GetUserById(user.Id);
 
-            originUser.UserName = user.UserName;
-            originUser.Phone = user.Phone;
+            if (user != null && originUser != null)
+            {
+                originUser.UserName = user.UserName;
+                originUser.Phone = user.Phone;
 
-            _dataContext.Update(originUser);
-            await _dataContext.SaveChangesAsync();
+                _dataContext.Update(originUser);
+                await _dataContext.SaveChangesAsync();
+            }
+
 
         }
 

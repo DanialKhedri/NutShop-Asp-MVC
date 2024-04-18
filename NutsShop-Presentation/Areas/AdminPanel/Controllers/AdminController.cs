@@ -227,16 +227,27 @@ public class AdminController : Controller
 
         var user = await _IUserService.GetUserById(UserId);
 
-        return View(user);
+        var Roles = await _IRoleService.GetAllRoles();
+
+        EditUserViewModel editUserViewModel = new EditUserViewModel()
+        {
+            UserAdminPanelDTO = user,
+            Roles = Roles,
+        };
+
+        return View(editUserViewModel);
 
 
     }
 
     [HttpPost]
-    public async Task<IActionResult> EditUser(UserAdminPanelDTO userAdminPanelDTO)
+    public async Task<IActionResult> EditUser(UserAdminPanelDTO userAdminPanelDTO, List<int> SelectedRoles)
     {
 
         await _IUserService.EditUser(userAdminPanelDTO);
+        await _IRoleService.AddSelectedRole(SelectedRoles, userAdminPanelDTO);
+
+
 
         return RedirectToAction(nameof(GetAllUsers));
     }
