@@ -52,7 +52,7 @@ namespace Application.Services.implements
 
                 }
 
-              
+
 
             }
 
@@ -60,20 +60,30 @@ namespace Application.Services.implements
 
         }
 
-        public async Task AddSelectedRole(List<int> SelectedRoles,UserAdminPanelDTO UserDTO) 
+        public async Task AddSelectedRole(List<int> SelectedRoles, UserAdminPanelDTO UserDTO)
         {
 
-
-            foreach (int item in SelectedRoles)
+            if (SelectedRoles != null)
             {
-                SelectedRole TempselectedRole = new SelectedRole
-                {
-                    UserId = UserDTO.Id,
-                    RoleId = item,
-                };
+                await _IRoleRepository.RemoveAllSelectedRolesByUserId(UserDTO.Id);
 
-              await  _IRoleRepository.AddSelectedRole(TempselectedRole);
+
+
+                foreach (int item in SelectedRoles)
+                {
+                    SelectedRole TempselectedRole = new SelectedRole
+                    {
+                        UserId = UserDTO.Id,
+                        RoleId = item,
+                    };
+
+                    await _IRoleRepository.AddSelectedRole(TempselectedRole);
+                }
+
+
+                await _IRoleRepository.SaveChangeAsync();
             }
+
 
 
 

@@ -119,10 +119,12 @@ public class AdminController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> EditProduct(ProductDTO productDTO)
+    public async Task<IActionResult> EditProduct(ProductDTO productDTO, List<int> SelectedCategories)
     {
 
         await _IProductService.EditProduct(productDTO);
+
+        await _ICategoryService.AddSelectedCategory(SelectedCategories, productDTO);
 
         return RedirectToAction(nameof(GetAllProducts));
     }

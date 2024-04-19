@@ -1,6 +1,8 @@
 ﻿using Application.Dtos.CategoryDTO;
 using Domain.Entities.Product;
 using Domain.Entities.Product.Category;
+using Domain.Entities.Product.SelectedCategory;
+using Domain.Entities.User.SelectedRole;
 using Domain.IRepository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -94,6 +96,45 @@ public class CategoryRepository : ICategoryRepository
 
     }
 
+    #endregion
+
+
+    #region AddSelectedCategory
+    public async Task AddSelectedCategory(SelectedCategory selectedCategory)
+    {
+        if (selectedCategory != null)
+        {
+
+            await _datacontext.SelectedCategories.AddAsync(selectedCategory);
+            await _datacontext.SaveChangesAsync();
+
+
+        }
+
+    }
+    #endregion
+
+
+    #region Remove SelectedCategories
+    public async Task RemoveSelectedCategoriesByProductId(int ProductId)
+    {
+        var SelectedCategories = await _datacontext.SelectedCategories.Where(s => s.ProductId == ProductId)
+                                                                    .ToListAsync();
+
+        _datacontext.SelectedCategories.RemoveRange(SelectedCategories);
+        await _datacontext.SaveChangesAsync();
+
+
+
+    }
+
+    #endregion
+
+    #region SaveChangeAsync
+    public async Task SaveChangeAsync()
+    {
+        await _datacontext.SaveChangesAsync();
+    }
     #endregion
 
 }

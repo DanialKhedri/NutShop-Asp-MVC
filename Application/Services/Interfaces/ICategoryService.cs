@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.CategoryDTO;
+using Application.Dtos.ProductDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,7 @@ public interface ICategoryService
     public Task EditCategory(CategoryDTO categoryDTO);
 
     public Task RemoveCategory(int CategoryId);
+    public Task AddSelectedCategory(List<int> SelectedCategories, ProductDTO productDTO);
+
 
 }

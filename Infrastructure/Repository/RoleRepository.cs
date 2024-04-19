@@ -50,16 +50,32 @@ namespace Infrastructure.Repository
         {
             if (SelectedRole != null)
             {
-                var Lastselectedrole = await _datacontext.SelectedRoles.FirstOrDefaultAsync(s => s.UserId == SelectedRole.UserId);
-                _datacontext.SelectedRoles.Remove(Lastselectedrole);
-                await _datacontext.SaveChangesAsync();
+
 
                 await _datacontext.SelectedRoles.AddAsync(SelectedRole);
-                await _datacontext.SaveChangesAsync();
+
             }
 
         }
 
+
+        #endregion
+
+        #region RemoveAllSelectedRolesByUserId
+        public async Task RemoveAllSelectedRolesByUserId(int  UserId)
+        {
+            var Lastselectedroles = await _datacontext.SelectedRoles.Where(s => s.UserId == UserId)
+                                                                    .ToListAsync();
+            _datacontext.SelectedRoles.RemoveRange(Lastselectedroles);
+            await _datacontext.SaveChangesAsync();
+        }
+        #endregion
+
+        #region SaveChangeAsync
+        public async Task SaveChangeAsync()
+        {
+            await _datacontext.SaveChangesAsync();
+        }
         #endregion
 
     }

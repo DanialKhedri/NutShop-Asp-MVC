@@ -13,11 +13,13 @@ public interface IRoleRepository
 
     public Task<List<Role>> GetAllRoles();
 
-    public Task AddSelectedRole(SelectedRole SelectedRole); 
+    public Task AddSelectedRole(SelectedRole SelectedRole);
 
 
+    public Task RemoveAllSelectedRolesByUserId(int UserId);
 
 
+    public Task SaveChangeAsync();
 
 }
 

@@ -1,9 +1,11 @@
 ﻿using Application.Dtos.CategoryDTO;
 using Application.Dtos.ProductDTO;
+using Application.Dtos.UserLogInDTO;
 using Application.Extensions.NameGenerator;
 using Application.Services.Interfaces;
 using Domain.Entities.Product;
 using Domain.Entities.Product.Category;
+using Domain.Entities.Product.SelectedCategory;
 using Domain.IRepository;
 using System;
 using System.Collections.Generic;
@@ -66,9 +68,9 @@ public class CategoryService : ICategoryService
         CategoryDTO categoryDTO = new CategoryDTO()
         {
             Id = category.Id,
-            CategoryTitle= category.CategoryTitle,
-            CategoryUniqueName= category.CategoryUniqueName,
-            Image= category.Image,
+            CategoryTitle = category.CategoryTitle,
+            CategoryUniqueName = category.CategoryUniqueName,
+            Image = category.Image,
         };
 
         return categoryDTO;
@@ -119,19 +121,18 @@ public class CategoryService : ICategoryService
     #endregion
 
     #region Edit Category
-
-    public async Task EditCategory(CategoryDTO categoryDTO) 
+    public async Task EditCategory(CategoryDTO categoryDTO)
     {
         Category Category = new Category()
         {
             Id = categoryDTO.Id,
             CategoryTitle = categoryDTO.CategoryTitle,
-            CategoryUniqueName  = categoryDTO.CategoryUniqueName,
+            CategoryUniqueName = categoryDTO.CategoryUniqueName,
             Image = categoryDTO.Image,
 
         };
 
-       await _ICategoryRepository.EditCategory(Category);
+        await _ICategoryRepository.EditCategory(Category);
 
 
     }
@@ -140,10 +141,48 @@ public class CategoryService : ICategoryService
 
     #region Remove Category
 
-    public async Task RemoveCategory(int CategoryId) 
+    public async Task RemoveCategory(int CategoryId)
     {
 
-      await  _ICategoryRepository.RemoveCategory(CategoryId);
+        await _ICategoryRepository.RemoveCategory(CategoryId);
+
+
+    }
+
+    #endregion
+
+    #region AddSelectedCategory
+
+
+    public async Task AddSelectedCategory(List<int> SelectedCategories, ProductDTO productDTO)
+    {
+
+        if (SelectedCategories != null)
+        {
+
+            await _ICategoryRepository.RemoveSelectedCategoriesByProductId(productDTO.Id);
+
+
+            foreach (var item in SelectedCategories)
+            {
+
+                SelectedCategory selectedCategory = new SelectedCategory()
+                {
+
+                    CategoryId = item,
+                    ProductId = productDTO.Id,
+
+                };
+
+                await _ICategoryRepository.AddSelectedCategory(selectedCategory);
+
+            }
+
+            await _ICategoryRepository.SaveChangeAsync();   
+
+        }
+
+
 
 
     }

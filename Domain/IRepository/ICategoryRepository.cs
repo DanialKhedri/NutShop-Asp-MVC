@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Product.Category;
+using Domain.Entities.Product.SelectedCategory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace Domain.IRepository
         public Task AddCategory(Category category);
         public Task EditCategory(Category category);
         public Task RemoveCategory(int CategoryId);
+
+        public  Task AddSelectedCategory(SelectedCategory selectedCategory);
+
+        public Task RemoveSelectedCategoriesByProductId(int ProductId);
+        public Task SaveChangeAsync();
 
 
     }
