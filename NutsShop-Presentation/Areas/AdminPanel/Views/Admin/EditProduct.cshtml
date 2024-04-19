@@ -1,5 +1,5 @@
-﻿@using Application.Dtos.ProductDTO
-@model ProductDTO;
+﻿@using NutsShop_Presentation.Areas.AdminPanel.ViewModels
+@model EditProductViewModel;
 
 @{
     Layout = "_AdminLayout";
@@ -47,7 +47,7 @@
                         <div class="col-6">
                             <label>Id</label>
                             <input readonly class="form-control" style="margin: 10px" type="text"
-                                   asp-for="Id" placeholder="Product Name" required="">
+                                   asp-for="@Model.productDTO.Id" placeholder="Product Name" required="">
                         </div>
 
 
@@ -56,7 +56,7 @@
                         <div class="col-6">
                             <label>Product Name</label>
                             <input class="form-control" style="margin: 10px" type="text"
-                                   asp-for="ProductName" placeholder="Product Name" required="">
+                                   asp-for="@Model.productDTO.ProductName" placeholder="Product Name" required="">
                         </div>
 
 
@@ -65,7 +65,7 @@
                         <div class="col-6">
 
                             <label>Description</label>
-                            <textarea class="form-control" style="margin: 10px" type="text" asp-for="Description" placeholder="Description" required=""></textarea>
+                            <textarea class="form-control" style="margin: 10px" type="text" asp-for="@Model.productDTO.Description" placeholder="Description" required=""></textarea>
 
                         </div>
 
@@ -76,7 +76,7 @@
                         <div class="col-6">
 
                             <label>Price</label>
-                            <input class="form-control" style="margin: 10px" type="text" asp-for="Price" placeholder="Your Name" required="">
+                            <input class="form-control" style="margin: 10px" type="text" asp-for="@Model.productDTO.Price" placeholder="Your Name" required="">
 
                         </div>
 
@@ -92,10 +92,36 @@
                         <img class="form-control" style="margin: 10px;width :50%;height:50%" type="file" id="image" name="image" >
 
 
-                        <input id="UserAvatarIFromFIle" type="file" asp-for="ImageIformFile"></>
+                        <input id="UserAvatarIFromFIle" type="file" asp-for="@Model.productDTO.ImageIformFile"></>
 
                     </div>
 
+                    <div class="Roles">
+
+
+
+                        @if (Model.categories != null)
+                        {
+
+
+                            @foreach (var item in Model.categories)
+                            {
+
+                                <label>@item.CategoryTitle</label>
+                                <input type="checkbox" value="@item.Id" name="SelectedRoles" />
+                                <br></br>
+
+                            }
+
+
+
+                        }
+
+
+
+
+
+                    </div>
 
                     <div>
                         <button class="btn btn-primary mt-2" type="submit">Edit information</button>
