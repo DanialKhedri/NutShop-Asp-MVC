@@ -104,7 +104,17 @@ public class AdminController : Controller
 
         var product = await _IProductService.GetProductById(ProductId);
 
-        return View(product);
+        var Categories = await _ICategoryService.GetAllCategories();
+
+        EditProductViewModel editProductViewModel = new EditProductViewModel()
+        {
+
+            productDTO = product,
+            categories = Categories,
+        };
+
+
+        return View(editProductViewModel);
 
     }
 
