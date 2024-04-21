@@ -6,6 +6,8 @@
 }
 
 
+
+
 <html lang="fa">
 
 <head>
@@ -82,6 +84,26 @@
         width: 40%;
     }
 
+    .location {
+        display: flex;
+        flex-direction: column;
+        background-color: gray;
+        border-radius: 10px;
+        border: 2px #333;
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .labecontainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        width: 90%;
+        margin: 20px;
+        background-color: #f2f2f2;
+    }
+
 </style>
 
 
@@ -130,31 +152,61 @@
 
         </table>
 
-        <h1>مجموع</h1>
-        <h1>@Model.OrderDTO.Sum</h1>
+        <h4>مجموع</h4>
+        <h4>@Model.OrderDTO.Sum</h4>
 
     </div>
+
+    <h1>اطلاعات مشتری</h1>
 
     <div class="location">
 
 
-        <h1>اطلاعات مشتری</h1>
 
-        @if (Model.LocationDTO !=null)
+        @if (Model.LocationDTO != null)
         {
+            <div class="labecontainer">
+                <label>FirstName: </label>
+                <label>@Model.LocationDTO.FirstName</label>
+            </div>
 
-            <h3>@Model.LocationDTO.FirstName</h3>
-            <h3>@Model.LocationDTO.LastName</h3>
-            <h3>@Model.LocationDTO.PhoneNumber</h3>
-            <h3>@Model.LocationDTO.State</h3>
-            <h3>@Model.LocationDTO.City</h3>
-            <h3>@Model.LocationDTO.Address</h3>
-            <h3>@Model.LocationDTO.PostCode</h3>
+            <div class="labecontainer">
+                <label>LastName: </label>
+                <label>@Model.LocationDTO.LastName</label>
+            </div>
+
+
+            <div class="labecontainer">
+                <label>PhoneNumber: </label>
+                <label>@Model.LocationDTO.PhoneNumber</label>
+            </div>
+
+
+            <div class="labecontainer">
+                <label>state: </label>
+                <label>@Model.LocationDTO.State</label>
+            </div>
+
+
+            <div class="labecontainer">
+                <label>City: </label>
+                <label>@Model.LocationDTO.City</label>
+            </div>
+
+
+            <div class="labecontainer">
+                <label>Address: </label>
+                <label>@Model.LocationDTO.Address</label>
+            </div>
+
+
+            <div class="labecontainer">
+                <label>PostCode: </label>
+                <label>@Model.LocationDTO.PostCode</label>
+            </div>
+
 
         }
-        
-      
-
 
 
 
@@ -163,4 +215,6 @@
 </body>
 
 </html>
+
+
 
