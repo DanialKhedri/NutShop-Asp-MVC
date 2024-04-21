@@ -128,7 +128,18 @@
             <div class="inputcontainer">
 
 
-                <img class="img" type="file" id="image" name="image">
+                @if (Model.Image != null)
+                {
+
+                    <img src="~/Images/Categories/@Model.Image" class="img" type="file" id="image" name="image">
+                }
+
+                else
+                {
+
+                    <img class="img" type="file" id="image" name="image">
+
+                }
 
 
                 <input id="UserAvatarIFromFIle" type="file" asp-for="@Model.ImageIFormFile"></>

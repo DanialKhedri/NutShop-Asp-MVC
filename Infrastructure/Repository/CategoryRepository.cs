@@ -124,8 +124,6 @@ public class CategoryRepository : ICategoryRepository
         _datacontext.SelectedCategories.RemoveRange(SelectedCategories);
         await _datacontext.SaveChangesAsync();
 
-
-
     }
 
     #endregion

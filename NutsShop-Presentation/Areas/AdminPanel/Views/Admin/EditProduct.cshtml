@@ -82,7 +82,7 @@
     </div>
 
     <div class="maincontainer">
-     
+
 
         <form class="maincontainer" method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="EditProduct" enctype="multipart/form-data">
 
@@ -132,8 +132,19 @@
 
             <div class="inputcontainer">
 
+                @if (Model.productDTO.Image != null)
+                {
 
-                <img class="img" type="file" id="image" name="image">
+                    <img src="~/Images/Products/@Model.productDTO.Image" class="img" type="file" id="image" name="image">
+                }
+
+                else
+                {
+
+                    <img class="img" type="file" id="image" name="image">
+
+                }
+
 
 
                 <input id="UserAvatarIFromFIle" type="file" asp-for="@Model.productDTO.ImageIformFile"></>
