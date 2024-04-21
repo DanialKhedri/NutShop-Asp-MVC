@@ -27,79 +27,114 @@
 
 
 
+<style>
+
+    .maincontainer {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: gray;
+        padding: 1px;
+    }
+
+    .inputcontainer {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: rgb(224, 224, 224);
+        padding: 10px;
+    }
+
+    .img {
+        margin: 20px;
+        width: 300px;
+        height: 300px;
+    }
+
+    .Roles {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: rgb(224, 224, 224);
+        padding: 10px;
+    }
+
+    .btn {
+        margin: 20px;
+    }
+
+</style>
+
 <body>
 
-    <div class="InputContainer" style="display: flex; flex-direction: column;align-content: center; justify-content: center; align-items: center;">
-
-        <div style="display:flex; align-items: center; margin-top: 20px;">
-        </div>
+    <div class="maincontainer">
 
 
+        <form class="maincontainer" method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="EditProduct" enctype="multipart/form-data">
 
-        <div>
+            <div class="row">
 
-            <div class="contant-section px-3 px-lg-4 pb-4" id="contact">
-
-                <form method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="EditCategory" enctype="multipart/form-data">
-
-                    <div class="row">
-
-                        <div class="col-6">
-                            <label>Id</label>
-                            <input readonly class="form-control" style="margin: 10px" type="text"
-                                   asp-for="Id" placeholder="Product Name" required="">
-                        </div>
+                <div class="inputcontainer">
+                    <label>Id</label>
+                    <input readonly class="form-control" style="margin: 10px" type="text"
+                           asp-for="@Model.Id" placeholder="Product Name" required="">
+                </div>
 
 
-                        <!--Category Title-->
+                <!--Product Name-->
 
-                        <div class="col-6">
+                <div class="inputcontainer">
 
-                            <label>Category Title</label>
-                            <input class="form-control" style="margin: 10px" asp-for="CategoryTitle" />
+                    <label>Category Title</label>
+                    <input class="form-control" style="margin: 10px" type="text"
+                           asp-for="@Model.CategoryTitle" placeholder="Product Name" required="">
 
-                        </div>
-
-
-                        <!--Category Unique Name-->
-
-                        <div class="col-6">
-
-                            <label>Category Unique Name</label>
-                            <textarea class="form-control" style="margin: 10px" type="text" asp-for="CategoryUniqueName" placeholder="Description" required=""></textarea>
-
-                        </div>
-
-                        <br>
-
-                    </div>
+                </div>
 
 
-                    <!--Image-->
+                <!--Description-->
 
-                    <div class="col-6">
+                <div class="inputcontainer">
 
+                    <label>CategoryUniqueName</label>
+                    <textarea class="form-control" style="margin: 10px" type="text" asp-for="@Model.CategoryUniqueName" placeholder="Description" required=""></textarea>
 
-                        <img class="form-control" style="margin: 10px;width :50%;height:50%" type="file" id="image" name="image" placeholder="Your E-mail">
+                </div>
 
+                <br>
 
+       
 
-
-                        <input id="UserAvatarIFromFIle" type="file" asp-for="ImageIFormFile"></>
-
-                    </div>
-
-
-
-                    <div>
-                        <button class="btn btn-primary mt-2" type="submit">Edit information</button>
-                    </div>
-
-                </form>
 
             </div>
 
-        </div>
+
+            <!--Image-->
+
+            <div class="inputcontainer">
+
+
+                <img class="img" type="file" id="image" name="image">
+
+
+                <input id="UserAvatarIFromFIle" type="file" asp-for="@Model.ImageIFormFile"></>
+
+            </div>
+
+
+
+        
+
+            <div>
+                <button class="btn" type="submit">Edit information</button>
+            </div>
+
+        </form>
+
+
 
 
     </div>
