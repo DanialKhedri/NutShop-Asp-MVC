@@ -7,6 +7,7 @@
 
 
 
+
 <head>
 
     <noscript>
@@ -27,94 +28,126 @@
 
 
 
+<style>
+
+    .maincontainer {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: gray;
+        padding: 1px;
+    }
+
+    .inputcontainer {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: rgb(224, 224, 224);
+        padding: 10px;
+    }
+
+    .img {
+        margin: 20px;
+        width: 300px;
+        height: 300px;
+    }
+
+    .Roles {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: rgb(224, 224, 224);
+        padding: 10px;
+    }
+
+    .btn {
+        margin: 20px;
+    }
+
+</style>
+
 <body>
 
-    <div class="InputContainer" style="display: flex; flex-direction: column;align-content: center; justify-content: center; align-items: center;">
-
-        <div style="display:flex; align-items: center; margin-top: 20px;">
-        </div>
-
-
-
-        <div>
-
-            <div class="contant-section px-3 px-lg-4 pb-4" id="contact">
-
-                <form method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="EditUser" enctype="multipart/form-data">
-
-                    <div class="row">
-
-                        <div class="col-6">
-
-                            <label>Id</label>
-                            <input readonly class="form-control" style="margin: 10px" type="text"
-                                   asp-for="@Model.UserAdminPanelDTO.Id" placeholder="Product Name" required="">
-                        </div>
-
-
-                        <!--User Name-->
-
-                        <div class="col-6">
-
-                            <label>User Name</label>
-                            <input class="form-control" style="margin: 10px" type="text"
-                                   asp-for="@Model.UserAdminPanelDTO.UserName" placeholder="Product Name" required="">
-                        </div>
-
-
-                        <!--Phone-->
-
-                        <div class="col-6">
-
-                            <label>Phone</label>
-                            <textarea class="form-control" style="margin: 10px" type="text" asp-for="@Model.UserAdminPanelDTO.Phone" placeholder="Description" required=""></textarea>
-
-                        </div>
-
-                        <br>
+    <div class="maincontainer">
 
 
 
 
-                    </div>
+
+        <form class="maincontainer" method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="EditUser" enctype="multipart/form-data">
+
+            <div class="row">
+
+                <div class="inputcontainer">
+                    <label>Id</label>
+                    <input readonly class="form-control" style="margin: 10px" type="text"
+                           asp-for="@Model.UserAdminPanelDTO.Id" placeholder="Product Name" required="">
+                </div>
 
 
-                    <div class="Roles">
+                <!--User Name-->
 
-                       
-                        
-                            @if (Model.Roles != null)
-                            {
-
-
-                                @foreach (var item in Model.Roles)
-                                {
-
-                                    <label>@item.RoleTitle</label>
-                                    <input type="checkbox" value="@item.Id" name="SelectedRoles" />
-                                    <br></br>
-
-                                }
+                <div class="inputcontainer">
+                    <label>UserName</label>
+                    <input class="form-control" style="margin: 10px" type="text"
+                           asp-for="@Model.UserAdminPanelDTO.UserName" placeholder="Product Name" required="">
+                </div>
 
 
+                <!--Phone-->
 
-                            }
+                <div class="inputcontainer">
 
-                        
+                    <label>Phone</label>
+                    <textarea class="form-control" style="margin: 10px" type="text" asp-for="@Model.UserAdminPanelDTO.Phone" placeholder="Description" required=""></textarea>
 
+                </div>
 
+                <br>
 
-                    </div>
+              
 
-                    <div>
-                        <button class="btn btn-primary mt-2" type="submit">Edit information</button>
-                    </div>
-
-                </form>
 
             </div>
 
-        </div>
+
+          
+
+
+
+            <div class="Roles">
+
+
+
+                @if (Model.Roles != null)
+                {
+
+
+                    @foreach (var item in Model.Roles)
+                    {
+
+                        <label>@item.RoleTitle</label>
+                        <input type="checkbox" value="@item.Id" name="SelectedRoles" />
+                        <br></br>
+
+                    }
+
+
+
+                }
+
+            </div>
+
+            <div>
+                <button class="btn" type="submit">Edit information</button>
+            </div>
+
+        </form>
+
+
 
 
     </div>
@@ -123,22 +156,4 @@
 
 </body>
 
-<script>
 
-    const fileInput = document.getElementById('UserAvatarIFromFIle');
-
-    const image = document.getElementById('image');
-
-    fileInput.addEventListener('change', function () {
-
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            image.src = e.target.result;
-        }
-
-        reader.readAsDataURL(file);
-    });
-
-</script>
