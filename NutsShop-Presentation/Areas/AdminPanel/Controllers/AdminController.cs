@@ -81,17 +81,28 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> AddProduct()
     {
-        return View();
+
+        AddProductViewModel addProductViewModel = new AddProductViewModel()
+        {
+
+            categories = await _ICategoryService.GetAllCategories(),
+
+        };
+
+
+        
+
+        return View(addProductViewModel);
     }
 
-
-
     [HttpPost]
-    public async Task<IActionResult> AddProduct(ProductDTO productDTO)
+    public async Task<IActionResult> AddProduct(ProductDTO productDTO,List<int> SelectedCategories)
     {
-        await _IProductService.AddProduct(productDTO);
 
-        return View();
+        await _IProductService.AddProduct(productDTO,SelectedCategories);
+       
+
+        return RedirectToAction(nameof(GetAllProducts));
     }
 
 

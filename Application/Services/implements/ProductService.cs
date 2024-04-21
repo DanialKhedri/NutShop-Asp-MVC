@@ -2,6 +2,7 @@
 using Application.Extensions.NameGenerator;
 using Application.Services.Interfaces;
 using Domain.Entities.Product;
+using Domain.Entities.Product.SelectedCategory;
 using Domain.Entities.User;
 using Domain.IRepository;
 using Microsoft.Identity.Client;
@@ -19,10 +20,13 @@ public class ProductService : IProductService
     #region Ctor
 
     private readonly IProductRepository _IProductRepository;
+    private readonly ICategoryRepository _ICategoryRepository;
 
-    public ProductService(IProductRepository productRepository)
+    public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository)
     {
         _IProductRepository = productRepository;
+        _ICategoryRepository = categoryRepository;
+
     }
     #endregion
 
@@ -121,7 +125,7 @@ public class ProductService : IProductService
 
     #region AddProduct
 
-    public async Task AddProduct(ProductDTO productDTO)
+    public async Task AddProduct(ProductDTO productDTO, List<int> SelectedCategories)
     {
 
         //object mapping
@@ -153,13 +157,35 @@ public class ProductService : IProductService
 
         await _IProductRepository.AddProduct(product);
 
+
+        //AddSelected Categories
+        var tempproduct = await _IProductRepository.GetLastProduct();
+        if (tempproduct != null)
+        {
+            foreach (var item in SelectedCategories)
+            {
+                SelectedCategory selectedCategory = new SelectedCategory()
+                {
+                    CategoryId = item,
+                    ProductId = tempproduct.Id,
+                };
+
+                await _ICategoryRepository.AddSelectedCategory(selectedCategory);
+
+            }
+
+            await _ICategoryRepository.SaveChangeAsync();
+
+
+        }
+
     }
 
     #endregion
 
     #region EditProduct
 
-    public async Task EditProduct(ProductDTO productDTO) 
+    public async Task EditProduct(ProductDTO productDTO)
     {
         Product product = new Product()
         {
@@ -167,7 +193,7 @@ public class ProductService : IProductService
             ProductName = productDTO.ProductName,
             Description = productDTO.Description,
             Price = productDTO.Price,
-       
+
         };
 
 
@@ -194,9 +220,9 @@ public class ProductService : IProductService
 
     #region Remove Product
 
-    public async Task RemoveProduct(int ProductId) 
+    public async Task RemoveProduct(int ProductId)
     {
-       await _IProductRepository.RemoveProduct(ProductId);
+        await _IProductRepository.RemoveProduct(ProductId);
     }
 
     #endregion
