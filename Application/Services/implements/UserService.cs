@@ -48,7 +48,6 @@ namespace Application.Services.implements
                     UserName = item.UserName,
                     Phone = item.Phone,
                     CreateDate = item.CreateDate,
-                    Password = item.Password,
 
                 };
 
@@ -76,7 +75,6 @@ namespace Application.Services.implements
                 Id = User.Id,
                 UserName = User.UserName,
                 Phone = User.Phone,
-                Password = User.Password,
                 CreateDate = User.CreateDate
 
             };

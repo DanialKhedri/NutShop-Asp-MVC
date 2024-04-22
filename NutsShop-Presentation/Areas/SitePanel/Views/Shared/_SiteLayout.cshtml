@@ -39,9 +39,6 @@
     }
 
 
-    .navbar .logo {
-        font-size: 24px;
-    }
 
     .navbar .menu,
     .navbar .search {
@@ -191,27 +188,11 @@
 
         <div class="navbarleft">
 
-            <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Cart">سبد خرید</a></div>
-            <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Index">خانه</a></div>
-            <div class="menu">منو</div>
-
-        </div>
-
-        <div class="navbarcenter">
-
-            <div class="logo">
-                <img>آجیل و خشکبار دانیال<img>
-            </div>
-
-        </div>
-
-        <div class="navbarright">
-
             @if (User.Identity.IsAuthenticated == true)
             {
 
                 <div class="menu">
-                    <img></img>
+                   
                     <label>@User.Identity.Name</label>
 
                 </div>
@@ -229,6 +210,20 @@
             }
 
 
+        </div>
+
+        <div class="navbarcenter">
+
+            <div>
+                <h1>آجیل و خشکبار دانیال</h1>
+            </div>
+
+        </div>
+
+        <div class="navbarright">
+
+            <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Cart">سبد خرید</a></div>
+            <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Index">خانه</a></div>
 
         </div>
 
