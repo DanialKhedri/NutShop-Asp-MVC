@@ -13,59 +13,36 @@
 <style>
 
 
-    .MainContainer {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
-    }
-
-
-    a {
-        font-family: Arial, sans-serif;
-        text-decoration: none;
-        color: inherit;
-        text-decoration: none;
-        cursor: pointer;
-        color: #494848;
-        font-weight: bold;
-    }
-
-        a : :hover {
-            transform: scale(1.1);
-        }
 
     body {
         margin: 0;
         padding: 0;
         display: block;
+        justify-content: center;
         align-items: center;
-        align-content: center;
         height: 100%;
         background: linear-gradient(to right, #333, #494848);
     }
 
     .form-container {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
         width: 50%;
         margin: 50px;
         background-color: #fff;
         border-radius: 25px;
         padding: 40px;
+        justify-content: center;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .form-group {
-        width:80%;
-        margin-bottom: 20px;
+        margin: 10px;
+        width: 70%;
     }
 
         .form-group label {
             display: block;
             font-weight: bold;
+            font: bolder;
             margin-bottom: 15px;
         }
 
@@ -104,8 +81,16 @@
 
 
 
-    form {
-        width: 80%;
+    .content {
+        display: flex;
+        justify-content: center;
+    }
+
+    .form {
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 </style>
@@ -114,90 +99,86 @@
 <body>
 
 
-    <div class="MainContainer">
+    <div class="content">
+
         <div class="form-container">
 
-            <form method="post" asp-area="SitePanel" asp-controller="User" asp-action="SetOrderLocation">
+            <form class="form" method="post" asp-area="SitePanel" asp-controller="User" asp-action="SetOrderLocation">
 
                 <div class="form-group">
 
-                    <label for="name">First Name</label>
-                    <input type="text" asp-for="FirstName" placeholder="Please Enter UserName">
+                    <label for="name">نام</label>
+                    <input type="text" asp-for="FirstName" placeholder="لطفا نام را وارد کنید">
                     <span style="color:red" asp-validation-for="FirstName"></span>
 
                 </div>
 
                 <div class="form-group">
 
-                    <label for="name">LastName</label>
-                    <input type="tel" asp-for="LastName" placeholder="Please Enter LastName">
+                    <label for="name">نام خانوادگی</label>
+                    <input type="tel" asp-for="LastName" placeholder=" لطفا نام خانوادگی را وارد کنید">
                     <span style="color:red" asp-validation-for="LastName"></span>
 
                 </div>
 
-             
+
 
 
                 <div class="form-group">
 
-                    <label for="">Password</label>
-                    <input type="text" asp-for="State" placeholder="Please Enter state">
+                    <label for=""> استان </label>
+                    <input type="text" asp-for="State" placeholder="لطفا استان را وارد کنید ">
                     <span style="color:red" asp-validation-for="State"></span>
 
                 </div>
 
+
                 <div class="form-group">
-                    <label for="confirm-password">City</label>
 
-                    <input type="text" asp-for="City" placeholder="Please Enter City">
-
+                    <label for="confirm-password">شهر</label>
+                    <input type="text" asp-for="City" placeholder="لطفا شهر را وراد کنید">
                     <span style="color:red" asp-validation-for="City"></span>
-                </div>
 
-
-                <div class="form-group">
-                    <label for="confirm-password">Address</label>
-
-                    <input type="text" asp-for="Address" placeholder="Please Enter Address">
-
-                    <span style="color:red" asp-validation-for="Address"></span>
                 </div>
 
 
 
                 <div class="form-group">
-                    <label for="confirm-password">Phone Number</label>
 
-                    <input type="text" asp-for="PhoneNumber" placeholder="Please Enter Phone Numbers">
-
+                    <label for="confirm-password">تلفن همراه</label>
+                    <input type="text" asp-for="PhoneNumber" placeholder="لطفا تلفن همراه را وارد کنید">
                     <span style="color:red" asp-validation-for="PhoneNumber"></span>
+
                 </div>
+
 
 
 
 
                 <div class="form-group">
-                    <label for="confirm-password">PostCode</label>
 
-                    <input type="text" asp-for="PostCode" placeholder="Please Enter City">
-
+                    <label for="confirm-password">کد پستی</label>
+                    <input type="text" asp-for="PostCode" placeholder="لطفا کدپستی را وارد کنید">
                     <span style="color:red" asp-validation-for="PostCode"></span>
+
                 </div>
 
-            
+
                 <br></br>
 
                 <div class="form-group">
 
                     <button type="submit">پرداخت</button>
                     <br></br>
-                 
+
                 </div>
 
             </form>
+
         </div>
 
     </div>
+
 
 </body>
 </html>
