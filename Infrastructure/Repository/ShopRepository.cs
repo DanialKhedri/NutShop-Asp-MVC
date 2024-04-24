@@ -8,5 +8,9 @@ namespace Infrastructure.Repository
 {
     public class ShopRepository
     {
+
+
+
+
     }
 }
