@@ -353,7 +353,7 @@ public class AdminController : Controller
 
 
 
-    //Shop detail managment
+    #region Shop Detail Managment
 
     public async Task<IActionResult> ShopDetails()
     {
@@ -371,5 +371,8 @@ public class AdminController : Controller
         return RedirectToAction($"{nameof(Index)}");
 
     }
+
+
+    #endregion
 
 }
