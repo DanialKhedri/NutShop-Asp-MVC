@@ -142,7 +142,7 @@ public class HomeController : Controller
 
         else
         {
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("LogIn","User");
         }
 
 
