@@ -64,7 +64,7 @@ public class HomeController : Controller
     {
 
         var productdto = await _IProductService.GetProductById(Id);
-
+        TempData["Shop"] = await _IShopService.GetShopDetail();
 
         return View(productdto);
 
@@ -79,7 +79,7 @@ public class HomeController : Controller
     {
 
         List<ProductDTO> products = await _IProductService.GetAllProducts();
-
+        TempData["Shop"] = await _IShopService.GetShopDetail();
 
         ShowProductsViewModel showProductsViewModel = new ShowProductsViewModel()
         {
@@ -99,7 +99,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> ShowProductByCategory(int CategoryId)
     {
-
+        TempData["Shop"] = await _IShopService.GetShopDetail();
         List<ProductDTO>? productsDTOList = await _IProductService.GetProductsByCategoryId(CategoryId);
 
         ShowProductByCategoryIdViewModel showProductByCategoryIdViewModel = new ShowProductByCategoryIdViewModel()
@@ -121,9 +121,10 @@ public class HomeController : Controller
     #region Cart
     public async Task<IActionResult> Cart()
     {
-
+     
         if (User.Identity.IsAuthenticated)
-        {
+        { 
+            TempData["Shop"] = await _IShopService.GetShopDetail();
             int userid = User.GetUserId();
 
             CartViewModel cartViewModel = new CartViewModel();
@@ -155,7 +156,7 @@ public class HomeController : Controller
     public async Task<IActionResult> AboutUs()
     {
         var aboutus = await _IAboutUsService.GetAboutUs();
-
+        TempData["Shop"] = await _IShopService.GetShopDetail();
         return View(aboutus);
     }
 

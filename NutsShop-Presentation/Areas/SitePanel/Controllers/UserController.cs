@@ -2,6 +2,7 @@
 using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
 using Application.Extensions;
+using Application.Services.implements;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,15 @@ public class UserController : Controller
 
     private readonly IUserService _IUserService;
     private readonly IOrderService _IOrderService;
+    private readonly IShopService _IShopService;
 
-    public UserController(IUserService userService, IOrderService orderService)
+    public UserController(IUserService userService,
+        IOrderService orderService,
+        IShopService ShopService)
     {
         _IUserService = userService;
         _IOrderService = orderService;
+        _IShopService = ShopService;
     }
 
     #endregion
@@ -36,7 +41,7 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> Register()
     {
-
+        TempData["Shop"] = await _IShopService.GetShopDetail();
         return View();
 
     }
@@ -44,6 +49,8 @@ public class UserController : Controller
     [HttpPost]
     public async Task<IActionResult> Register(UserRegisterDTO userRegisterDTO)
     {
+
+
         if (ModelState.IsValid)
         {
 
@@ -95,6 +102,8 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> LogIn()
     {
+        TempData["Shop"] = await _IShopService.GetShopDetail();
+
         return View();
     }
 
@@ -195,6 +204,7 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> SetOrderLocation()
     {
+        TempData["Shop"] = await _IShopService.GetShopDetail();
 
         return View();
 
@@ -211,7 +221,7 @@ public class UserController : Controller
     }
     #endregion
 
-   
+
 
 
 }
