@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.Interfaces
+namespace Application.Services.Interfaces;
+
+public interface IShopService
 {
-    public interface IShopService
-    {
 
-        public Task<ShopDTO?> GetShopDetail();
+    public Task<ShopDTO?> GetShopDetail();
 
-    }
 }

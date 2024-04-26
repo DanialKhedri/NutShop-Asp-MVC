@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.ShopDTO;
+using Application.Services.Interfaces;
 using Domain.Entities.Shop;
 using Domain.IRepository;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.implements;
 
-public class ShopService
+public class ShopService : IShopService
 {
     #region Ctor
 
@@ -24,7 +25,8 @@ public class ShopService
 
     #endregion
 
-    #region GetShopDetils
+
+    #region GetShopDetail
     public async Task<ShopDTO?> GetShopDetail()
     {
         var shopdetail = await _IshopRepository.GetShopDetail();
@@ -48,8 +50,6 @@ public class ShopService
 
 
     #endregion
-
-
 
 
 }

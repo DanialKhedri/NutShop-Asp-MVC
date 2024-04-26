@@ -8,136 +8,144 @@ using Domain.Entities.Order;
 using Microsoft.AspNetCore.Mvc;
 using NutsShop_Presentation.Areas.SitePanel.ViewModels;
 
-namespace NutsShop_Presentation.Areas.SitePanel.Controllers
+namespace NutsShop_Presentation.Areas.SitePanel.Controllers;
+
+[Area("SitePanel")]
+public class HomeController : Controller
 {
-    [Area("SitePanel")]
-    public class HomeController : Controller
+    #region Ctor 
+
+    private readonly IProductService _IProductService;
+    private readonly ICategoryService _ICategoryService;
+    private readonly IOrderService _IOrderService;
+    private readonly IShopService _IShopService;
+
+
+    public HomeController(IProductService productService,
+        ICategoryService categoryService, 
+        IOrderService orderService,
+        IShopService shopService)
     {
-        #region Ctor 
+        _IProductService = productService;
+        _ICategoryService = categoryService;
+        _IOrderService = orderService;
+        _IShopService = shopService;
 
-        private readonly IProductService _IProductService;
-        private readonly ICategoryService _ICategoryService;
-        private readonly IOrderService _IOrderService;
+    }
 
-        public HomeController(IProductService productService, ICategoryService categoryService, IOrderService orderService)
+    #endregion
+
+
+    #region Index
+    public async Task<IActionResult> Index()
+    {
+
+        List<ProductDTO> Products = await _IProductService.GetAllProducts();
+        List<CategoryDTO> categories = await _ICategoryService.GetAllCategories();
+
+        TempData["Shop"] = await _IShopService.GetShopDetail();
+
+        IndexViewModel indexViewModel = new IndexViewModel()
         {
-            _IProductService = productService;
-            _ICategoryService = categoryService;
-            _IOrderService = orderService;
+            ProductsDTOs = Products,
+            CategoryDTOs = categories
+        };
 
-        }
-        #endregion
-
-
-        #region Index
-        public async Task<IActionResult> Index()
-        {
-
-            List<ProductDTO> Products = await _IProductService.GetAllProducts();
-            List<CategoryDTO> categories = await _ICategoryService.GetAllCategories();
-
-            IndexViewModel indexViewModel = new IndexViewModel()
-            {
-                ProductsDTOs = Products,
-                CategoryDTOs = categories
-            };
-
-            return View(indexViewModel);
-        }
-        #endregion
+        return View(indexViewModel);
+    }
+    #endregion
 
 
-        #region ShowProduct
+    #region ShowProduct
 
-        public async Task<IActionResult> ShowProduct(int Id)
-        {
+    public async Task<IActionResult> ShowProduct(int Id)
+    {
 
-            var productdto = await _IProductService.GetProductById(Id);
-
-
-            return View(productdto);
-
-        }
-
-        #endregion
+        var productdto = await _IProductService.GetProductById(Id);
 
 
-        #region ShowAllProducts
+        return View(productdto);
 
-        public async Task<IActionResult> ShowAllProducts()
-        {
+    }
 
-            List<ProductDTO> products = await _IProductService.GetAllProducts();
-
-
-            ShowProductsViewModel showProductsViewModel = new ShowProductsViewModel()
-            {
-
-                ProductsDTOs = products,
-            };
-
-            return View(showProductsViewModel);
+    #endregion
 
 
-        }
+    #region ShowAllProducts
 
-        #endregion
+    public async Task<IActionResult> ShowAllProducts()
+    {
+
+        List<ProductDTO> products = await _IProductService.GetAllProducts();
 
 
-        #region ShowProductsByCategory
-
-        public async Task<IActionResult> ShowProductByCategory(int CategoryId)
+        ShowProductsViewModel showProductsViewModel = new ShowProductsViewModel()
         {
 
-            List<ProductDTO>? productsDTOList = await _IProductService.GetProductsByCategoryId(CategoryId);
+            ProductsDTOs = products,
+        };
 
-            ShowProductByCategoryIdViewModel showProductByCategoryIdViewModel = new ShowProductByCategoryIdViewModel()
-            {
-
-
-                productIndexDTOs = productsDTOList,
-
-               
-            };
-
-
-            return View(showProductByCategoryIdViewModel);
-        }
-
-        #endregion
-
-
-        #region Cart
-        public async Task<IActionResult> Cart()
-        {
-
-            if (User.Identity.IsAuthenticated)
-            {
-                int userid = User.GetUserId();
-
-                CartViewModel cartViewModel = new CartViewModel();
-
-                cartViewModel.OrderDTO = await _IOrderService.GetUnFinaledOrderByUserId(userid);
-
-                if (cartViewModel.OrderDTO != null)
-                {
-                    cartViewModel.OrderDetailDTOs = await _IOrderService.GetAllOrderDetailsByOrderId(cartViewModel.OrderDTO.Id);
-                }
-              
-
-                return View(cartViewModel);
-            }
-
-            else
-            {
-                return RedirectToAction(nameof(Index));
-            }
-
-
-        }
-
-        #endregion
+        return View(showProductsViewModel);
 
 
     }
+
+    #endregion
+
+
+    #region ShowProductsByCategory
+
+    public async Task<IActionResult> ShowProductByCategory(int CategoryId)
+    {
+
+        List<ProductDTO>? productsDTOList = await _IProductService.GetProductsByCategoryId(CategoryId);
+
+        ShowProductByCategoryIdViewModel showProductByCategoryIdViewModel = new ShowProductByCategoryIdViewModel()
+        {
+
+
+            productIndexDTOs = productsDTOList,
+
+           
+        };
+
+
+        return View(showProductByCategoryIdViewModel);
+    }
+
+    #endregion
+
+
+    #region Cart
+    public async Task<IActionResult> Cart()
+    {
+
+        if (User.Identity.IsAuthenticated)
+        {
+            int userid = User.GetUserId();
+
+            CartViewModel cartViewModel = new CartViewModel();
+
+            cartViewModel.OrderDTO = await _IOrderService.GetUnFinaledOrderByUserId(userid);
+
+            if (cartViewModel.OrderDTO != null)
+            {
+                cartViewModel.OrderDetailDTOs = await _IOrderService.GetAllOrderDetailsByOrderId(cartViewModel.OrderDTO.Id);
+            }
+          
+
+            return View(cartViewModel);
+        }
+
+        else
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+
+    }
+
+    #endregion
+
+
 }

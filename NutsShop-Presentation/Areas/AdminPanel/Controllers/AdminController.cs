@@ -3,6 +3,7 @@ using Application.Dtos.LocationDTO;
 using Application.Dtos.OrderDetailDTO;
 using Application.Dtos.OrderDTO;
 using Application.Dtos.ProductDTO;
+using Application.Dtos.ShopDTO;
 using Application.Dtos.UserLogInDTO;
 using Application.Extensions;
 using Application.Services.Interfaces;
@@ -24,12 +25,14 @@ public class AdminController : Controller
     private readonly IUserService _IUserService;
     private readonly ICategoryService _ICategoryService;
     private readonly IRoleService _IRoleService;
+    private readonly IShopService _IShopService;
 
     public AdminController(IProductService productService,
         IOrderService orderService,
         IUserService userService,
         ICategoryService categoryService,
-        IRoleService roleService)
+        IRoleService roleService,
+        IShopService shopService)
     {
 
         _IProductService = productService;
@@ -37,7 +40,7 @@ public class AdminController : Controller
         _IUserService = userService;
         _ICategoryService = categoryService;
         _IRoleService = roleService;
-
+        _IShopService = shopService;
     }
 
 
@@ -350,6 +353,22 @@ public class AdminController : Controller
 
 
 
+    //Shop detail managment
 
+    public async Task<IActionResult> ShopDetails()
+    {
+
+        var shop = await _IShopService.GetShopDetail();
+
+        return View(shop);
+    }
+
+    public async Task<IActionResult> EditShopDetails(ShopDTO shopDTO)
+    {
+
+        
+
+        
+    }
 
 }

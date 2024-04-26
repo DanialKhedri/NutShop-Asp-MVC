@@ -1,4 +1,10 @@
-﻿<html>
+﻿@using Application.Dtos.ShopDTO
+
+@{
+    var shop = TempData["Shop"] as ShopDTO;
+}
+
+<html>
 
 <style>
 
@@ -28,7 +34,7 @@
         flex-direction: row;
     }
 
-    
+
 
     .navbarright {
         display: flex;
@@ -71,84 +77,7 @@
 
 
 
-    .categories {
-        margin: 25px;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .category {
-        text-align: center;
-        cursor: pointer;
-    }
-
-        .category:hover {
-            transform: scale(1.1);
-        }
-
-        .category img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 2px solid #333;
-        }
-
-        .category span {
-            display: block;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-
-
-    .products {
-        background-color: #555;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .product {
-        width: 15%;
-        height: 25%;
-        margin: 15px;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        text-align: center;
-    }
-
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .product h3 {
-            margin-bottom: 10px;
-        }
-
-        .product p {
-            margin-bottom: 10px;
-        }
-
-        .product span {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .product button {
-            background-color: #333;
-            color: #fff;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-            .product button:hover {
-                background-color: #555;
-            }
+   
 
     .footer {
         display: flex;
@@ -158,90 +87,94 @@
         padding: 30px 50px;
     }
 
-        .footer h3 {
-            margin-bottom: 20px;
-        }
-
-        .footer p {
-            margin-bottom: 10px;
-        }
-
-        .footer ul {
-            list-style: none;
-            padding: 0;
-        }
-
-            .footer ul li a {
-                color: #fff;
-                text-decoration: none;
-            }
-
-                .footer ul li a:hover {
-                    text-decoration: underline;
-                }
+ 
 
 </style>
 
 <body>
 
-    <div class="navbar">
+    <div class="main">
 
-        <div class="navbarleft">
+        <div class="navbar">
 
-            @if (User.Identity.IsAuthenticated == true)
-            {
+            <div class="navbarleft">
 
-                <div class="menu">
-                   
-                    <label>@User.Identity.Name</label>
+                @if (User.Identity.IsAuthenticated == true)
+                {
 
+                    <div class="menu">
+
+                        <label>@User.Identity.Name</label>
+
+                    </div>
+
+                    <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogOut">خروج</a></div>
+
+                }
+
+                else
+                {
+
+                    <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogIn">ورود</a></div>
+                    <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="Register">ثبت نام</a></div>
+
+                }
+
+
+            </div>
+
+            <div class="navbarcenter">
+
+                <div>
+                    <h1>آجیل و خشکبار دانیال</h1>
                 </div>
 
-                <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogOut">خروج</a></div>
+            </div>
 
-            }
+            <div class="navbarright">
 
-            else
-            {
+                <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Cart">سبد خرید</a></div>
+                <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Index">خانه</a></div>
 
-                <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogIn">ورود</a></div>
-                <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="Register">ثبت نام</a></div>
-
-            }
-
-
-        </div>
-
-        <div class="navbarcenter">
-
-            <div>
-                <h1>آجیل و خشکبار دانیال</h1>
             </div>
 
         </div>
 
-        <div class="navbarright">
 
-            <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Cart">سبد خرید</a></div>
-            <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Index">خانه</a></div>
+        <!--Content-->
+
+        <div>
+
+            @RenderBody();
 
         </div>
 
 
 
+        <footer class="footer">
+
+
+            @if (shop != null)
+            {
+                <div>
+
+                    <label>:آدرس</label>
+                    <label>@shop.Address</label>
+
+                    <label>:شماره تماس</label>
+                    <label>@shop.Phone</label>
+
+                </div>
+
+                <div>
+                </div>
+
+            }
+
+
+        </footer>
+
     </div>
-
-
-    <!--Content--></>
-    <div>
-        @RenderBody();
-
-    </div>
-
-
-
-    <footer class="footer">
-    </footer>
 
 </body>
 

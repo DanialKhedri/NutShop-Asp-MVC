@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Shop;
+using Domain.IRepository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository;
 
-public class ShopRepository
+public class ShopRepository : IShopRepository
 {
 
     #region Ctor
@@ -23,10 +24,13 @@ public class ShopRepository
 
     #endregion
 
+
+    #region GetShopDetail
     public async Task<Shop?> GetShopDetail()
     {
         return await _datacontext.Shop.FirstOrDefaultAsync();
     }
+    #endregion
 
 
 }

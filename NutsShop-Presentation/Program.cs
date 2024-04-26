@@ -44,6 +44,12 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 
+//Shop Serv And Rep
+builder.Services.AddScoped<IShopRepository, ShopRepository>();
+builder.Services.AddScoped<IShopService, ShopService>();
+
+
+
 #region Authentication
 
 
