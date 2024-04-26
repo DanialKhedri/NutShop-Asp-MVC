@@ -11,6 +11,7 @@ public interface IAboutUsService
 {
     public Task<AboutUsDTO?> GetAboutUs();
 
+    public Task EditAboutUs(AboutUsDTO aboutUsDTO);
 
 
 

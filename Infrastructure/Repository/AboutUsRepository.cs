@@ -35,5 +35,27 @@ public class AboutUsRepository : IAboutUsRepository
     #endregion
 
     #region EditAboutUs
+    public async Task EditAboutUs(AboutUs aboutUs)
+    {
+        var originAboutUs = await _datacontext.AboutUs.FirstOrDefaultAsync();
 
+        if (originAboutUs != null)
+        {
+            originAboutUs.Title = aboutUs.Title;
+            originAboutUs.Tilte2 = aboutUs.Tilte2;
+            originAboutUs.Description = aboutUs.Description;
+
+            _datacontext.Update(originAboutUs);
+            await _datacontext.SaveChangesAsync();
+        }
+
+        else
+        {
+            await _datacontext.AboutUs.AddAsync(aboutUs);
+            await _datacontext.SaveChangesAsync();
+        }
+
+    }
+
+    #endregion
 }

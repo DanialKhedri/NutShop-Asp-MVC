@@ -1,4 +1,5 @@
-﻿using Application.Dtos.CategoryDTO;
+﻿using Application.Dtos.AboutUsDTO;
+using Application.Dtos.CategoryDTO;
 using Application.Dtos.LocationDTO;
 using Application.Dtos.OrderDetailDTO;
 using Application.Dtos.OrderDTO;
@@ -391,10 +392,12 @@ public class AdminController : Controller
     }
 
 
-    public async Task<IActionResult> EditAboutUs() 
+    public async Task<IActionResult> EditAboutUs(AboutUsDTO aboutUsDTO)
     {
 
-        return View();
+        await _IAboutUs.EditAboutUs(aboutUsDTO);
+
+        return RedirectToAction(nameof(Index));
     }
 
     #endregion

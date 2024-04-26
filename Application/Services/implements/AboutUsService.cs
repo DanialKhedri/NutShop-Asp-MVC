@@ -1,5 +1,8 @@
 ﻿using Application.Dtos.AboutUsDTO;
+using Application.Dtos.ShopDTO;
 using Application.Services.Interfaces;
+using Domain.Entities.AboutUs;
+using Domain.Entities.Shop;
 using Domain.IRepository;
 using System;
 using System.Collections.Generic;
@@ -49,4 +52,31 @@ public class AboutUsService : IAboutUsService
     }
     #endregion
 
+    #region EditAboutUs
+
+
+    public async Task EditAboutUs(AboutUsDTO aboutUsDTO)
+    {
+
+        if (aboutUsDTO != null)
+        {
+            AboutUs aboutUs = new AboutUs()
+            {
+
+                Id = aboutUsDTO.Id,
+                Title = aboutUsDTO.Title,
+                Tilte2 = aboutUsDTO.Tilte2,
+                Description = aboutUsDTO.Description,
+
+            };
+
+            await _IAboutUsRepository.EditAboutUs(aboutUs);
+        }
+
+
+
+
+    }
+
+    #endregion
 }

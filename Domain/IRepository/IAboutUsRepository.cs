@@ -11,5 +11,8 @@ namespace Domain.IRepository
     {
         public Task<AboutUs?> GetAboutUs();
 
+        public Task EditAboutUs(AboutUs aboutUs);
+
+
     }
 }
