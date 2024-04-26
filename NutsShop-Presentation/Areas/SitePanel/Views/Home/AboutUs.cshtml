@@ -1,0 +1,19 @@
+﻿@using Application.Dtos.AboutUsDTO
+@model AboutUsDTO
+
+@{
+    Layout = "_SiteLayout";
+}
+
+<style>
+    body{margin: 0;}
+</style>
+
+@if (Model != null)
+{
+
+    <h3>@Model.Title</h3>
+    <h3>@Model.Tilte2</h3>
+    <h3>@Model.Description</h3>
+
+}

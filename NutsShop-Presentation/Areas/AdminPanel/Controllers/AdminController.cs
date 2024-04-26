@@ -26,13 +26,15 @@ public class AdminController : Controller
     private readonly ICategoryService _ICategoryService;
     private readonly IRoleService _IRoleService;
     private readonly IShopService _IShopService;
+    private readonly IAboutUsService _IAboutUs;
 
     public AdminController(IProductService productService,
         IOrderService orderService,
         IUserService userService,
         ICategoryService categoryService,
         IRoleService roleService,
-        IShopService shopService)
+        IShopService shopService,
+        IAboutUsService aboutUsService)
     {
 
         _IProductService = productService;
@@ -41,6 +43,8 @@ public class AdminController : Controller
         _ICategoryService = categoryService;
         _IRoleService = roleService;
         _IShopService = shopService;
+        _IAboutUs = aboutUsService;
+
     }
 
 
@@ -372,6 +376,26 @@ public class AdminController : Controller
 
     }
 
+
+    #endregion
+
+
+    #region AboutUsManagment
+
+    public async Task<IActionResult> GetAboutUs()
+    {
+        var AboutUs = await _IAboutUs.GetAboutUs();
+
+        return View(AboutUs);
+
+    }
+
+
+    public async Task<IActionResult> EditAboutUs() 
+    {
+
+        return View();
+    }
 
     #endregion
 

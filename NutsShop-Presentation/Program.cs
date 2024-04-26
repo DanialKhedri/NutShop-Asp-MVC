@@ -24,30 +24,40 @@ builder.Services.AddDbContext<DataContext>(option =>
 //HttpAccessor
 builder.Services.AddHttpContextAccessor();
 
+
 //User serv and Rep
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
 
 //Product Serv and rep
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+
 //Category Ser and Rep
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 
 //Order Serv And Rep
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
+
 //Role Serv And Rep
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+
 
 //Shop Serv And Rep
 builder.Services.AddScoped<IShopRepository, ShopRepository>();
 builder.Services.AddScoped<IShopService, ShopService>();
 
+
+//Aboutus Serv And Rep
+builder.Services.AddScoped<IAboutUsService, AboutUsService>();
+builder.Services.AddScoped<IAboutUsRepository, AboutUsRepository>();
 
 
 #region Authentication

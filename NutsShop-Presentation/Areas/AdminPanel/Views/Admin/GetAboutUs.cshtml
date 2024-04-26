@@ -1,0 +1,147 @@
+﻿@using Application.Dtos.AboutUsDTO
+@model AboutUsDTO;
+
+@{
+    Layout = "_AdminLayout";
+}
+
+
+
+<head>
+
+    <noscript>
+
+        <style>
+
+            [data-aos] {
+                opacity: 1 !important;
+                transform: translate(0) scale(1) !important;
+            }
+
+        </style>
+
+
+    </noscript>
+
+</head>
+
+
+
+<style>
+
+    .maincontainer {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: gray;
+        padding: 1px;
+    }
+
+    .inputcontainer {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: rgb(224, 224, 224);
+        padding: 10px;
+    }
+
+    .img {
+        margin: 20px;
+        width: 300px;
+        height: 300px;
+    }
+
+    .Roles {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        background-color: rgb(224, 224, 224);
+        padding: 10px;
+    }
+
+    .btn {
+        margin: 20px;
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+<body>
+
+    <div class="title">
+        <h1>ویرایش درباره ما</h1>
+    </div>
+
+
+    <div class="maincontainer">
+
+
+        <form class="maincontainer" method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="EditCategory" enctype="multipart/form-data">
+
+            <div class="row">
+
+                <div class="inputcontainer">
+                    <label>Id</label>
+                    <input readonly class="form-control" style="margin: 10px" type="text"
+                           asp-for="@Model.Id" placeholder="Product Name" required="">
+                </div>
+
+
+                <!--title1-->
+
+                <div class="inputcontainer">
+
+                    <label>Title</label>
+                    <input class="form-control" style="margin: 10px" type="text"
+                           asp-for="@Model.Title" placeholder="Product Name" required="">
+
+                </div>
+
+
+                <!--title2-->
+
+                <div class="inputcontainer">
+
+                    <label>Title 2</label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.Tilte2" placeholder="Description" required=""></textarea>
+
+                </div>
+
+                <!--Description-->
+
+                <div class="inputcontainer">
+
+                    <label>Description</label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.Description" placeholder="Description" required=""></textarea>
+
+                </div>
+
+                <br>
+
+            </div>
+
+
+
+            <div>
+                <button class="btn" type="submit">Edit information</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <hr style="height: 5px; color: black;"></hr>
+
+</body>
+
+

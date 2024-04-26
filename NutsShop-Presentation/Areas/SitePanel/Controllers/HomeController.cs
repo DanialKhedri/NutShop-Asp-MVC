@@ -7,6 +7,7 @@ using Application.Services.Interfaces;
 using Domain.Entities.Order;
 using Microsoft.AspNetCore.Mvc;
 using NutsShop_Presentation.Areas.SitePanel.ViewModels;
+using System.Net.WebSockets;
 
 namespace NutsShop_Presentation.Areas.SitePanel.Controllers;
 
@@ -19,18 +20,19 @@ public class HomeController : Controller
     private readonly ICategoryService _ICategoryService;
     private readonly IOrderService _IOrderService;
     private readonly IShopService _IShopService;
-
+    private readonly IAboutUsService _IAboutUsService;
 
     public HomeController(IProductService productService,
-        ICategoryService categoryService, 
+        ICategoryService categoryService,
         IOrderService orderService,
-        IShopService shopService)
+        IShopService shopService,
+        IAboutUsService aboutUsService)
     {
         _IProductService = productService;
         _ICategoryService = categoryService;
         _IOrderService = orderService;
         _IShopService = shopService;
-
+        _IAboutUsService = aboutUsService;
     }
 
     #endregion
@@ -106,7 +108,7 @@ public class HomeController : Controller
 
             productIndexDTOs = productsDTOList,
 
-           
+
         };
 
 
@@ -132,7 +134,7 @@ public class HomeController : Controller
             {
                 cartViewModel.OrderDetailDTOs = await _IOrderService.GetAllOrderDetailsByOrderId(cartViewModel.OrderDTO.Id);
             }
-          
+
 
             return View(cartViewModel);
         }
@@ -143,6 +145,18 @@ public class HomeController : Controller
         }
 
 
+    }
+
+    #endregion
+
+
+    #region About Us
+
+    public async Task<IActionResult> AboutUs()
+    {
+        var aboutus = await _IAboutUsService.GetAboutUs();
+
+        return View(aboutus);
     }
 
     #endregion

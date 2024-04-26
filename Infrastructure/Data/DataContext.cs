@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Order;
+﻿using Domain.Entities.AboutUs;
+using Domain.Entities.Order;
 using Domain.Entities.Order.Location;
 using Domain.Entities.Order.OrderDetail;
 using Domain.Entities.Product;
@@ -52,6 +53,7 @@ namespace Infrastructure.Data
 
         public DbSet<Shop> Shop { get; set; }
 
+        public DbSet<AboutUs> AboutUs { get; set; }
 
         #endregion
     }
