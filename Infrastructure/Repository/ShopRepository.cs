@@ -32,5 +32,28 @@ public class ShopRepository : IShopRepository
     }
     #endregion
 
+    #region EditShopDetail
 
+    public async Task EditShopDetail(Shop shop)
+    {
+        var tempshop = await _datacontext.Shop.FirstOrDefaultAsync(s => s.Id == shop.Id);
+
+        if (tempshop != null)
+        {
+            tempshop.Phone = shop.Phone;
+            tempshop.Address = shop.Address;
+            tempshop.ShopName = shop.ShopName;
+
+            _datacontext.Update(tempshop);
+            await _datacontext.SaveChangesAsync();
+
+        }
+        else
+        {
+            await _datacontext.Shop.AddAsync(shop);
+            await _datacontext.SaveChangesAsync();
+
+        }
+    }
+    #endregion
 }

@@ -1,5 +1,5 @@
 ﻿@using Application.Dtos.ShopDTO
-@model ShopDTO;
+@model ShopDTO?;
 
 @{
     Layout = "_AdminLayout";
@@ -84,12 +84,20 @@
     <div class="maincontainer">
 
 
-        <form class="maincontainer" method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="EditCategory" enctype="multipart/form-data">
+        <form class="maincontainer" method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="EditShopDetails" enctype="multipart/form-data">
 
             <div class="row">
 
-            
 
+                <!--Address-->
+
+                <div class="inputcontainer">
+
+                    <label>Id</label>
+                    <input readonly class="form-control" style="margin: 10px" type="text"
+                           asp-for="@Model.Id" placeholder="Product Name" required="">
+
+                </div>
 
                 <!--Address-->
 
@@ -107,11 +115,22 @@
                 <div class="inputcontainer">
 
                     <label>phone</label>
-                    <textarea class="form-control" style="margin: 10px" type="text" 
-                    asp-for="@Model.Phone" placeholder="Description" required=""></textarea>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.Phone" placeholder="Description" required=""></textarea>
 
                 </div>
 
+                <!--Shop Name-->
+
+                <div class="inputcontainer">
+
+                    <label>phone</label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.ShopName" placeholder="Description" required=""></textarea>
+
+                </div>
+
+                
                 <br>
 
             </div>

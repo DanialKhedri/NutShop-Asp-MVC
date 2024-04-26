@@ -51,5 +51,28 @@ public class ShopService : IShopService
 
     #endregion
 
+    #region EditShopDetail
+
+    public async Task EditShopDetail(ShopDTO shopDTO)
+    {
+        if (shopDTO != null)
+        {
+            Shop shop = new Shop()
+            {
+                Id = shopDTO.Id,
+                ShopName = shopDTO.ShopName,
+                Address = shopDTO.Address,
+                Phone = shopDTO.Phone,
+
+            };
+
+            await _IshopRepository.EditShopDetail(shop);
+
+        }
+
+
+
+    }
+    #endregion
 
 }

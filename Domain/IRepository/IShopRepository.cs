@@ -11,4 +11,7 @@ public interface IShopRepository
 {
     public Task<Shop?> GetShopDetail();
 
+    public Task EditShopDetail(Shop shop);
+
+
 }

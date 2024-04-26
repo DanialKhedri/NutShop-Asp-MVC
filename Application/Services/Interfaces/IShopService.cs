@@ -12,4 +12,7 @@ public interface IShopService
 
     public Task<ShopDTO?> GetShopDetail();
 
+    public Task EditShopDetail(ShopDTO shopDTO);
+
+
 }

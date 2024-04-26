@@ -8,7 +8,7 @@ namespace Application.Dtos.ShopDTO
 {
     public class ShopDTO
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string? ShopName { get; set; }
 

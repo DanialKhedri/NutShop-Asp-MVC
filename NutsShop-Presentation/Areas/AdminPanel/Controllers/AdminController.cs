@@ -93,17 +93,17 @@ public class AdminController : Controller
         };
 
 
-        
+
 
         return View(addProductViewModel);
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddProduct(ProductDTO productDTO,List<int> SelectedCategories)
+    public async Task<IActionResult> AddProduct(ProductDTO productDTO, List<int> SelectedCategories)
     {
 
-        await _IProductService.AddProduct(productDTO,SelectedCategories);
-       
+        await _IProductService.AddProduct(productDTO, SelectedCategories);
+
 
         return RedirectToAction(nameof(GetAllProducts));
     }
@@ -366,9 +366,10 @@ public class AdminController : Controller
     public async Task<IActionResult> EditShopDetails(ShopDTO shopDTO)
     {
 
-        
+        await _IShopService.EditShopDetail(shopDTO);
 
-        
+        return RedirectToAction($"{nameof(Index)}");
+
     }
 
 }
