@@ -1,3 +1,4 @@
+using Application.Extensions.KaveNegar;
 using Application.Services.implements;
 using Application.Services.Interfaces;
 using Domain.IRepository;
@@ -23,6 +24,9 @@ builder.Services.AddDbContext<DataContext>(option =>
 
 //HttpAccessor
 builder.Services.AddHttpContextAccessor();
+
+//Configure KaveNegar model from appsetting 
+builder.Services.Configure<KaveNegarInfoModel>(builder.Configuration.GetSection("KaveNegarInfo"));
 
 
 //User serv and Rep
@@ -59,6 +63,8 @@ builder.Services.AddScoped<IShopService, ShopService>();
 builder.Services.AddScoped<IAboutUsService, AboutUsService>();
 builder.Services.AddScoped<IAboutUsRepository, AboutUsRepository>();
 
+//Sms Service
+builder.Services.AddScoped<ISmsService, SmsService>();
 
 #region Authentication
 

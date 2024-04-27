@@ -21,14 +21,16 @@ public class UserController : Controller
     private readonly IUserService _IUserService;
     private readonly IOrderService _IOrderService;
     private readonly IShopService _IShopService;
-
+    private readonly ISmsService _SmsService;
     public UserController(IUserService userService,
         IOrderService orderService,
-        IShopService ShopService)
+        IShopService ShopService,
+        ISmsService smsService)
     {
         _IUserService = userService;
         _IOrderService = orderService;
         _IShopService = ShopService;
+        _SmsService = smsService;
     }
 
     #endregion
@@ -138,7 +140,15 @@ public class UserController : Controller
 
     #endregion
 
+    #region Login With sms
 
+    public async Task LogInWithSms()
+    {
+        await _SmsService.SendPublicSms("09336314704", "سلام سوسیس");
+        await HttpContext.Response.WriteAsync("Sms Sent");
+    }
+
+    #endregion
 
     #region LogOut
 
