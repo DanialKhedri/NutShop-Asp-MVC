@@ -148,6 +148,12 @@ public class UserController : Controller
         await HttpContext.Response.WriteAsync("Sms Sent");
     }
 
+    //public async Task LookUpSms()
+    //{
+    //    await _SmsService.SendLookUpSms("09336314704","Password");
+    //    await HttpContext.Response.WriteAsync("Sms Sent");
+    //}
+
     #endregion
 
     #region LogOut

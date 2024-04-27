@@ -11,6 +11,11 @@ namespace Application.Services.Interfaces
 
         public Task SendPublicSms(string PhoneNumber, string Message);
 
+        public Task SendLookUpSms(string PhoneNumber,
+     string TemplateName,
+     string token,
+     string? token2 = ""
+     , string? token3 = "");
 
     }
 }
