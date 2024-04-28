@@ -123,19 +123,19 @@
 
             </form>
 
-            <form class="form">
+            <form class="form" asp-area="SitePanel" asp-controller="User" asp-action="LogInWithSms">
 
 
 
                 <div class="form-group">
 
                     <label for="name"> وارد کردن رمز یکبار مصرف</label>
-                    <input type="password" placeholder="لظفا رمز عبور یکبار مصرف را وارد کنید"></input>
+                    <input type="password" name="SecretKey" id="SecretKey" placeholder="لظفا رمز عبور یکبار مصرف را وارد کنید"></input>
                     <span style="color:red"></span>
 
 
                     <div class="form-group">
-                        <a style="color:black;" asp-area="SitePanel" asp-controller="User" asp-action="LookUpSms">LookUpSms</a>
+                    <button type="submit">ورود</button>
                     </div>
 
                 </div>

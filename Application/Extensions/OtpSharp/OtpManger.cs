@@ -11,37 +11,41 @@ namespace Application.Extensions.OtpSharp;
 
 public static class OtpManger
 {
+    public static string key;
 
     public static string GenerateOtp()
     {
-        string StringKey = NumberGenerator.GenerateNumber();
+        key = NumberGenerator.GenerateNumber();
 
-        byte[] Keybytes = Encoding.ASCII.GetBytes(StringKey);
+        
+        Timer timer = new Timer(TimerCallback, null, 10000, Timeout.Infinite);
 
-        //string someString = Encoding.ASCII.GetString(bytes);
 
 
-        var totp = new Totp(Keybytes);
-        return totp.ComputeTotp();
+        return key;
+
     }
 
     public static bool VerifyOtp(string otp)
     {
-        string StringKey = NumberGenerator.GenerateNumber();
 
-        byte[] Keybytes = Encoding.ASCII.GetBytes(StringKey);
+        if (otp == key)
+            return true;
+        else
+            return false;
 
-        //string someString = Encoding.ASCII.GetString(bytes);
-
-
-        var totp = new Totp(Keybytes);
-
-        return totp.VerifyTotp(otp, out long timeStepMatched);
     }
 
+    public static void TimerCallback(object state)
+    {
+
+        key = null;
+
+
+    }
 
 }
 
 
 
-}
+

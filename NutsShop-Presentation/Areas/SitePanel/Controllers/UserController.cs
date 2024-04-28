@@ -3,6 +3,7 @@ using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
 using Application.Extensions;
 using Application.Extensions.Generators;
+using Application.Extensions.OtpSharp;
 using Application.Services.implements;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -153,6 +154,15 @@ public class UserController : Controller
         return View();
     }
 
+    [HttpPost]
+    public async Task<IActionResult> LogInWithSms(string SecretKey)
+    {
+
+       bool isverify =  OtpManger.VerifyOtp(SecretKey);
+
+
+        return View();
+    }
 
     public async Task SendPublicSms()
     {
@@ -160,11 +170,12 @@ public class UserController : Controller
         await HttpContext.Response.WriteAsync("Sms Sent");
     }
 
-    public async Task LookUpSms()
+    public async Task<IActionResult> LookUpSms()
     {
-        var number = NumberGenerator.GenerateNumber();
+        string SecretKey = OtpManger.GenerateOtp();
 
-        //await _SmsService.SendLookUpSms("09336314704", "Passwordtest", number);
+        return RedirectToAction(nameof(LogInWithSms));
+        //await _SmsService.SendLookUpSms("09336314704", "Passwordtest", SecretKey);
         //await HttpContext.Response.WriteAsync("Sms Sent");
     }
 
