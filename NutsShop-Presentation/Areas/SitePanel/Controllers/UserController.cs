@@ -2,6 +2,7 @@
 using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
 using Application.Extensions;
+using Application.Extensions.Generators;
 using Application.Services.implements;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -22,6 +23,7 @@ public class UserController : Controller
     private readonly IOrderService _IOrderService;
     private readonly IShopService _IShopService;
     private readonly ISmsService _SmsService;
+
     public UserController(IUserService userService,
         IOrderService orderService,
         IShopService ShopService,
@@ -140,19 +142,31 @@ public class UserController : Controller
 
     #endregion
 
+
+
     #region Login With sms
 
-    public async Task LogInWithSms()
+    [HttpGet]
+    public async Task<IActionResult> LogInWithSms()
+    {
+
+        return View();
+    }
+
+
+    public async Task SendPublicSms()
     {
         await _SmsService.SendPublicSms("09336314704", "سلام سوسیس");
         await HttpContext.Response.WriteAsync("Sms Sent");
     }
 
-    //public async Task LookUpSms()
-    //{
-    //    await _SmsService.SendLookUpSms("09336314704","Password");
-    //    await HttpContext.Response.WriteAsync("Sms Sent");
-    //}
+    public async Task LookUpSms()
+    {
+        var number = NumberGenerator.GenerateNumber();
+
+        //await _SmsService.SendLookUpSms("09336314704", "Passwordtest", number);
+        //await HttpContext.Response.WriteAsync("Sms Sent");
+    }
 
     #endregion
 
