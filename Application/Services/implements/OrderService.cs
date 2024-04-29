@@ -324,6 +324,20 @@ namespace Application.Services.implements
 
         #endregion
 
+        //Finlize Order
+
+        #region Finalize Order
+
+        public async Task FinalizeOrder(int OrderId)
+        {
+
+            await _IOrderRepository.FinalizeOrder(OrderId);
+
+        }
+
+        #endregion
+
+
 
         //add to cart methods
 

@@ -77,8 +77,8 @@ public class OrderRepository : IOrderRepository
 
     public async Task<Order?> GetFinalyOrderByUserID(int UserId)
     {
-        return await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId 
-                                                               && o.IsFinaly == true && 
+        return await _datacontext.Orders.FirstOrDefaultAsync(o => o.UserId == UserId
+                                                               && o.IsFinaly == true &&
                                                                 o.IsDelete == false);
     }
 
@@ -142,7 +142,7 @@ public class OrderRepository : IOrderRepository
 
     public async Task RemoveOrder(int OrderId)
     {
-        var order = await _datacontext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId && 
+        var order = await _datacontext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId &&
                                                                   o.IsDelete == false);
 
         if (order != null)
@@ -208,6 +208,7 @@ public class OrderRepository : IOrderRepository
     #endregion
 
 
+    //Order IsExist
 
     #region OrderIsExist
 
@@ -218,9 +219,22 @@ public class OrderRepository : IOrderRepository
                           o.IsDelete == false &&
                           o.IsFinaly == false);
     }
+
     #endregion
 
+    //finalize Order
 
+    public async Task FinalizeOrder(int OrderId)
+    {
+        var Order = await _datacontext.Orders.FirstOrDefaultAsync(o => o.Id == OrderId
+                                                 && o.IsDelete == false
+                                                 && o.IsFinaly == false);
+
+        Order.IsFinaly = true;
+
+        _datacontext.Update(Order);
+        await _datacontext.SaveChangesAsync();
+    }
 
 
     //Add Product methods
@@ -259,8 +273,8 @@ public class OrderRepository : IOrderRepository
     #region UpdateSum
     public async Task UpdateSum(int UserId)
     {
-        Order? Order = await _datacontext.Orders.FirstOrDefaultAsync(O => O.UserId == UserId && 
-                                                                     O.IsDelete == false && 
+        Order? Order = await _datacontext.Orders.FirstOrDefaultAsync(O => O.UserId == UserId &&
+                                                                     O.IsDelete == false &&
                                                                      O.IsFinaly == false);
 
         if (Order != null)

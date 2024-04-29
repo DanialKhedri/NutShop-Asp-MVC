@@ -38,7 +38,12 @@ namespace Domain.IRepository
         //Add Order
         public Task AddOrder(Order order);
 
+        //IsExist
         public Task<bool> OrderIsExist(int UserId);
+
+        //Finalize Order
+        public Task FinalizeOrder(int OrderId);
+
 
         //Add orderdetail
         public Task AddOrderDetail(OrderDetail orderDetail);

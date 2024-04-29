@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.LocationDTO;
+using Application.Dtos.OrderDTO;
 using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
 using Application.Dtos.VerifyOtpDTO;
@@ -9,7 +10,9 @@ using Application.Services.implements;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Security.Claims;
+using ZarinpalSandbox;
 
 namespace NutsShop_Presentation.Areas.SitePanel.Controllers;
 
@@ -25,16 +28,18 @@ public class UserController : Controller
     private readonly IOrderService _IOrderService;
     private readonly IShopService _IShopService;
     private readonly ISmsService _SmsService;
-
+    private readonly IPaymentService _IPaymentService;
     public UserController(IUserService userService,
         IOrderService orderService,
         IShopService ShopService,
-        ISmsService smsService)
+        ISmsService smsService,
+        IPaymentService iPaymentService)
     {
         _IUserService = userService;
         _IOrderService = orderService;
         _IShopService = ShopService;
         _SmsService = smsService;
+        _IPaymentService = iPaymentService;
     }
 
     #endregion
@@ -172,10 +177,9 @@ public class UserController : Controller
 
                 };
 
-                return RedirectToAction("GetVerifyOtp", verifyOtpDTO);
-
                 //await _SmsService.SendLookUpSms(PhoneNumber, "Passwordtest", SecretKey);
-                //await HttpContext.Response.WriteAsync("Sms Sent");
+                //return RedirectToAction("GetVerifyOtp", verifyOtpDTO);
+
 
             }
             else
@@ -191,9 +195,6 @@ public class UserController : Controller
 
 
     }
-
-    #endregion
-
 
     [HttpGet]
     public async Task<IActionResult> GetVerifyOtp(VerifyOtpDTO verifyOtpDTO)
@@ -215,10 +216,11 @@ public class UserController : Controller
             if (verifyOtpDTO.PhoneNumber != null)
             {
                 var islog = await _IUserService.LogInWithSms(verifyOtpDTO.PhoneNumber);
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
 
         }
+
         return RedirectToAction(nameof(GetVerifyOtp));
 
 
@@ -230,6 +232,9 @@ public class UserController : Controller
     //    await _SmsService.SendPublicSms("09336314704", "سلام سوسیس");
     //    await HttpContext.Response.WriteAsync("Sms Sent");
     //}
+
+
+    #endregion
 
 
 
@@ -293,10 +298,12 @@ public class UserController : Controller
     #endregion
 
 
+
     #region SetOrderLocation
     [HttpGet]
     public async Task<IActionResult> SetOrderLocation()
     {
+        
         TempData["Shop"] = await _IShopService.GetShopDetail();
 
         return View();
@@ -306,15 +313,101 @@ public class UserController : Controller
     [HttpPost]
     public async Task<IActionResult> SetOrderLocation(LocationDTO locationDTO)
     {
-
-        int UserId = User.GetUserId();
-        await _IOrderService.AddOrderLocation(locationDTO, UserId);
-        return View();
+        if (ModelState.IsValid)
+        {
+            int UserId = User.GetUserId();
+            await _IOrderService.AddOrderLocation(locationDTO, UserId);
+            return RedirectToAction(nameof(PaymentAction));
+        }
+        else 
+        {
+            return View();
+        }
 
     }
     #endregion
 
 
+    #region Payment
+    public async Task<IActionResult> PaymentAction()
+    {
+        var UserId = User.GetUserId();
+
+        OrderDTO? Order = await _IOrderService.GetUnFinaledOrderByUserId(UserId);
+        UserAdminPanelDTO? user = await _IUserService.GetUserById(UserId);
+
+        if (Order != null)
+        {
+            var Payment = new Payment(Order.Sum);
+
+            var Request = Payment
+                .PaymentRequest($"پرداخت فاکتور شماره{Order.Id}", "https://localhost:7077/User/OnlinePayment/" + Order.Id, "", user.UserName);
+
+            if (Request.Result.Status == 100)
+            {
+
+                return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + Request.Result.Authority);
+
+            }
+
+            else
+            {
+                return BadRequest();
+            }
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
+
+    }
+
+    public async Task<IActionResult> OnlinePayment(int Id)
+    {
+        if (HttpContext.Request.Query["Status"] != ""
+            && HttpContext.Request.Query["Status"].ToString().ToLower() == "ok"
+            && HttpContext.Request.Query["Authority"] != "")
+        {
+
+            string Authority = HttpContext.Request.Query["Authority"];
+
+            OrderDTO orderDTO = await _IOrderService.GetUnFinaledOrderByOrderId(Id);
+
+            var payment = new Payment(orderDTO.Sum);
+
+            var result = payment.Verification(Authority).Result;
+
+            if (result.Status == 100)
+            {
+                await _IOrderService.FinalizeOrder(orderDTO.Id);
+
+               
+                return View();
+            }
+            else
+            {
+                BadRequest();
+            }
+
+
+
+        }
+
+        else
+        {
+            return BadRequest();
+        }
+
+        return BadRequest();
+
+    }
+
+
+    #endregion
 
 
 }

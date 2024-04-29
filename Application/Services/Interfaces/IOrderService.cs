@@ -19,7 +19,6 @@ namespace Application.Services.Interfaces
 
         public Task<List<OrderDTO>> GetAllFinaledOrders();
 
-        
         public Task<List<OrderDetailDTO>> GetAllOrderDetailsByOrderId(int OrderId);
 
         //Get Order
@@ -41,6 +40,11 @@ namespace Application.Services.Interfaces
         public Task RemoveOrder(int OrderId);
 
         public Task RemoveOrderDetail(int OrderDetailId);
+
+        //Finalize Order
+
+        public Task FinalizeOrder(int OrderId);
+
 
 
         //Add Order Location

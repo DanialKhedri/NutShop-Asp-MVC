@@ -66,6 +66,9 @@ builder.Services.AddScoped<IAboutUsRepository, AboutUsRepository>();
 //Sms Service
 builder.Services.AddScoped<ISmsService, SmsService>();
 
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+
+
 #region Authentication
 
 
