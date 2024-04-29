@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.LocationDTO;
 using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
+using Application.Dtos.VerifyOtpDTO;
 using Application.Extensions;
 using Application.Extensions.Generators;
 using Application.Extensions.OtpSharp;
@@ -150,36 +151,84 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> LogInWithSms()
     {
-
         return View();
+
     }
 
-    [HttpPost]
-    public async Task<IActionResult> LogInWithSms(string SecretKey)
+
+    public async Task<IActionResult> LookUpSms(string PhoneNumber)
     {
 
-       bool isverify =  OtpManger.VerifyOtp(SecretKey);
+        if (ModelState.IsValid)
+        {
+            if (PhoneNumber != null)
+            {
+
+                string SecretKey = OtpManger.GenerateOtp();
+
+                VerifyOtpDTO verifyOtpDTO = new VerifyOtpDTO()
+                {
+                    PhoneNumber = PhoneNumber,
+                 
+                };
+
+                return RedirectToAction("GetVerifyOtp", verifyOtpDTO);
+
+                //await _SmsService.SendLookUpSms(PhoneNumber, "Passwordtest", SecretKey);
+                //await HttpContext.Response.WriteAsync("Sms Sent");
+
+            }
+            else
+            {
+                return RedirectToAction(nameof(LogInWithSms));
+            }
 
 
-        return View();
-    }
 
-    public async Task SendPublicSms()
-    {
-        await _SmsService.SendPublicSms("09336314704", "سلام سوسیس");
-        await HttpContext.Response.WriteAsync("Sms Sent");
-    }
-
-    public async Task<IActionResult> LookUpSms()
-    {
-        string SecretKey = OtpManger.GenerateOtp();
+        }
 
         return RedirectToAction(nameof(LogInWithSms));
-        //await _SmsService.SendLookUpSms("09336314704", "Passwordtest", SecretKey);
-        //await HttpContext.Response.WriteAsync("Sms Sent");
+
+
     }
 
     #endregion
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetVerifyOtp(VerifyOtpDTO verifyOtpDTO)
+    {
+       
+        return View(verifyOtpDTO);
+
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> VerifyOtp(VerifyOtpDTO verifyOtpDTO)
+    {
+
+        //SecretKey Is Correct 
+
+        //bool PhoneNumberisExist =
+        
+
+        
+
+        bool isverify = OtpManger.VerifyOtp(verifyOtpDTO.SecretKey);
+
+        return View();
+
+
+    }
+
+
+    //public async Task SendPublicSms()
+    //{
+    //    await _SmsService.SendPublicSms("09336314704", "سلام سوسیس");
+    //    await HttpContext.Response.WriteAsync("Sms Sent");
+    //}
+
+
 
     #region LogOut
 

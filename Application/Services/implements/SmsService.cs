@@ -12,6 +12,7 @@ namespace Application.Services.implements;
 
 public class SmsService : ISmsService
 {
+
     #region Ctor
 
     private readonly KaveNegarInfoModel _kaveNegarInfoModel;
@@ -20,6 +21,12 @@ public class SmsService : ISmsService
     {
         _kaveNegarInfoModel = kavenegarmodel.Value;
     }
+
+    #endregion
+
+
+
+    #region Properties
 
     #endregion
 

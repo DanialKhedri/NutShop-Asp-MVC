@@ -1,4 +1,8 @@
-﻿@{
+﻿@using Application.Dtos.VerifyOtpDTO
+@model VerifyOtpDTO;
+
+
+@{
     Layout = "_SiteLayout";
 }
 
@@ -99,6 +103,9 @@
 
 </style>
 
+
+
+
 <body>
 
 
@@ -109,26 +116,33 @@
 
             <h1>ورود با رمز یکبار مصرف</h1>
 
-            <form class="form" asp-area="SitePanel" asp-controller="User" asp-action="LookUpSms">
+
+            <form class="form" method="post" asp-area="SitePanel" asp-controller="User" asp-action="VerifyOtp">
 
                 <div class="form-group">
 
-                    <label for="name">شماره موبایل</label>
-                    <input name="PhoneNumber" type="text" placeholder="لطفا شماره موبایل را وارد کنید"></input>
+                    <label for="name"> شماره شما:</label>
+                    <input readonly type="text" asp-for="@Model.PhoneNumber" ></input>
                     <span style="color:red"></span>
 
                 </div>
 
                 <div class="form-group">
 
-                    <button type="submit">ارسال پیامک</button>
+                    <label for="name"> وارد کردن رمز یکبار مصرف</label>
+                    <input type="password" asp-for="@Model.SecretKey"  placeholder="لظفا رمز عبور یکبار مصرف را وارد کنید"></input>
+                    <span style="color:red"></span>
 
                 </div>
 
 
+
+                <div class="form-group">
+
+                    <button type="submit">ورود</button>
+
+                </div>
             </form>
-
-
 
         </div>
 

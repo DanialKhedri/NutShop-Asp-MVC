@@ -11,13 +11,14 @@ namespace Application.Extensions.OtpSharp;
 
 public static class OtpManger
 {
+ 
     public static string key;
 
     public static string GenerateOtp()
     {
         key = NumberGenerator.GenerateNumber();
 
-        
+
         Timer timer = new Timer(TimerCallback, null, 10000, Timeout.Infinite);
 
 
