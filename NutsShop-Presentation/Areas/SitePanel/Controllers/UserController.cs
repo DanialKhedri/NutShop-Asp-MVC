@@ -169,7 +169,7 @@ public class UserController : Controller
                 VerifyOtpDTO verifyOtpDTO = new VerifyOtpDTO()
                 {
                     PhoneNumber = PhoneNumber,
-                 
+
                 };
 
                 return RedirectToAction("GetVerifyOtp", verifyOtpDTO);
@@ -198,7 +198,7 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> GetVerifyOtp(VerifyOtpDTO verifyOtpDTO)
     {
-       
+
         return View(verifyOtpDTO);
 
     }
@@ -208,15 +208,18 @@ public class UserController : Controller
     {
 
         //SecretKey Is Correct 
-
-        //bool PhoneNumberisExist =
-        
-
-        
-
         bool isverify = OtpManger.VerifyOtp(verifyOtpDTO.SecretKey);
 
-        return View();
+        if (isverify)
+        {
+            if (verifyOtpDTO.PhoneNumber != null)
+            {
+                var islog = await _IUserService.LogInWithSms(verifyOtpDTO.PhoneNumber);
+                return RedirectToAction("Index","Home");
+            }
+
+        }
+        return RedirectToAction(nameof(GetVerifyOtp));
 
 
     }

@@ -97,14 +97,62 @@ namespace Infrastructure.Repository
         #endregion
 
 
+        //Get User By Phone
+
+        public async Task<User?> GetUserByPhone(string PhoneNumber)
+        {
+
+            return await _dataContext.Users.FirstOrDefaultAsync(u => u.Phone == PhoneNumber);
+
+
+        }
+
+
+        //LogIn With Sms
+
+        public async Task<bool> LogInWithSms(string PhoneNumber)
+        {
+            User? Tempuser = await _dataContext.Users
+                                              .FirstOrDefaultAsync(p => p.Phone == PhoneNumber);
 
 
 
 
+            if (Tempuser != null)
+            {
+
+                //Set Cookies
+
+                #region SetCoockie
+                var claims = new List<Claim>
+
+            {
+
+            new (ClaimTypes.NameIdentifier, Tempuser.Id.ToString()),
+            new (ClaimTypes.Name, Tempuser.UserName),
+
+              };
+
+                var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(claimIdentity);
+
+                var authProps = new AuthenticationProperties();
+
+                //authProps.IsPersistent = model.RememberMe;
+
+                _IhttpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProps);
+
+                #endregion
 
 
+                return true;
 
-
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
 

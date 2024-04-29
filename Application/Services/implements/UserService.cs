@@ -157,6 +157,28 @@ namespace Application.Services.implements
 
         #endregion
 
+        #region LogInWithSms
+
+        public async Task<bool> LogInWithSms(string PhoneNumber)
+        {
+
+            var User = await _IUserRepository.GetUserByPhone(PhoneNumber);
+            if (User != null)
+            {
+
+                var IsLog = await _IUserRepository.LogInWithSms(PhoneNumber);
+
+                return IsLog;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        #endregion
+
         #region SavChanges
 
         public void SaveChange()

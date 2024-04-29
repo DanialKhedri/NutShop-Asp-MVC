@@ -16,6 +16,7 @@ namespace Application.Services.Interfaces
         public Task<bool> Register(UserRegisterDTO userRegisterDTO);
 
         public Task<bool> LogIn(UserLogInDTO userLogInDTO);
+        public Task<bool> LogInWithSms(string PhoneNumber);
 
         public Task EditUser(UserAdminPanelDTO UserDTO);
 
