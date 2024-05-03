@@ -7,291 +7,102 @@
 
 
 
-<html>
+<html lang="en">
+
 
 <style>
 
-    body {
-        margin: 0;
-    }
-
-    a {
-        font-family: Arial, sans-serif;
-        text-decoration: none;
-        color: inherit;
-        text-decoration: none;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #333;
-        padding: 10px 20px;
-        color: #fff;
-        box-shdow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbarleft {
-        display: flex;
-        flex-direction: row;
-    }
-
-
-
-    .navbarright {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .navbarcenter {
-    }
-
-
-  
-
-    .navbar .menu,
-    .navbar .search {
-        cursor: pointer;
-        padding: 8px 12px;
-        border-radius: 5px;
-    }
-
-        .navbar .menu:hover,
-        .navbar .search:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transition: background-color 0.3s ease;
-        }
-
-    .navbar .search {
-        margin-right: 10px;
-    }
-
-    .navbar .menu {
-        margin-right: 20px;
-    }
-
-    .navbar .search:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .navbar .menu:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-
-
-    .categories {
-        margin: 25px;
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-    }
-
-    .category {
-        text-align: center;
-        cursor: pointer;
-        margin: 10px;
-    }
-
-        .category img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 2px solid #333;
-            transition: transform 1s ease;
-        }
-
-            .category img:hover {
-                transform: scale(1.2);
-            }
-
-        .category span {
-            display: block;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-
-    img {
-        width: 60%;
-        height: 50%;
-        margin: 10px;
-        border-radius: 5px;
-        transition: transform 0.3s ease;
-    }
-
-        img:hover {
-            transform: scale(1.05);
-        }
-
-    .products {
-        background-color: #555;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .product {
-        width: 15%;
-        height: 25%;
-        margin: 15px;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        text-align: center;
-    }
-
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .product h3 {
-            margin-bottom: 10px;
-        }
-
-        .product p {
-            margin-bottom: 10px;
-        }
-
-        .product span {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .product button {
-            background-color: #333;
-            color: #fff;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-            .product button:hover {
-                background-color: #555;
-            }
-
-    .footer {
-        display: flex;
-        justify-content: space-between;
-        background-color: #333;
-        color: #fff;
-        padding: 30px 50px;
-    }
-
-        .footer h3 {
-            margin-bottom: 20px;
-        }
-
-        .footer p {
-            margin-bottom: 10px;
-        }
-
-        .footer ul {
-            list-style: none;
-            padding: 0;
-        }
-
-            .footer ul li a {
-                color: #fff;
-                text-decoration: none;
-            }
-
-                .footer ul li a:hover {
-                    text-decoration: underline;
-                }
 
 </style>
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Example</title>
+    <!-- لینک به فایل CSS -->
+    <link rel="stylesheet" href="~/Bootstrap/css/bootstrap.min.css">
+
+</head>
 
 <body>
+    <!-- محتوای صفحه -->
+    <!--Header-->>
+    <div class="container">
+
+        <div class="row ">
+
+            <nav class="col-4 navbar navbar-expand-lg navbar-light bg-light">
+
+     
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
 
 
-    <div class="categories">
+                </ul>
 
-        @foreach (var item in Model.CategoryDTOs)
-        {
+            </nav>
 
-            <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProductByCategory" asp-route-CategoryId="@item.Id">
+            <nav class="col-4 navbar navbar-expand-lg navbar-light bg-light justify-content-center">
 
-                <div class="category">
+                <ul class="navbar-nav mr-auto justify-content-center">
 
-                    <img src="~/Images/Categories/@item.Image" alt="Category 1">
-                    <h3>@item.CategoryTitle</h3>
-
-                </div>
-
-            </a>
-
-        }
-
-    </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
 
 
-    <div class="products">
+                </ul>
+
+            </nav>
 
 
-        @{
-            var count = Model.ProductsDTOs.Count;
+            <nav class="col-4 navbar navbar-expand-lg navbar-light bg-light justify-content-end">
 
-            if (count > 9)
-            {
-                @for (int i = 0; i < 9; i++)
-                {
-                    <div class="product">
+                <ul class="navbar-nav mr-auto justify-content-end">
 
-                        <img src="~/Images/Products/@Model.ProductsDTOs[i].Image" alt="Product 1">
-                        <h3>@Model.ProductsDTOs[i].ProductName</h3>
-                        <p> محصول۱</p>
-                        <span>@Model.ProductsDTOs[i].Price</span>
-                        <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProduct" asp-route-Id="@Model.ProductsDTOs[i].Id">   <button>خرید</button></a>
-                    </div>
-                }
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
 
-            }
-            else
-            {
-                @for (int i = 0; i < count; i++)
-                {
-                    <div class="product">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
 
-                        <img src="~/Images/Products/@Model.ProductsDTOs[i].Image" alt="Product 1">
-                        <h3>@Model.ProductsDTOs[i].ProductName</h3>
-                        <p> محصول۱</p>
-                        <span>@Model.ProductsDTOs[i].Price</span>
-                        <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProduct" asp-route-Id="@Model.ProductsDTOs[i].Id">   <button>خرید</button></a>
-                    </div>
-                }
-            }
-
-        }
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
 
 
+                </ul>
 
+            </nav>
 
-
-
-
-
-        <div class="product">
-
-            <img src="" alt="Product 1">
-
-
-
-            <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowAllProducts"><button>نمایش همه محصولات</button></a>
         </div>
 
 
     </div>
 
 
+    </div>
 
+
+
+
+
+
+
+
+    <!-- لینک به فایل JS -->
+    <script src="~/Bootstrap/js/bootstrap.min.js"></script>
 </body>
-
 </html>
+
+

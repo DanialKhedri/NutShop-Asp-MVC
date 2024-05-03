@@ -6,153 +6,11 @@
 
 <html>
 
-<style>
 
-    a {
-        font-family: Arial, sans-serif;
-        text-decoration: none;
-        color: inherit;
-        text-decoration: none;
-        cursor: pointer;
-        color: floralwhite;
-        font-weight: bold;
-    }
-
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #333;
-        padding: 10px 20px;
-        color: #fff;
-        box-shdow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbarleft {
-        display: flex;
-        flex-direction: row;
-    }
-
-
-
-    .navbarright {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .navbarcenter {
-    }
-
-
-
-    .navbar .menu,
-    .navbar .search {
-        cursor: pointer;
-        padding: 8px 12px;
-        border-radius: 5px;
-    }
-
-        .navbar .menu:hover,
-        .navbar .search:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transition: background-color 0.3s ease;
-        }
-
-    .navbar .search {
-        margin-right: 10px;
-    }
-
-    .navbar .menu {
-        margin-right: 20px;
-    }
-
-    .navbar .search:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .navbar .menu:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-
-
-
-
-
-    .footer {
-        display: flex;
-        justify-content: space-between;
-        background-color: #333;
-        color: #fff;
-        padding: 30px 50px;
-    }
-
-    .btncontainer
-    {
-        display:flex;
-
-    }
-</style>
 
 <body>
 
-    <div class="main">
-
-        <div class="navbar">
-
-            <div class="navbarleft">
-
-                @if (User.Identity.IsAuthenticated == true)
-                {
-
-                    <div class="btncontainer">
-
-                        <div class="menu">
-
-                            <label>@User.Identity.Name</label>
-
-                        </div>
-
-                        <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogOut">خروج</a></div>
-
-                    </div>
-                }
-
-                else
-                {
-                    <div class="btncontainer">
-
-
-                        <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="LogIn">ورود</a></div>
-                        <div class="menu"><a asp-area="SitePanel" asp-controller="User" asp-action="Register">ثبت نام</a></div>
-
-                    </div>
-
-                }
-
-
-            </div>
-
-            <div class="navbarcenter">
-
-                <div>
-                    <h1>آجیل و خشکبار دانیال</h1>
-                </div>
-
-            </div>
-
-            <div class="navbarright">
-
-                <div class="btncontainer"> 
-
-                    <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="ShowAllProducts">جستجو</a></div>
-                    <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Cart">سبد خرید</a></div>
-                    <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="Index">خانه</a></div>
-                </div>
-            </div>
-
-        </div>
-
+   
 
         <!--Content-->
 
@@ -164,35 +22,8 @@
 
 
 
-        <footer class="footer">
+     
 
-
-            @if (shop != null)
-            {
-                <div>
-
-                    <label>:آدرس</label>
-                    <label>@shop.Address</label>
-
-                    <label>:شماره تماس</label>
-                    <label>@shop.Phone</label>
-
-                </div>
-
-                <div>
-                </div>
-
-            }
-
-            <div>
-                <div class="menu"><a asp-area="SitePanel" asp-controller="Home" asp-action="AboutUs">درباره ما</a></div>
-
-            </div>
-
-
-        </footer>
-
-    </div>
 
 </body>
 
