@@ -190,7 +190,7 @@
                         <div class="card-body">
                             <p class="card-text">@item.ProductName</p>
                             <p class="card-text">@item.Price</p>
-                            <a href="/SitePanel/Home/ShowProduct/3">   <button>خرید</button></a>
+                            <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProduct" asp-route-Id="@item.Id">   <button>خرید</button></a>
                         </div>
                     </div>
                 }
