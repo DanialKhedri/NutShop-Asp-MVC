@@ -126,9 +126,9 @@
             @foreach (var item in Model.ProductsDTOs)
             {
 
-                <div class="col-12 col-md-3 product m-2 p-2">
+                <div class="col-12 col-md-3 product m-2 p-4 justify-content-center">
 
-                    <img src="~/Images/Products/@item.Image" alt="Product 1">
+                    <img class="img-fluid" src="~/Images/Products/@item.Image" alt="Product 1">
                     <h3>@item.ProductName</h3>
                     <span>@item.Price</span>
                     <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProduct" asp-route-Id="@item.Id"><button>خرید</button></a>

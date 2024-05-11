@@ -7,160 +7,130 @@
 }
 
 
-<html lang="en">
-
-
-<style>
-
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-    }
-
-    .container {
-        display: flex;
-        justify-content: center;
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 0 20px;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .product-list {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
-
-
-        .product-list button {
-            background-color: red;
-        }
-
-    table {
-        width: 100%;
-        background-color: white border-collapse: collapse;
-    }
-
-
-
-    th, td {
-        font-size: larger;
-        padding: 8px;
-        text-align: left;
-        border-bottom: 2px solid dimgray;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    .timage {
-        width: 150px;
-        height: 150px;
-    }
-
-    .Continuebtn {
-        width: 60%;
-        height: 50px;
-        background-color: dodgerblue;
-    }
-</style>
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سبد خرید</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-
-
 <body>
-    <div class="container">
 
-        <h1>سبد خرید</h1>
+    <div class="container-fluid">
 
-        <div class="product-list">
+        <h2 class="my-4 text-center">سبد خرید</h2>
+        <hr></hr>
 
 
-            @if (Model.OrderDetailDTOs != null && Model.OrderDTO != null)
-            {
+        @if (Model.OrderDetailDTOs != null && Model.OrderDTO != null)
+        {
+            <div class="row bg-light">
 
-                <table>
-
-                    <tr>
-
-                        <th></th>
-                        <th>محصول</th>
-                        <th>مقدار</th>
-                        <th>قیمت</th>
-                        <th></th>
-
-                    </tr>
+                <div class="col-md-8 offset-md-2">
 
                     @foreach (var item in Model.OrderDetailDTOs)
                     {
-                        <tr>
-                            <td>
-                                <img class="timage" src="~/Images/Products/@item.ProductImage" alt="محصول 1">
+                        <div class="card mt-3">
+                            <div class="card-body">
 
-                            </td>
+                                <button id="myInput" class="btn btn-danger btn-sm float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">X</button>
 
-                            <td>@item.Producttitle</td>
-                            <td>@item.Weight</td>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h5 class="card-title">@item.Producttitle</h5>
+                                        <hr />
+                                        <p class="card-text">@item.Price</p>
+                                        <hr />
+                                        <p class="card-text">@item.Weight</p>
+                                        <hr />
+                                    </div>
 
+                                    <div class="col-md-4">
+                                        <img src="~/Images/Products//@item.ProductImage" class="img-fluid" alt="محصول 1">
+                                    </div>
 
-                            <td>@item.Price</td>
+                                </div>
+                            </div>
+                        </div>
 
-                            <td>
-                                <button>
-                                    <a asp-area="SitePanel" asp-controller="User" asp-action="RemoveOrderDetail"
-                                       asp-route-Id="@item.Id">Remove</a>
-                                </button>
-                            </td>
-
-                        </tr>
-
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">آیا میخواهید این محصول را از سبدخرید خود حذف کنید؟</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                        <a asp-area="SitePanel" asp-controller="User" asp-action="RemoveOrderDetail" asp-route-Id="@item.Id"> <button type="button" class="btn btn-danger">حذف</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     }
 
-                    <tr>
-                        <td>جمع حساب</td>
-                        <td>@Model.OrderDTO.Sum</td>
-                    </tr>
-
-                </table>
 
 
 
+                </div>
+            </div>
 
-                <button  class="Continuebtn">
+            <hr></hr>
+            <div class="row mt-4">
+                <div class="col-md-8 offset-md-2">
+                    <div class="text-center">
+                        <h4>
+                            مجموع کل: <h4>
+                                @Model.OrderDTO.Sum تومان
+                                <hr></hr>
+                                <button class="btn btn-primary mt-3">پرداخت</button>
+                                <br></br>  <br></br>  <br></br>
+                    </div>
+                </div>
+            </div>
 
-                    <a asp-area="SitePanel" asp-controller="User" asp-action="SetOrderLocation" asp-route-OrderId="@Model.OrderDTO.Id">
-                        ادامه</a>
-
-                    </button>
-
-            }
-
-            else
-            {
-                <h1>No Order</h1>
-            }
+        }
 
 
 
-            <!-- ادامه محصولات -->
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </div>
-</body>
 
-</html>
+
+
+
+
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous">
+
+            const myModal = document.getElementById('myModal')
+            const myInput = document.getElementById('myInput')
+
+            myModal.addEventListener('shown.bs.modal', () => {
+              myInput.focus()
+            })
+        </script>
+</body>

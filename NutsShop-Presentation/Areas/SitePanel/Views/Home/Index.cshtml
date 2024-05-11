@@ -148,12 +148,14 @@
 
                     @foreach (var item in Model.CategoryDTOs)
                     {
-                        <div class="carousel-item active">
-                            <img src="~/Images/Categories/@item.Image" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>@item.CategoryTitle</h5>
+                        <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProductByCategory" asp-route-CategoryId="@item.Id">
+                            <div class="carousel-item active">
+                                <img src="~/Images/Categories/@item.Image" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>@item.CategoryTitle</h5>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     }
 
                 </div>
