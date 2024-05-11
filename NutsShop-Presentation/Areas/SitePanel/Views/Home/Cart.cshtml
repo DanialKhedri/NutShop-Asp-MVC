@@ -6,6 +6,21 @@
     Layout = "_SiteLayout";
 }
 
+<style>
+    .paybtn {
+        background-color: #333;
+        color: #fff;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .paybtn:hover {
+            background-color: #555;
+        }
+</style>
+
 
 <body>
 
@@ -32,8 +47,10 @@
                                     <div class="col-md-8">
                                         <h5 class="card-title">@item.Producttitle</h5>
                                         <hr />
+                                        <p class="card-text">مبلغ:</p>
                                         <p class="card-text">@item.Price</p>
                                         <hr />
+                                        <p class="card-text">وزن:</p>
                                         <p class="card-text">@item.Weight</p>
                                         <hr />
                                     </div>
@@ -80,7 +97,7 @@
                             مجموع کل: <h4>
                                 @Model.OrderDTO.Sum تومان
                                 <hr></hr>
-                                <button class="btn btn-primary mt-3">پرداخت</button>
+                                <button class="paybtn btn  mt-3">پرداخت</button>
                                 <br></br>  <br></br>  <br></br>
                     </div>
                 </div>

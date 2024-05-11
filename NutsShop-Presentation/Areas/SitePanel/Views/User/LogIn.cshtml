@@ -19,160 +19,91 @@
 
 <style>
 
- 
 
-    body {
-        margin: 0;
-        padding: 0;
-        display: block;
-        justify-content: center;
-        align-items: center;
-  
-        height: 100%;
-        background: linear-gradient(to right, #333, #494848);
-    }
-
-    .form-container {
-        width: 50%;
-        margin: 50px;
-        background-color: #fff;
-        border-radius: 25px;
-        padding: 40px;
-        justify-content:center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .form-group {
-        margin: 10px;
-        width: 70%;
-    }
-
-        .form-group label {
-            
-       
-            display: block;
-            font-weight: bold;
-            font:bolder ;
-            margin-bottom: 15px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #494848;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #494848;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-            .form-group button:hover {
-                transform: scale(1.1);
-                font-size: 18px;
-            }
-
-
-
-    .content {
-        display: flex;
-        justify-content: center;
-    }
-
-    .form
+    .submitbtn
     {
-        flex-direction: column;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
+        background-color: #494848;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
-
 
 </style>
 
 <body>
 
 
-    <div class="content">
-
-        <div class="form-container">
-
-            <form class="form" method="post" asp-area="SitePanel" asp-controller="User" asp-action="LogIn">
-
-                <div class="form-group">
-
-                    <label for="name">نام کاربری یا شماره موبایل</label>
-                    <input type="text" asp-for="UserName" placeholder="لطفا نام کاربری یا شماره موبایل را وارد کنید">
-                    <span style="color:red" asp-validation-for="UserName"></span>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label for="name">رمز عبور</label>
-                    <input type="password" asp-for="Password" placeholder="لظفا رمز عبور را وارد کنید">
-                    <span style="color:red" asp-validation-for="Password"></span>
-
-                </div>
+ 
 
 
-                @if (TempData["Message"] != null)
-                {
-                    <span style="color:red">@TempData["Message"]</span>
-                }
 
-                <br></br>
+    <div class="container-fluid">
 
-                <div class="form-group">
-                    <button type="submit">ورود</button>
-                    <br></br>
-
-                    <a asp-area="SitePanel" asp-controller="User" asp-action="Register"><label>ثبت نام</label></a>
-                </div>
-
-            </form>
+        <div class="row justify-content-center m-2 p-2">
 
 
-            <div class="form-group">
-           
+            <div class="col-6 m-5">
+
+                <form method="post" asp-area="SitePanel" asp-controller="User" asp-action="LogIn" class="border-1 justify-content-center">
+
+                    <div class="mb-3">
+
+                        <label class="form-label">نام کاربری یا شماره موبایل</label>
+                        <input type="text" class="form-control" asp-for="UserName" placeholder="لطفا نام کاربری یا شماره موبایل را وارد کنید">
+                        <span style="color:red" asp-validation-for="UserName"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">رمز عبور</label>
+                        <input type="password" class="form-control" asp-for="Password" placeholder="لظفا رمز عبور را وارد کنید">
+                        <span style="color:red" asp-validation-for="Password"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        @if (TempData["Message"] != null)
+                        {
+                            <span style="color:red">@TempData["Message"]</span>
+                        }
+
+                    </div>
+
+
+                    <div class="text-center m-2 " >
+                        <button type="submit" class="submitbtn w-25 p-2">ورود</button>
+                    </div>
+                   
+
+
+
+                </form>
+
+                <hr />
+
                 <a style="color:black;" asp-area="SitePanel" asp-controller="User" asp-action="Register">حساب کاربری ندارید؟</a>
                 <br></br>
                 <a style="color:black;" asp-area="SitePanel" asp-controller="User" asp-action="LogInWithSms">ورود با رمز یکبار مصرف</a>
                 <br></br>
                 <a style="color:black;" asp-area="SitePanel" asp-controller="User" asp-action="LookUpSms">LookUpSms</a>
 
+
             </div>
-
-
-
-
 
 
         </div>
 
-
-
-
-
     </div>
+
+
+
+
+
+
+
 
 
 
