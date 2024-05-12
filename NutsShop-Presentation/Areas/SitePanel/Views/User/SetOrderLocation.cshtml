@@ -35,13 +35,18 @@
 
 </style>
 
-<body>
+<body dir="rtl">
 
 
     <div class="container-fluid">
 
         <div class="row justify-content-center m-2 p-2">
 
+            <div class="text-center m-2">
+                <h4> اطلاعات خریدار</h4>
+            </div>
+
+            <hr />
 
             <div class="col-12 col-md-6 m-5">
 
@@ -49,10 +54,8 @@
 
                     <!--FirstName-->
                     <div class="mb-3">
-
-           
                         <label class="form-label">نام</label>
-                        <input class="form-control" type="text" asp-for="FirstName" placeholder="لطفا نام را وارد کنید">                
+                        <input class="form-control" type="text" asp-for="FirstName" placeholder="لطفا نام را وارد کنید">
                         <span style="color:red" asp-validation-for="FirstName"></span>
 
                     </div>
@@ -61,7 +64,7 @@
                     <div class="mb-3">
 
                         <label class="form-label">نام خانوادگی</label>
-                        <input class="form-control" type="tel" asp-for="LastName" placeholder=" لطفا نام خانوادگی را وارد کنید">
+                        <input class="form-control" type="text" asp-for="LastName" placeholder="لطفا نام خانوادگی را وارد کنید">
                         <span style="color:red" asp-validation-for="LastName"></span>
 
                     </div>
@@ -113,7 +116,7 @@
 
                     </div>
 
-                   
+
 
                     <div class="mb-3">
 
