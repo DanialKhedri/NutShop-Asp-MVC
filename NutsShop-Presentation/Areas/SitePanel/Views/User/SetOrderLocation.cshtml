@@ -105,41 +105,9 @@
 
             <form class="form" method="post" asp-area="SitePanel" asp-controller="User" asp-action="SetOrderLocation">
 
-                <div class="form-group">
+           
 
-                    <label for="name">نام</label>
-                    <input type="text" asp-for="FirstName" placeholder="لطفا نام را وارد کنید">
-                    <span style="color:red" asp-validation-for="FirstName"></span>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label for="name">نام خانوادگی</label>
-                    <input type="tel" asp-for="LastName" placeholder=" لطفا نام خانوادگی را وارد کنید">
-                    <span style="color:red" asp-validation-for="LastName"></span>
-
-                </div>
-
-
-
-
-                <div class="form-group">
-
-                    <label for=""> استان </label>
-                    <input type="text" asp-for="State" placeholder="لطفا استان را وارد کنید ">
-                    <span style="color:red" asp-validation-for="State"></span>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="confirm-password">شهر</label>
-                    <input type="text" asp-for="City" placeholder="لطفا شهر را وارد کنید">
-                    <span style="color:red" asp-validation-for="City"></span>
-
-                </div>
+               
 
                 <div class="form-group">
 
@@ -187,4 +155,150 @@
 
 
 </body>
+</html>
+
+
+
+
+<html lang="fa">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> ورود </title>
+
+</head>
+
+<style>
+
+
+    .submitbtn {
+        background-color: #494848;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+</style>
+
+<body>
+
+
+    <div class="container-fluid">
+
+        <div class="row justify-content-center m-2 p-2">
+
+
+            <div class="col-12 col-md-6 m-5">
+
+                <form class="form" method="post" asp-area="SitePanel" asp-controller="User" asp-action="SetOrderLocation" class="border-1 justify-content-center">
+
+                    <!--FirstName-->
+                    <div class="mb-3">
+
+           
+                        <label class="form-label">نام</label>
+                        <input class="form-control" type="text" asp-for="FirstName" placeholder="لطفا نام را وارد کنید">                        <span style="color:red" asp-validation-for="UserName"></span>
+                        <span style="color:red" asp-validation-for="FirstName"></span>
+
+                    </div>
+
+                    <!--LastName-->
+                    <div class="mb-3">
+
+                        <label class="form-label">نام خانوادگی</label>
+                        <input class="form-control" type="tel" asp-for="LastName" placeholder=" لطفا نام خانوادگی را وارد کنید">
+                        <span style="color:red" asp-validation-for="LastName"></span>
+
+                    </div>
+
+                    <!--State-->
+                    <div class="mb-3">
+
+                        <label class="form-label"> استان </label>
+                        <input class="form-control" type="text" asp-for="State" placeholder="لطفا استان را وارد کنید ">
+                        <span style="color:red" asp-validation-for="State"></span>
+
+                    </div>
+
+
+                    <!--City-->
+                    <div class="mb-3">
+
+                        <label class="form-label">شهر</label>
+                        <input class="form-control" type="text" asp-for="City" placeholder="لطفا شهر را وارد کنید">
+                        <span style="color:red" asp-validation-for="City"></span>
+
+                    </div>
+
+                    <!--Address-->
+                    <div class="mb-3">
+
+                        <label class="form-label">آدرس</label>
+                        <input class="form-control" type="text" asp-for="Address" placeholder="لطفا آدرس را وارد کنید">
+                        <span style="color:red" asp-validation-for="Address"></span>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">نام خانوادگی</label>
+                        <input class="form-control" type="tel" asp-for="LastName" placeholder=" لطفا نام خانوادگی را وارد کنید">
+                        <span style="color:red" asp-validation-for="LastName"></span>
+
+                    </div>
+
+
+
+
+                    <div class="mb-3">
+
+                        @if (TempData["Message"] != null)
+                        {
+                            <span style="color:red">@TempData["Message"]</span>
+                        }
+
+                    </div>
+
+
+                    <div class="text-center m-2 ">
+                        <button type="submit" class="submitbtn w-25 p-2">ورود</button>
+                    </div>
+
+
+
+
+                </form>
+
+                <hr />
+
+                <a style="color:black;" asp-area="SitePanel" asp-controller="User" asp-action="Register">حساب کاربری ندارید؟</a>
+                <br></br>
+                <a style="color:black;" asp-area="SitePanel" asp-controller="User" asp-action="LogInWithSms">ورود با رمز یکبار مصرف</a>
+                <br></br>
+                <a style="color:black;" asp-area="SitePanel" asp-controller="User" asp-action="LookUpSms">LookUpSms</a>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+
 </html>
