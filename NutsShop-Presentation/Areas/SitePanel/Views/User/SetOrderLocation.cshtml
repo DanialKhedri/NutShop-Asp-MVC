@@ -7,155 +7,6 @@
 }
 
 
-<html lang="en">
-
-
-<style>
-
-
-
-    body {
-        margin: 0;
-        padding: 0;
-        display: block;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        background: linear-gradient(to right, #333, #494848);
-    }
-
-    .form-container {
-        width: 50%;
-        margin: 50px;
-        background-color: #fff;
-        border-radius: 25px;
-        padding: 40px;
-        justify-content: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .form-group {
-        margin: 10px;
-        width: 70%;
-    }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            font: bolder;
-            margin-bottom: 15px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #494848;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #494848;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-            .form-group button:hover {
-                transform: scale(1.1);
-                font-size: 18px;
-            }
-
-
-
-    .content {
-        display: flex;
-        justify-content: center;
-    }
-
-    .form {
-        flex-direction: column;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-</style>
-
-
-<body>
-
-
-    <div class="content">
-
-        <div class="form-container">
-
-            <form class="form" method="post" asp-area="SitePanel" asp-controller="User" asp-action="SetOrderLocation">
-
-           
-
-               
-
-                <div class="form-group">
-
-                    <label for="confirm-password">آدرس</label>
-                    <input type="text" asp-for="Address" placeholder="لطفا آدرس را وارد کنید">
-                    <span style="color:red" asp-validation-for="Address"></span>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label for="confirm-password">تلفن همراه</label>
-                    <input type="text" asp-for="PhoneNumber" placeholder="لطفا تلفن همراه را وارد کنید">
-                    <span style="color:red" asp-validation-for="PhoneNumber"></span>
-
-                </div>
-
-
-
-
-
-                <div class="form-group">
-
-                    <label for="confirm-password">کد پستی</label>
-                    <input type="text" asp-for="PostCode" placeholder="لطفا کدپستی را وارد کنید">
-                    <span style="color:red" asp-validation-for="PostCode"></span>
-
-                </div>
-
-
-                <br></br>
-
-                <div class="form-group">
-
-                    <button type="submit">پرداخت</button>
-                    <br></br>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-</body>
-</html>
 
 
 
@@ -201,7 +52,7 @@
 
            
                         <label class="form-label">نام</label>
-                        <input class="form-control" type="text" asp-for="FirstName" placeholder="لطفا نام را وارد کنید">                        <span style="color:red" asp-validation-for="UserName"></span>
+                        <input class="form-control" type="text" asp-for="FirstName" placeholder="لطفا نام را وارد کنید">                
                         <span style="color:red" asp-validation-for="FirstName"></span>
 
                     </div>
@@ -244,16 +95,25 @@
                     </div>
 
 
+                    <!--Phone-->
                     <div class="mb-3">
 
-                        <label class="form-label">نام خانوادگی</label>
-                        <input class="form-control" type="tel" asp-for="LastName" placeholder=" لطفا نام خانوادگی را وارد کنید">
-                        <span style="color:red" asp-validation-for="LastName"></span>
+                        <label class="form-label">تلفن همراه</label>
+                        <input class="form-control" type="text" asp-for="PhoneNumber" placeholder="لطفا تلفن همراه را وارد کنید">
+                        <span style="color:red" asp-validation-for="PhoneNumber"></span>
 
                     </div>
 
+                    <!--PostCode-->
+                    <div class="mb-3">
 
+                        <label class="form-label">کد پستی</label>
+                        <input class="form-control" type="text" asp-for="PostCode" placeholder="لطفا کدپستی را وارد کنید">
+                        <span style="color:red" asp-validation-for="PostCode"></span>
 
+                    </div>
+
+                   
 
                     <div class="mb-3">
 
@@ -266,7 +126,7 @@
 
 
                     <div class="text-center m-2 ">
-                        <button type="submit" class="submitbtn w-25 p-2">ورود</button>
+                        <button type="submit" class="submitbtn w-25 p-2">پرداخت</button>
                     </div>
 
 

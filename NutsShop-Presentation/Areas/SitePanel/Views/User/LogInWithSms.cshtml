@@ -2,8 +2,16 @@
     Layout = "_SiteLayout";
 }
 
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
-<html lang="ira">
+<html lang="fa">
 
 <head>
 
@@ -17,84 +25,12 @@
 <style>
 
 
-
-    body {
-        margin: 0;
-        padding: 0;
-        display: block;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        background: linear-gradient(to right, #333, #494848);
-    }
-
-    .form-container {
-        width: 50%;
-        margin: 50px;
-        background-color: #fff;
-        border-radius: 25px;
-        padding: 40px;
-        justify-content: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .form-group {
-        margin: 10px;
-        width: 70%;
-    }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            font: bolder;
-            margin-bottom: 15px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #494848;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #494848;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-            .form-group button:hover {
-                transform: scale(1.1);
-                font-size: 18px;
-            }
-
-
-
-    .content {
-        display: flex;
-        justify-content: center;
-    }
-
-    .form {
-        flex-direction: column;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .submitbtn {
+        background-color: #494848;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
 </style>
@@ -102,32 +38,43 @@
 <body>
 
 
-    <div class="content">
+    <div class="container-fluid">
 
-        <div class="form-container">
+        <div class="row justify-content-center m-2 p-2">
 
+            <hr></hr>
 
-            <h1>ورود با رمز یکبار مصرف</h1>
+            <h3>ورود با رمز یکبار مصرف</h3>
 
-            <form class="form" asp-area="SitePanel" asp-controller="User" asp-action="LookUpSms">
+            <div class="col-12 col-md-6 m-5">
 
-                <div class="form-group">
+                <form asp-area="SitePanel" asp-controller="User" asp-action="LookUpSms" class="border-1 justify-content-center">
 
-                    <label for="name">شماره موبایل</label>
-                    <input name="PhoneNumber" type="text" placeholder="لطفا شماره موبایل را وارد کنید"></input>
-                    <span style="color:red"></span>
+                    <div class="mb-3">
 
-                </div>
+                        <label class="form-label">شماره موبایل</label>
+                        <input class="form-control" name="PhoneNumber" type="text" placeholder="لطفا شماره موبایل را وارد کنید"></input>
+                        <span style="color:red"></span>
 
-                <div class="form-group">
-
-                    <button type="submit">ارسال پیامک</button>
-
-                </div>
+                    </div>
 
 
-            </form>
 
+
+                    <div class="text-center m-2 ">
+                        <button class="submitbtn" type="submit">ارسال پیامک</button>
+                    </div>
+
+
+
+
+                </form>
+
+                <hr />
+
+
+
+            </div>
 
 
         </div>
