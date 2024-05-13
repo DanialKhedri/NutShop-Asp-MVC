@@ -1,10 +1,13 @@
-﻿@using NutsShop_Presentation.Areas.SitePanel.ViewModels
+﻿@using Application.Dtos.CategoryDTO
+@using NutsShop_Presentation.Areas.SitePanel.ViewModels
 @model ShowProductByCategoryIdViewModel;
 
 @{
     Layout = "_SiteLayout";
 }
-
+@{
+    var Category = TempData["Category"] as CategoryDTO;
+}
 
 <style>
 
@@ -99,12 +102,12 @@
 
         <div class="row">
 
-            <div class="col-12 mt-3">
+            <div class="col-12 mt-1">
 
                 <div class="searchdiv">
 
 
-                    <h2>نام دسته بندی</h2>
+                    <h2>@Category.CategoryTitle</h2>
 
                 </div>
 
@@ -119,7 +122,7 @@
 
         <div class="row">
 
-            <div class="col-12 mt-3">
+            <div class="col-12 mt-1">
 
                 <div class="searchdiv">
 

@@ -103,7 +103,6 @@ namespace Application.Services.implements
         #endregion
 
 
-
         #region GetAllOrderDetailsByOrderId
         public async Task<List<OrderDetailDTO>> GetAllOrderDetailsByOrderId(int OrderId)
         {
@@ -254,6 +253,26 @@ namespace Application.Services.implements
         }
         #endregion
 
+
+        //GetOrderDetailsCount
+
+        public async Task<int> GetOrderDetailsCount(int UserId)
+        {
+            if (UserId != null)
+            {
+                var Order = await _IOrderRepository.GetUnFinaledOrderByUserID(UserId);
+                List<OrderDetail> Orderdetails = await _IOrderRepository.GetAllOrderDetailsByOrderId(Order.Id);
+
+                if (Orderdetails != null)
+                {
+                    return Orderdetails.Count;
+                }
+                else { return 0; }
+            }
+
+            else { return 0; }
+
+        }
 
         //Add Product
 

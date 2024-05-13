@@ -42,11 +42,20 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
 
-        List<ProductDTO> Products = await _IProductService.GetAllProducts();
-        List<CategoryDTO> categories = await _ICategoryService.GetAllCategories();
+        var UserId = User.GetUserId();
 
         TempData["Shop"] = await _IShopService.GetShopDetail();
         TempData["Categories"] = await _ICategoryService.GetAllCategories();
+
+        if (UserId != null)
+            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
+        else
+            TempData["CartCount"] = 0;
+
+        List<ProductDTO> Products = await _IProductService.GetAllProducts();
+        List<CategoryDTO> categories = await _ICategoryService.GetAllCategories();
+
+
 
         IndexViewModel indexViewModel = new IndexViewModel()
         {
@@ -66,6 +75,7 @@ public class HomeController : Controller
 
         var productdto = await _IProductService.GetProductById(Id);
         TempData["Shop"] = await _IShopService.GetShopDetail();
+        TempData["Categories"] = await _ICategoryService.GetAllCategories();
 
         return View(productdto);
 
@@ -81,6 +91,7 @@ public class HomeController : Controller
 
         List<ProductDTO> products = await _IProductService.GetAllProducts();
         TempData["Shop"] = await _IShopService.GetShopDetail();
+        TempData["Categories"] = await _ICategoryService.GetAllCategories();
 
         ShowProductsViewModel showProductsViewModel = new ShowProductsViewModel()
         {
@@ -101,6 +112,9 @@ public class HomeController : Controller
     public async Task<IActionResult> ShowProductByCategory(int CategoryId)
     {
         TempData["Shop"] = await _IShopService.GetShopDetail();
+        TempData["Categories"] = await _ICategoryService.GetAllCategories();
+        TempData["Category"] = await _ICategoryService.GetCategorybyId(CategoryId);
+
         List<ProductDTO>? productsDTOList = await _IProductService.GetProductsByCategoryId(CategoryId);
 
         ShowProductByCategoryIdViewModel showProductByCategoryIdViewModel = new ShowProductByCategoryIdViewModel()
@@ -122,10 +136,11 @@ public class HomeController : Controller
     #region Cart
     public async Task<IActionResult> Cart()
     {
-     
+
         if (User.Identity.IsAuthenticated)
-        { 
+        {
             TempData["Shop"] = await _IShopService.GetShopDetail();
+            TempData["Categories"] = await _ICategoryService.GetAllCategories();
             int userid = User.GetUserId();
 
             CartViewModel cartViewModel = new CartViewModel();
@@ -143,7 +158,7 @@ public class HomeController : Controller
 
         else
         {
-            return RedirectToAction("LogIn","User");
+            return RedirectToAction("LogIn", "User");
         }
 
 
@@ -158,6 +173,7 @@ public class HomeController : Controller
     {
         var aboutus = await _IAboutUsService.GetAboutUs();
         TempData["Shop"] = await _IShopService.GetShopDetail();
+        TempData["Categories"] = await _ICategoryService.GetAllCategories();
         return View(aboutus);
     }
 

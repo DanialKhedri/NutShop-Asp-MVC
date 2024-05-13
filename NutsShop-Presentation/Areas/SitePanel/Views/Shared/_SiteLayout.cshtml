@@ -4,6 +4,7 @@
 @{
     var shop = TempData["Shop"] as ShopDTO;
     var Categories = TempData["Categories"] as List<CategoryDTO>;
+    var CartCount = TempData["CartCount"];
 
 }
 
@@ -178,9 +179,10 @@
 
                                     <a asp-area="SitePanel" asp-controller="Home" asp-action="Cart">
 
+
                                         <i class="bi-cart-fill me-1"></i>
                                         سبد خرید
-                                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                                        <span class="badge bg-dark text-white ms-1 rounded-pill">@CartCount</span>
 
                                     </a>
 
@@ -294,14 +296,19 @@
 
                 <ul>
 
-                    @foreach (var item in Categories)
+                    @if (Categories != null)
                     {
-                        <li><a asp-area="SiePanel" asp-controller="Home" asp-action="ShowProductByCategory" asp-route-CategoryId="@item.Id" class="dropdown-item my-2">@item.CategoryTitle</a></li>
-                        <hr />
+                        @foreach (var item in Categories)
+                        {
+                            <li><a asp-area="SitePanel" asp-controller="Home" asp-action="ShowProductByCategory" asp-route-CategoryId="@item.Id" class="dropdown-item my-2">@item.CategoryTitle</a></li>
+                            <hr />
+                        }
+
                     }
 
 
                 </ul>
+
             </div>
         </div>
     </div>

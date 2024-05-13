@@ -30,6 +30,9 @@ namespace Application.Services.Interfaces
         public Task<OrderDTO?> GetUnFinaledOrderByOrderId(int OrderId);
         public Task<OrderDTO?> GetFinalyOrderByOrderId(int OrderId);
 
+        //Get OrderDetails Count
+
+        public Task<int> GetOrderDetailsCount(int UserId);
 
 
         //Add Product To Cart
