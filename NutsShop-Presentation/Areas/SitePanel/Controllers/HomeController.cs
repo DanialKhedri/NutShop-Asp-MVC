@@ -46,6 +46,7 @@ public class HomeController : Controller
         List<CategoryDTO> categories = await _ICategoryService.GetAllCategories();
 
         TempData["Shop"] = await _IShopService.GetShopDetail();
+        TempData["Categories"] = await _ICategoryService.GetAllCategories();
 
         IndexViewModel indexViewModel = new IndexViewModel()
         {

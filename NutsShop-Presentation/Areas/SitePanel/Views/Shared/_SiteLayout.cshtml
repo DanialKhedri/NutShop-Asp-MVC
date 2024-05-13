@@ -1,7 +1,10 @@
-﻿@using Application.Dtos.ShopDTO
+﻿@using Application.Dtos.CategoryDTO
+@using Application.Dtos.ShopDTO
 
 @{
     var shop = TempData["Shop"] as ShopDTO;
+    var Categories = TempData["Categories"] as List<CategoryDTO>;
+
 }
 
 
@@ -156,9 +159,9 @@
                                     }
                                     else
                                     {
-                                        
+
                                         <div class="mx-4"><label>@User.Identity.Name</label></div>
-                                        <li><a asp-area="SitePanel" asp-controller="User" asp-action="logIn" class="dropdown-item">حساب کاربری</a></li>
+                                        <li><a class="dropdown-item">حساب کاربری</a></li>
                                     }
 
 
@@ -197,7 +200,7 @@
                         </a>
 
 
-                    
+
 
 
                         </ul>
@@ -290,30 +293,14 @@
             <div class="dropdown mt-3">
 
                 <ul>
-                    <li><a class="dropdown-item my-2" href="#">آجیل ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">تخمه ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">شکلات ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">آجیل ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">تخمه ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">شکلات ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">آجیل ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">تخمه ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">شکلات ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">آجیل ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">تخمه ها</a></li>
-                    <hr />
-                    <li><a class="dropdown-item my-2" href="#">شکلات ها</a></li>
-                    <hr />
+
+                    @foreach (var item in Categories)
+                    {
+                        <li><a asp-area="SiePanel" asp-controller="Home" asp-action="ShowProductByCategory" asp-route-CategoryId="@item.Id" class="dropdown-item my-2">@item.CategoryTitle</a></li>
+                        <hr />
+                    }
+
+
                 </ul>
             </div>
         </div>
