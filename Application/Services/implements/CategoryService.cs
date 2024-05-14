@@ -1,7 +1,7 @@
 ﻿using Application.Dtos.CategoryDTO;
 using Application.Dtos.ProductDTO;
 using Application.Dtos.UserLogInDTO;
-using Application.Extensions.NameGenerator;
+using Application.Extensions.Generators.NameGenerator;
 using Application.Services.Interfaces;
 using Domain.Entities.Product;
 using Domain.Entities.Product.Category;

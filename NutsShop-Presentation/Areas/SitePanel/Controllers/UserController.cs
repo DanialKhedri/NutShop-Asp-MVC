@@ -374,9 +374,9 @@ public class UserController : Controller
             && HttpContext.Request.Query["Authority"] != "")
         {
 
-            string Authority = HttpContext.Request.Query["Authority"];
+            string? Authority =  HttpContext.Request.Query["Authority"];
 
-            OrderDTO orderDTO = await _IOrderService.GetUnFinaledOrderByOrderId(Id);
+            OrderDTO? orderDTO = await _IOrderService.GetUnFinaledOrderByOrderId(Id);
 
             var payment = new Payment(orderDTO.Sum);
 

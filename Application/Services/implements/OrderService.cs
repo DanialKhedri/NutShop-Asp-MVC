@@ -256,23 +256,33 @@ namespace Application.Services.implements
 
         //GetOrderDetailsCount
 
+        #region GetOrderDetailsCount
         public async Task<int> GetOrderDetailsCount(int UserId)
         {
             if (UserId != null)
             {
                 var Order = await _IOrderRepository.GetUnFinaledOrderByUserID(UserId);
-                List<OrderDetail> Orderdetails = await _IOrderRepository.GetAllOrderDetailsByOrderId(Order.Id);
-
-                if (Orderdetails != null)
+                if (Order != null)
                 {
-                    return Orderdetails.Count;
+                    List<OrderDetail> Orderdetails = await _IOrderRepository.GetAllOrderDetailsByOrderId(Order.Id);
+
+                    if (Orderdetails != null)
+                    {
+                        return Orderdetails.Count;
+                    }
+                    else
+                        return 0;
                 }
-                else { return 0; }
+                else
+                    return 0;
             }
 
             else { return 0; }
 
         }
+
+        #endregion
+
 
         //Add Product
 

@@ -1,7 +1,7 @@
 ﻿using Application.Dtos.ProductDTO;
 using Application.Dtos.UserLogInDTO;
 using Application.Dtos.UserRegisterDTO;
-using Application.Extensions.NameGenerator;
+using Application.Extensions.Generators.NameGenerator;
 using Application.Security;
 using Application.Services.Interfaces;
 using Domain.Entities.Product;
@@ -59,7 +59,6 @@ namespace Application.Services.implements
         }
 
         #endregion
-
 
 
         #region GetUserById
@@ -159,6 +158,7 @@ namespace Application.Services.implements
 
         #endregion
 
+
         #region LogInWithSms
 
         public async Task<bool> LogInWithSms(string PhoneNumber)
@@ -180,6 +180,7 @@ namespace Application.Services.implements
         }
 
         #endregion
+
 
         #region SavChanges
 

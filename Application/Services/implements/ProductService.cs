@@ -1,5 +1,5 @@
 ﻿using Application.Dtos.ProductDTO;
-using Application.Extensions.NameGenerator;
+using Application.Extensions.Generators.NameGenerator;
 using Application.Services.Interfaces;
 using Domain.Entities.Product;
 using Domain.Entities.Product.SelectedCategory;

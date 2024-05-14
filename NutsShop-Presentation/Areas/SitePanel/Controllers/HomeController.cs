@@ -41,16 +41,21 @@ public class HomeController : Controller
     #region Index
     public async Task<IActionResult> Index()
     {
+        if (User.Identity.IsAuthenticated)
+        {
+            int UserId = User.GetUserId();
+            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
 
-        var UserId = User.GetUserId();
+        }
+        else
+            TempData["CartCount"] = 0;
 
         TempData["Shop"] = await _IShopService.GetShopDetail();
         TempData["Categories"] = await _ICategoryService.GetAllCategories();
 
-        if (UserId != null)
-            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
-        else
-            TempData["CartCount"] = 0;
+
+
+
 
         List<ProductDTO> Products = await _IProductService.GetAllProducts();
         List<CategoryDTO> categories = await _ICategoryService.GetAllCategories();
