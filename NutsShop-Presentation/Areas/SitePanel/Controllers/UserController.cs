@@ -29,17 +29,21 @@ public class UserController : Controller
     private readonly IShopService _IShopService;
     private readonly ISmsService _SmsService;
     private readonly IPaymentService _IPaymentService;
+    private readonly ICategoryService _ICategoryService;
+
     public UserController(IUserService userService,
         IOrderService orderService,
         IShopService ShopService,
         ISmsService smsService,
-        IPaymentService iPaymentService)
+        IPaymentService iPaymentService,
+        ICategoryService iCategoryService)
     {
         _IUserService = userService;
         _IOrderService = orderService;
         _IShopService = ShopService;
         _SmsService = smsService;
         _IPaymentService = iPaymentService;
+        _ICategoryService = iCategoryService;
     }
 
     #endregion
@@ -52,7 +56,7 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> Register()
     {
-        TempData["Shop"] = await _IShopService.GetShopDetail();
+        await SetTempData();
         return View();
 
     }
@@ -113,7 +117,7 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> LogIn()
     {
-        TempData["Shop"] = await _IShopService.GetShopDetail();
+        await SetTempData();
 
         return View();
     }
@@ -156,6 +160,7 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> LogInWithSms()
     {
+        await SetTempData();
         return View();
 
     }
@@ -199,7 +204,7 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> GetVerifyOtp(VerifyOtpDTO verifyOtpDTO)
     {
-
+        await SetTempData();
         return View(verifyOtpDTO);
 
     }
@@ -259,7 +264,7 @@ public class UserController : Controller
     {
         if (User.Identity.IsAuthenticated)
         {
-
+            
             int UserId = UserExtensions.GetUserId(User);
 
 
@@ -303,8 +308,8 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> SetOrderLocation()
     {
-        
-        TempData["Shop"] = await _IShopService.GetShopDetail();
+
+        await SetTempData();
 
         return View();
 
@@ -369,6 +374,9 @@ public class UserController : Controller
 
     public async Task<IActionResult> OnlinePayment(int Id)
     {
+
+        await SetTempData();
+
         if (HttpContext.Request.Query["Status"] != ""
             && HttpContext.Request.Query["Status"].ToString().ToLower() == "ok"
             && HttpContext.Request.Query["Authority"] != "")
@@ -386,7 +394,7 @@ public class UserController : Controller
             {
                 await _IOrderService.FinalizeOrder(orderDTO.Id);
 
-               
+              
                 return View();
             }
             else
@@ -411,4 +419,25 @@ public class UserController : Controller
     #endregion
 
 
+
+
+
+    #region SetTempData
+    private async Task SetTempData()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            int UserId = User.GetUserId();
+            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
+
+        }
+        else
+            TempData["CartCount"] = 0;
+
+        TempData["Shop"] = await _IShopService.GetShopDetail();
+        TempData["Categories"] = await _ICategoryService.GetAllCategories();
+
+    }
+
+    #endregion
 }

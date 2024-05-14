@@ -41,17 +41,7 @@ public class HomeController : Controller
     #region Index
     public async Task<IActionResult> Index()
     {
-        if (User.Identity.IsAuthenticated)
-        {
-            int UserId = User.GetUserId();
-            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
-
-        }
-        else
-            TempData["CartCount"] = 0;
-
-        TempData["Shop"] = await _IShopService.GetShopDetail();
-        TempData["Categories"] = await _ICategoryService.GetAllCategories();
+        await SetTempData();
 
 
 
@@ -77,19 +67,11 @@ public class HomeController : Controller
 
     public async Task<IActionResult> ShowProduct(int Id)
     {
-        if (User.Identity.IsAuthenticated)
-        {
-            int UserId = User.GetUserId();
-            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
-
-        }
-        else
-            TempData["CartCount"] = 0;
+        await SetTempData();
 
 
         var productdto = await _IProductService.GetProductById(Id);
-        TempData["Shop"] = await _IShopService.GetShopDetail();
-        TempData["Categories"] = await _ICategoryService.GetAllCategories();
+
 
         return View(productdto);
 
@@ -102,24 +84,13 @@ public class HomeController : Controller
 
     public async Task<IActionResult> ShowAllProducts()
     {
-        if (User.Identity.IsAuthenticated)
-        {
-            int UserId = User.GetUserId();
-            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
-
-        }
-        else
-            TempData["CartCount"] = 0;
-
-        TempData["Shop"] = await _IShopService.GetShopDetail();
-        TempData["Categories"] = await _ICategoryService.GetAllCategories();
+        await SetTempData();
 
         List<ProductDTO> products = await _IProductService.GetAllProducts();
 
 
         ShowProductsViewModel showProductsViewModel = new ShowProductsViewModel()
         {
-
             ProductsDTOs = products,
         };
 
@@ -135,17 +106,8 @@ public class HomeController : Controller
 
     public async Task<IActionResult> ShowProductByCategory(int CategoryId)
     {
-        if (User.Identity.IsAuthenticated)
-        {
-            int UserId = User.GetUserId();
-            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
+        await SetTempData();
 
-        }
-        else
-            TempData["CartCount"] = 0;
-
-        TempData["Shop"] = await _IShopService.GetShopDetail();
-        TempData["Categories"] = await _ICategoryService.GetAllCategories();
         TempData["Category"] = await _ICategoryService.GetCategorybyId(CategoryId);
 
         List<ProductDTO>? productsDTOList = await _IProductService.GetProductsByCategoryId(CategoryId);
@@ -172,17 +134,7 @@ public class HomeController : Controller
 
         if (User.Identity.IsAuthenticated)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                int UserId = User.GetUserId();
-                TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
-
-            }
-            else
-                TempData["CartCount"] = 0;
-
-            TempData["Shop"] = await _IShopService.GetShopDetail();
-            TempData["Categories"] = await _ICategoryService.GetAllCategories();
+            await SetTempData();
             int userid = User.GetUserId();
 
             CartViewModel cartViewModel = new CartViewModel();
@@ -213,6 +165,19 @@ public class HomeController : Controller
 
     public async Task<IActionResult> AboutUs()
     {
+
+        await SetTempData();
+
+        var aboutus = await _IAboutUsService.GetAboutUs();
+        return View(aboutus);
+    }
+
+    #endregion
+
+
+    #region SetTempData
+    private async Task SetTempData()
+    {
         if (User.Identity.IsAuthenticated)
         {
             int UserId = User.GetUserId();
@@ -225,12 +190,7 @@ public class HomeController : Controller
         TempData["Shop"] = await _IShopService.GetShopDetail();
         TempData["Categories"] = await _ICategoryService.GetAllCategories();
 
-
-        var aboutus = await _IAboutUsService.GetAboutUs();    
-        return View(aboutus);
     }
 
     #endregion
-
-
 }
