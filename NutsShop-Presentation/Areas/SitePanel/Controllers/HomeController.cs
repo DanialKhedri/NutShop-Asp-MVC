@@ -77,6 +77,15 @@ public class HomeController : Controller
 
     public async Task<IActionResult> ShowProduct(int Id)
     {
+        if (User.Identity.IsAuthenticated)
+        {
+            int UserId = User.GetUserId();
+            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
+
+        }
+        else
+            TempData["CartCount"] = 0;
+
 
         var productdto = await _IProductService.GetProductById(Id);
         TempData["Shop"] = await _IShopService.GetShopDetail();
@@ -93,10 +102,20 @@ public class HomeController : Controller
 
     public async Task<IActionResult> ShowAllProducts()
     {
+        if (User.Identity.IsAuthenticated)
+        {
+            int UserId = User.GetUserId();
+            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
 
-        List<ProductDTO> products = await _IProductService.GetAllProducts();
+        }
+        else
+            TempData["CartCount"] = 0;
+
         TempData["Shop"] = await _IShopService.GetShopDetail();
         TempData["Categories"] = await _ICategoryService.GetAllCategories();
+
+        List<ProductDTO> products = await _IProductService.GetAllProducts();
+
 
         ShowProductsViewModel showProductsViewModel = new ShowProductsViewModel()
         {
@@ -116,6 +135,15 @@ public class HomeController : Controller
 
     public async Task<IActionResult> ShowProductByCategory(int CategoryId)
     {
+        if (User.Identity.IsAuthenticated)
+        {
+            int UserId = User.GetUserId();
+            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
+
+        }
+        else
+            TempData["CartCount"] = 0;
+
         TempData["Shop"] = await _IShopService.GetShopDetail();
         TempData["Categories"] = await _ICategoryService.GetAllCategories();
         TempData["Category"] = await _ICategoryService.GetCategorybyId(CategoryId);
@@ -144,6 +172,15 @@ public class HomeController : Controller
 
         if (User.Identity.IsAuthenticated)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                int UserId = User.GetUserId();
+                TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
+
+            }
+            else
+                TempData["CartCount"] = 0;
+
             TempData["Shop"] = await _IShopService.GetShopDetail();
             TempData["Categories"] = await _ICategoryService.GetAllCategories();
             int userid = User.GetUserId();
@@ -176,9 +213,20 @@ public class HomeController : Controller
 
     public async Task<IActionResult> AboutUs()
     {
-        var aboutus = await _IAboutUsService.GetAboutUs();
+        if (User.Identity.IsAuthenticated)
+        {
+            int UserId = User.GetUserId();
+            TempData["CartCount"] = await _IOrderService.GetOrderDetailsCount(UserId);
+
+        }
+        else
+            TempData["CartCount"] = 0;
+
         TempData["Shop"] = await _IShopService.GetShopDetail();
         TempData["Categories"] = await _ICategoryService.GetAllCategories();
+
+
+        var aboutus = await _IAboutUsService.GetAboutUs();    
         return View(aboutus);
     }
 
