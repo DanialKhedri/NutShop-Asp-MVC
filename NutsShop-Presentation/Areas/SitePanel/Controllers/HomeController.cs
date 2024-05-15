@@ -41,11 +41,10 @@ public class HomeController : Controller
     #region Index
     public async Task<IActionResult> Index()
     {
+
         await SetTempData();
 
-
-
-
+       
 
         List<ProductDTO> Products = await _IProductService.GetAllProducts();
         List<CategoryDTO> categories = await _ICategoryService.GetAllCategories();

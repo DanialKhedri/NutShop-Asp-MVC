@@ -16,6 +16,12 @@ namespace Application.Dtos.ShopDTO
 
         public string? Phone { get; set; }
 
+        //Intro
+
+        public string? IntroTitle { get; set; }
+        public string? IntroDescription { get; set; }
+        public string? IntroImage { get; set; }
+
 
     }
 

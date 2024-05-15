@@ -39,6 +39,11 @@ public class ShopService : IShopService
                 ShopName = shopdetail.ShopName,
                 Address = shopdetail.Address,
                 Phone = shopdetail.Phone,
+                IntroTitle = shopdetail.IntroTitle,
+                IntroDescription = shopdetail.IntroDescription,
+                IntroImage = shopdetail.IntroImage,
+
+
             };
 
             return shopDTO;

@@ -1,4 +1,5 @@
 ﻿@using Application.Dtos.CategoryDTO
+@using Application.Dtos.ShopDTO
 @using NutsShop_Presentation.Areas.SitePanel.ViewModels
 @model IndexViewModel;
 
@@ -6,7 +7,9 @@
     Layout = "_SiteLayout";
 }
 
-
+@{
+    var Shop = TempData["Shop"] as ShopDTO;
+}
 
 
 <html lang="fa">
@@ -113,6 +116,7 @@
 <body class="" dir="rtl">
 
 
+    <hr></hr>
     <!--Intro-->
     <div class="Intro m-5">
 
@@ -121,13 +125,13 @@
             <div class="row justify-content-center">
 
                 <div style="border-radius: 15px;" class="col-12 col-sm-6 bg-light p-4">
-                    <h4>آجیل و خشکبار دانیال</h4>
-                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut nostrum quos et, praesentium sapiente maxime magnam ea fuga possimus eos ab aspernatur laboriosam illo laudantium numquam! Ratione quisquam illum illo!</p>
+                    <h4>@Shop.IntroTitle</h4>
+                    <p class="lead">@Shop.IntroDescription</p>
                 </div>
 
                 <div style=" border-radius: 15px;" class="col-6 	d-none d-sm-block bg-dark-light">
 
-                    <img style="border-radius: 15px;" class=" img-fluid" src="~/Images/Products/pesteh.jpg"></img>
+                    <img style="border-radius: 15px;" class=" img-fluid" src="~/Images/Intro/@Shop.IntroImage"></img>
                 </div>
 
             </div>
@@ -182,6 +186,7 @@
         </div>
 
     </div>
+
     <hr></hr>
 
     <!--Product-->

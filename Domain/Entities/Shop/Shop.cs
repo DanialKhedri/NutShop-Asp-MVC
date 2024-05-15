@@ -16,6 +16,11 @@ namespace Domain.Entities.Shop
 
         public string? Phone { get; set; }
 
+        //Intro
+
+        public string? IntroTitle { get; set; }
+        public string? IntroDescription { get; set; }
+        public string? IntroImage { get; set; }
         
     }
 }
