@@ -39,9 +39,19 @@ public class ShopService : IShopService
                 ShopName = shopdetail.ShopName,
                 Address = shopdetail.Address,
                 Phone = shopdetail.Phone,
+
                 IntroTitle = shopdetail.IntroTitle,
                 IntroDescription = shopdetail.IntroDescription,
                 IntroImage = shopdetail.IntroImage,
+
+                WhyNutsTitle = shopdetail.WhyNutsTitle,
+                WhyNutsDescription = shopdetail.WhyNutsDescription,
+
+                WhyUsTitle = shopdetail.WhyUsTitle,
+                WhyUsDescription = shopdetail.WhyUsDescription,
+
+                WhyUsTitle2 = shopdetail.WhyUsTitle2,
+                WhyUsDescription2 = shopdetail.WhyUsDescription2,
 
 
             };

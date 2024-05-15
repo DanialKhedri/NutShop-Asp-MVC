@@ -21,6 +21,18 @@ namespace Domain.Entities.Shop
         public string? IntroTitle { get; set; }
         public string? IntroDescription { get; set; }
         public string? IntroImage { get; set; }
-        
+
+        //
+
+        public string? WhyNutsTitle { get; set; }
+        public string? WhyNutsDescription { get; set; }
+
+        public string? WhyUsTitle { get; set; }
+        public string? WhyUsDescription { get; set; }
+
+        public string? WhyUsTitle2 { get; set; }
+        public string? WhyUsDescription2 { get; set; }
+
+
     }
 }
