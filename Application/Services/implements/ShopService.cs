@@ -1,5 +1,8 @@
-﻿using Application.Dtos.ShopDTO;
+﻿using Application.Dtos.ProductDTO;
+using Application.Dtos.ShopDTO;
+using Application.Extensions.Generators.NameGenerator;
 using Application.Services.Interfaces;
+using Domain.Entities.Product;
 using Domain.Entities.Shop;
 using Domain.IRepository;
 using System;
@@ -66,6 +69,12 @@ public class ShopService : IShopService
 
     #endregion
 
+
+
+
+
+
+
     #region EditShopDetail
 
     public async Task EditShopDetail(ShopDTO shopDTO)
@@ -79,7 +88,39 @@ public class ShopService : IShopService
                 Address = shopDTO.Address,
                 Phone = shopDTO.Phone,
 
+                //Intro
+                IntroTitle = shopDTO.IntroTitle,
+                IntroDescription = shopDTO.IntroDescription,
+
+                //why
+
+                WhyNutsTitle = shopDTO.WhyNutsTitle,
+                WhyNutsDescription = shopDTO.WhyNutsDescription,
+
+                WhyUsTitle = shopDTO.WhyUsTitle,
+                WhyUsDescription = shopDTO.WhyUsDescription,
+
+                WhyUsTitle2 = shopDTO.WhyUsTitle2,
+                WhyUsDescription2 = shopDTO.WhyUsDescription2,
+
             };
+
+
+
+            #region AddImage 
+
+            if (shopDTO.IntroImageIformFile != null)
+            {
+                //Save New Image
+                shop.IntroImage = NameGenerator.GenerateUniqCode() + Path.GetExtension(shopDTO.IntroImageIformFile.FileName);
+
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Products", shop.IntroImage);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    shopDTO.IntroImageIformFile.CopyTo(stream);
+                }
+            }
+            #endregion
 
             await _IshopRepository.EditShopDetail(shop);
 

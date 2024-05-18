@@ -113,7 +113,7 @@
 
 </style>
 
-<body class="" dir="rtl">
+<body dir="rtl">
 
 
     <hr></hr>
@@ -129,9 +129,9 @@
                     <p class="lead">@Shop.IntroDescription</p>
                 </div>
 
-                <div style=" border-radius: 15px;" class="col-6 	d-none d-sm-block bg-dark-light">
+                <div style=" border-radius: 15px;" class="col-6 d-none d-sm-block bg-dark-light">
 
-                    <img style="border-radius: 15px;" class=" img-fluid" src="~/Images/Intro/@Shop.IntroImage"></img>
+                    <img style="border-radius: 15px;" class="img-fluid" src="~/Images/Intro/@Shop.IntroImage"></img>
                 </div>
 
             </div>
@@ -144,48 +144,38 @@
     <hr></hr>
 
     <!--Categories-->
+    @*  <div class="Categories p-3 justify-content-center">
 
-    <div class="Categories p-3 justify-content-center">
+    <div class="w-50 container-fluid">
 
-        <div class="w-50 container-md">
+    <div id="carouselExample" class="carousel slide">
 
-            <div id="carouselExampleCaptions" class="carousel">
+    <div class="carousel-inner">
 
-
-
-                <div class="carousel-inner carouselborder">
-
-
-                    @foreach (var item in Model.CategoryDTOs)
-                    {
-                        <div class="carousel-item active">
-                            <img src="~/Images/Categories/@item.Image" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>@item.CategoryTitle</h5>
-                            </div>
-                        </div>
-                    }
+    @foreach (var item in Model.CategoryDTOs)
+    {
+    <div class="carousel-item active">
+    <img src="~/Images/Categories/@item.Image" class="d-block w-100" alt="...">
+    </div>
+    }
 
 
-
-
-                </div>
-
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-
-            </div>
-
-        </div>
 
     </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+    </button>
+    </div>
+
+    </div>
+
+    </div> *@
 
     <hr></hr>
 
@@ -199,7 +189,7 @@
 
                 @foreach (var item in Model.ProductsDTOs)
                 {
-                    <div class="product card" style="width: 18rem;">
+                    <div class="col-12 col-md-3 product card" style="width: 18rem;">
                         <img src="~/Images/Products/@item.Image" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text">@item.ProductName</p>
@@ -208,6 +198,16 @@
                         </div>
                     </div>
                 }
+
+                <div class="col-12 col-md-3 product card" style="width: 18rem;">
+                    <img src="~/Images/Products/pesteh.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <br></br>
+                       
+
+                        <a asp-area="SitePanel" asp-controller="Home" asp-action="ShowAllProducts"><button>نمایش همه محصولات</button></a>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -222,6 +222,7 @@
             <div class="accordion accordion-flush" id="accordionFlushExample">
 
                 <div class="accordion-item">
+
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                             @Shop.WhyNutsTitle
@@ -255,7 +256,7 @@
                             @Shop.WhyUsTitle2
                         </button>
                     </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             @Shop.WhyUsDescription2
                         </div>

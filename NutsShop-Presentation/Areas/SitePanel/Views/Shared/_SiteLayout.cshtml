@@ -27,9 +27,9 @@
     }
 
     .navbar {
-        background-color: #555;
+        background-color: #555 !important;
         padding: 10px 20px;
-        color: #fff;
+        color: #fff !important;
     }
 
 
@@ -219,12 +219,9 @@
     </div>
 
     <!--Content-->
+    @RenderBody();
 
-    <div>
 
-        @RenderBody();
-
-    </div>
 
     <!--Footer-->
     <div class="Footer">
@@ -233,7 +230,7 @@
 
             <footer class="row ">
 
-               
+                <hr></hr>
 
                 <div style="color:white" class="col-12 m-3">
                     <label>آدرس فروشگاه</label>
@@ -247,7 +244,7 @@
                 <div style="color:white" class="col-12 m-3">
                     <label>شماره تماس فروشگاه</label>
                     <br><br />
-                    <label>@shop.Phone</label>            
+                    <label>@shop.Phone</label>
                 </div>
 
                 <hr></hr>
@@ -255,7 +252,7 @@
                 <div style="color:white" class="col-12 m-3 text-center">
                     <label class=" text-center">© DanWeb</label>
                 </div>
-             
+
             </footer>
 
 

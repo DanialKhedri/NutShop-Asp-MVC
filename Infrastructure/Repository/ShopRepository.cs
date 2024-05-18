@@ -44,6 +44,23 @@ public class ShopRepository : IShopRepository
             tempshop.Address = shop.Address;
             tempshop.ShopName = shop.ShopName;
 
+            //Intro
+            tempshop.IntroTitle = shop.IntroTitle;
+            tempshop.IntroDescription = shop.IntroDescription;
+            tempshop.IntroImage = shop.IntroImage;
+
+            //Why
+
+            tempshop.WhyNutsTitle = shop.WhyNutsTitle;
+            tempshop.WhyUsDescription = shop.WhyUsDescription;
+
+            tempshop.WhyUsTitle = shop.WhyUsTitle;
+            tempshop.WhyUsDescription =shop.WhyUsDescription;
+
+            tempshop.WhyUsTitle2 = shop.WhyUsTitle2;
+            tempshop.WhyUsDescription2 = shop.WhyUsDescription2;
+
+
             _datacontext.Update(tempshop);
             await _datacontext.SaveChangesAsync();
 

@@ -130,8 +130,104 @@
 
                 </div>
 
+
+
+                <!--Intro-->
+
+
+                <!--IntroTitle-->
+
+                <div class="inputcontainer">
+
+                    <label>Intro Title</label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.IntroTitle" placeholder="Description" required=""></textarea>
+
+                </div>
+
+
+                <!--IntroDescription-->
+
+                <div class="inputcontainer">
+
+                    <label>intro Description</label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.IntroDescription" placeholder="Description" required=""></textarea>
+
+                </div>
+
+                <!--IntroImage-->
+                
+                <div class="inputcontainer">
+
+
+                    <img class="img-fluid img" type="file" id="image" name="image">
+
+
+                    <input id="UserAvatarIFromFIle" type="file" asp-for="@Model.IntroImageIformFile"></>
+
+                </div>
+
                 
                 <br>
+
+                <!--Why Nuts Title-->
+                <div class="inputcontainer">
+
+                    <label>Why Nuts Title</label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.WhyNutsTitle" placeholder="Description" required=""></textarea>
+
+                </div>
+
+                <!--Why Nuts Description-->
+                <div class="inputcontainer">
+
+                    <label>Why Nuts Description </label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.WhyNutsDescription" placeholder="Description" required=""></textarea>
+
+                </div>
+
+
+                <!--Why Us Title-->
+                <div class="inputcontainer">
+
+                    <label>Why Us Title </label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.WhyUsTitle" placeholder="Description" required=""></textarea>
+
+                </div>
+
+
+
+                <!--Why Us Description-->
+                <div class="inputcontainer">
+
+                    <label>Why Us Description </label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.WhyUsDescription" placeholder="Description" required=""></textarea>
+
+                </div>
+
+                <!--Why Us Title2-->
+                <div class="inputcontainer">
+
+                    <label>Why Us Title 2 </label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.WhyUsTitle2" placeholder="Description" required=""></textarea>
+
+                </div>
+
+
+                <!--Why Us Description 2-->
+                <div class="inputcontainer">
+
+                    <label>Why Us Description 2 </label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.WhyUsDescription2" placeholder="Description" required=""></textarea>
+
+                </div>
 
             </div>
 
@@ -146,3 +242,22 @@
 
 </body>
 
+<script>
+
+    const fileInput = document.getElementById('UserAvatarIFromFIle');
+
+    const image = document.getElementById('image');
+
+    fileInput.addEventListener('change', function () {
+
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            image.src = e.target.result;
+        }
+
+        reader.readAsDataURL(file);
+    });
+
+</script>

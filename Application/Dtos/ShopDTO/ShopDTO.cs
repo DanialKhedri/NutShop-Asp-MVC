@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace Application.Dtos.ShopDTO
         public string? IntroTitle { get; set; }
         public string? IntroDescription { get; set; }
         public string? IntroImage { get; set; }
+        public IFormFile? IntroImageIformFile { get; set; }
 
         //
         public string? WhyNutsTitle { get; set; }
