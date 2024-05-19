@@ -9,90 +9,6 @@
 
 
 
-<body>
-
-    <div class="title">
-        <h1>اضافه کردن محصول</h1>
-    </div>
-
-    <div class="maincontainer">
-
-
-        <form class="maincontainer" method="post" asp-area="AdminPanel" asp-controller="Admin" asp-action="AddCategory" enctype="multipart/form-data">
-
-            <div class="row">
-
-                <!--Category Title-->
-
-                <div class="inputcontainer">
-                    <label>Category Title</label>
-                    <input class="form-control" style="margin: 10px" type="text"
-                           asp-for="@Model.CategoryTitle" placeholder="Category Title" required="">
-                </div>
-
-
-                <!--Category Unique Name-->
-
-                <div class="inputcontainer">
-
-                    <label>Category Unique Name</label>
-                    <textarea class="form-control" style="margin: 10px" type="text" asp-for="@Model.CategoryUniqueName" placeholder="Category Unique Name" required=""></textarea>
-
-                </div>
-
-                <br>
-
-     
-
-
-            </div>
-
-
-            <!--Image-->
-
-            <div class="inputcontainer">
-
-
-                <img class="img" type="file" id="image" name="image">
-
-
-                <input id="UserAvatarIFromFIle" type="file" asp-for="@Model.ImageIFormFile"></>
-
-            </div>
-
-       
-
-            <div>
-                <button class="btn" type="submit">Edit information</button>
-            </div>
-
-        </form>
-
-    </div>
-
-    <hr style="height: 5px; color: black;"></hr>
-
-</body>
-
-<script>
-
-    const fileInput = document.getElementById('UserAvatarIFromFIle');
-
-    const image = document.getElementById('image');
-
-    fileInput.addEventListener('change', function () {
-
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            image.src = e.target.result;
-        }
-
-        reader.readAsDataURL(file);
-    });
-
-</script>
 
 
 
@@ -166,11 +82,13 @@
 
 <body>
 
+    <hr></hr>
     <div class="title">
         <hr></hr>
         <h1>اضافه کردن دسته بندی</h1>
         <hr></hr>
     </div>
+    <hr></hr>
 
     <div class="maincontainer">
 
@@ -214,7 +132,7 @@
                 <img class="img" type="file" id="image" name="image">
 
 
-                <input id="UserAvatarIFromFIle" type="file" asp-for="@Model.ImageIFormFile"></>
+                <input id="UserAvatarIFromFIle" type="file" asp-for="@Model.ImageIFormFile"></hr>
 
             </div>
 
