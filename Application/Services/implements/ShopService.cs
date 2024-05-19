@@ -114,7 +114,7 @@ public class ShopService : IShopService
                 //Save New Image
                 shop.IntroImage = NameGenerator.GenerateUniqCode() + Path.GetExtension(shopDTO.IntroImageIformFile.FileName);
 
-                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Products", shop.IntroImage);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Intro", shop.IntroImage);
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
                     shopDTO.IntroImageIformFile.CopyTo(stream);

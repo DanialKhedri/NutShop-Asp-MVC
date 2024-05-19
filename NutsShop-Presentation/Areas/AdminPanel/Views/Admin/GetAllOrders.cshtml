@@ -88,13 +88,13 @@
 <body>
 
 
-   
-  
+
+
 
     <div class="container">
 
         <h1>لیست سفارشات</h1>
-      
+
         <table>
 
             <tr>
@@ -121,7 +121,7 @@
 
                         <td>
                             <a asp-area="AdminPanel" asp-controller="Admin" asp-action="GetOrderDetails" asp-route-OrderId="@item.Id"><button class="btn">مشاهده</button></a>
-                            <button class="btn">حذف</button>
+                            <a asp-area="AdminPanel" asp-controller="Admin" asp-action="RemoveOrder" asp-route-OrderId="@item.Id"><button class="btn">حذف</button> </a>
                         </td>
 
                     </tr>

@@ -7,6 +7,9 @@
 
 
 
+
+
+
 <head>
 
     <noscript>
@@ -23,9 +26,9 @@
 
     </noscript>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 </head>
-
-
 
 <style>
 
@@ -34,7 +37,7 @@
         display: flex;
         flex-direction: column;
         margin: 10px;
-        background-color: gray;
+        background-color: ghostwhite;
         padding: 1px;
     }
 
@@ -78,7 +81,9 @@
 <body>
 
     <div class="title">
+        <hr></hr>
         <h1>ویرایش محصول</h1>
+        <hr></hr>
     </div>
 
     <div class="maincontainer">
@@ -88,27 +93,29 @@
 
             <div class="row">
 
+
+
+                <!--Id-->
                 <div class="inputcontainer">
                     <label>Id</label>
                     <input readonly class="form-control" style="margin: 10px" type="text"
                            asp-for="@Model.productDTO.Id" placeholder="Product Name" required="">
                 </div>
 
-
                 <!--Product Name-->
 
-                <div class="inputcontainer">
-                    <label>Product Name</label>
-                    <input class="form-control" style="margin: 10px" type="text"
-                           asp-for="@Model.productDTO.ProductName" placeholder="Product Name" required="">
+                <div class="col-12 inputcontainer">
+                    <label class="form-label">Product Name</label>
+                    <textarea class="form-control" style="margin: 10px" type="text"
+                              asp-for="@Model.productDTO.ProductName" placeholder="Product Name" required=""></textarea>
                 </div>
 
 
                 <!--Description-->
 
-                <div class="inputcontainer">
+                <div class="col-12 inputcontainer">
 
-                    <label>Description</label>
+                    <label class="form-label">Description</label>
                     <textarea class="form-control" style="margin: 10px" type="text" asp-for="@Model.productDTO.Description" placeholder="Description" required=""></textarea>
 
                 </div>
@@ -117,10 +124,10 @@
 
                 <!--Price-->
 
-                <div class="inputcontainer">
+                <div class="col-12 inputcontainer">
 
-                    <label>Price</label>
-                    <input class="form-control" style="margin: 10px" type="text" asp-for="@Model.productDTO.Price" placeholder="Your Name" required="">
+                    <label class="form-label">Price</label>
+                    <textarea class="form-control" style="margin: 10px" type="text" asp-for="@Model.productDTO.Price" placeholder="product Price" required=""></textarea>
 
                 </div>
 
@@ -130,44 +137,33 @@
 
             <!--Image-->
 
-            <div class="inputcontainer">
+            <div class="col-12 inputcontainer">
 
-                @if (Model.productDTO.Image != null)
-                {
 
-                    <img src="~/Images/Products/@Model.productDTO.Image" class="img" type="file" id="image" name="image">
-                }
-
-                else
-                {
-
-                    <img class="img" type="file" id="image" name="image">
-
-                }
-
+                <img class="img" type="file" id="image" name="image">
 
 
                 <input id="UserAvatarIFromFIle" type="file" asp-for="@Model.productDTO.ImageIformFile"></>
 
             </div>
 
-            <div class="Roles">
+            <div class="col-12 Roles">
 
                 @if (Model.categories != null)
                 {
                     @foreach (var item in Model.categories)
                     {
-
-                        <label>@item.CategoryTitle</label>
+                        <hr></hr>
+                        <label class="form-label">@item.CategoryTitle</label>
                         <input type="checkbox" value="@item.Id" name="SelectedCategories" />
-                        <br></br>
+                        <hr></hr>
 
                     }
                 }
             </div>
 
             <div>
-                <button class="btn" type="submit">Edit information</button>
+                <button class="btn btn-primary" type="submit">Edit information</button>
             </div>
 
         </form>
@@ -197,4 +193,3 @@
     });
 
 </script>
-
