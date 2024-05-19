@@ -159,23 +159,28 @@ public class ProductService : IProductService
 
 
         //AddSelected Categories
-        var tempproduct = await _IProductRepository.GetLastProduct();
-        if (tempproduct != null)
-        {
-            foreach (var item in SelectedCategories)
-            {
-                SelectedCategory selectedCategory = new SelectedCategory()
-                {
-                    CategoryId = item,
-                    ProductId = tempproduct.Id,
-                };
 
-                await _ICategoryRepository.AddSelectedCategory(selectedCategory);
+        if (SelectedCategories.Count != 0)
+        {
+            var tempproduct = await _IProductRepository.GetLastProduct();
+            if (tempproduct != null)
+            {
+                foreach (var item in SelectedCategories)
+                {
+                    SelectedCategory selectedCategory = new SelectedCategory()
+                    {
+                        CategoryId = item,
+                        ProductId = tempproduct.Id,
+                    };
+
+                    await _ICategoryRepository.AddSelectedCategory(selectedCategory);
+
+                }
+
+                await _ICategoryRepository.SaveChangeAsync();
+
 
             }
-
-            await _ICategoryRepository.SaveChangeAsync();
-
 
         }
 

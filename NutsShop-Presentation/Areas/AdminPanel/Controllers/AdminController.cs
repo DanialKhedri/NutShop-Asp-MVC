@@ -276,7 +276,12 @@ public class AdminController : Controller
     {
 
         await _IUserService.EditUser(userAdminPanelDTO);
-        await _IRoleService.AddSelectedRole(SelectedRoles, userAdminPanelDTO);
+
+        if (SelectedRoles.Count != 0)
+        {
+            await _IRoleService.AddSelectedRole(SelectedRoles, userAdminPanelDTO);
+        }
+
 
 
 
