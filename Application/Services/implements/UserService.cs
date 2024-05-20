@@ -190,5 +190,16 @@ namespace Application.Services.implements
         }
         #endregion
 
+
+        #region IsAdmin
+
+        public async Task<bool> IsAdmin(int UserId)
+        {
+
+           return await _IUserRepository.IsAdmin(UserId);
+
+        }
+        #endregion
+
     }
 }

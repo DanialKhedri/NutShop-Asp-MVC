@@ -10,11 +10,13 @@ using Application.Extensions;
 using Application.Services.Interfaces;
 using Domain.Entities.Order;
 using Domain.Entities.Order.OrderDetail;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NutsShop_Presentation.Areas.AdminPanel.ViewModels;
 
 namespace NutsShop_Presentation.Areas.AdminPanel.Controllers;
 
+[Authorize]
 [Area("AdminPanel")]
 public class AdminController : Controller
 {
@@ -58,7 +60,20 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        return View();
+
+        bool isadmin = await IsAdmin();
+
+        if (isadmin == true)
+        {
+            return View();
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
+
     }
 
     #endregion
@@ -74,12 +89,18 @@ public class AdminController : Controller
     public async Task<IActionResult> GetAllProducts()
     {
 
+        bool isadmin = await IsAdmin();
 
-        var ProductList = await _IProductService.GetAllProducts();
+        if (isadmin == true)
+        {
+            var ProductList = await _IProductService.GetAllProducts();
+            return View(ProductList);
+        }
+        else
+        {
+            return BadRequest();
+        }
 
-
-
-        return View(ProductList);
     }
 
 
@@ -90,17 +111,33 @@ public class AdminController : Controller
     public async Task<IActionResult> AddProduct()
     {
 
-        AddProductViewModel addProductViewModel = new AddProductViewModel()
+
+        bool isadmin = await IsAdmin();
+
+        if (isadmin == true)
         {
 
-            categories = await _ICategoryService.GetAllCategories(),
+            AddProductViewModel addProductViewModel = new AddProductViewModel()
+            {
 
-        };
+                categories = await _ICategoryService.GetAllCategories(),
+
+            };
+
+            return View(addProductViewModel);
 
 
 
 
-        return View(addProductViewModel);
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
     }
 
     [HttpPost]
@@ -121,19 +158,40 @@ public class AdminController : Controller
     public async Task<IActionResult> EditProduct(int ProductId)
     {
 
-        var product = await _IProductService.GetProductById(ProductId);
 
-        var Categories = await _ICategoryService.GetAllCategories();
+        bool isadmin = await IsAdmin();
 
-        EditProductViewModel editProductViewModel = new EditProductViewModel()
+        if (isadmin == true)
         {
 
-            productDTO = product,
-            categories = Categories,
-        };
+
+            var product = await _IProductService.GetProductById(ProductId);
+
+            var Categories = await _ICategoryService.GetAllCategories();
+
+            EditProductViewModel editProductViewModel = new EditProductViewModel()
+            {
+
+                productDTO = product,
+                categories = Categories,
+            };
 
 
-        return View(editProductViewModel);
+            return View(editProductViewModel);
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
+
+
+
+
+
 
     }
 
@@ -170,10 +228,29 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> GetAllCategories()
     {
-        var Categories = await _ICategoryService.GetAllCategories();
+
+        bool isadmin = await IsAdmin();
+
+        if (isadmin == true)
+        {
 
 
-        return View(Categories);
+
+            var Categories = await _ICategoryService.GetAllCategories();
+
+
+            return View(Categories);
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
+
+
 
     }
 
@@ -183,8 +260,22 @@ public class AdminController : Controller
     public async Task<IActionResult> AddCategory()
     {
 
+        bool isadmin = await IsAdmin();
 
-        return View();
+        if (isadmin == true)
+        {
+
+            return View();
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
+
     }
 
     [HttpPost]
@@ -201,12 +292,33 @@ public class AdminController : Controller
     }
 
     //Edit
-
+    [HttpGet]
     public async Task<IActionResult> EditCategory(int CategoryId)
     {
-        CategoryDTO Category = await _ICategoryService.GetCategorybyId(CategoryId);
 
-        return View(Category);
+
+
+
+
+
+        bool isadmin = await IsAdmin();
+
+        if (isadmin == true)
+        {
+
+            CategoryDTO Category = await _ICategoryService.GetCategorybyId(CategoryId);
+
+            return View(Category);
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
+
 
     }
 
@@ -406,5 +518,19 @@ public class AdminController : Controller
     }
 
     #endregion
+
+
+
+
+
+    public async Task<bool> IsAdmin()
+    {
+        var userid = User.GetUserId();
+
+        return await _IUserService.IsAdmin(userid);
+    }
+
+
+
 
 }

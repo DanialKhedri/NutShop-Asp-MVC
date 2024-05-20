@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.ProductDTO;
 using Domain.Entities.Product;
 using Domain.Entities.User;
+using Domain.Entities.User.SelectedRole;
 using Domain.IRepository;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication;
@@ -96,6 +97,7 @@ namespace Infrastructure.Repository
 
         #endregion
 
+        #region Get User By Phone
 
         //Get User By Phone
 
@@ -107,7 +109,9 @@ namespace Infrastructure.Repository
 
         }
 
+        #endregion
 
+        #region LogIn With Sms
         //LogIn With Sms
 
         public async Task<bool> LogInWithSms(string PhoneNumber)
@@ -154,11 +158,44 @@ namespace Infrastructure.Repository
             }
         }
 
+        #endregion
 
 
 
+        #region User Is Admin
+
+        public async Task<bool> IsAdmin(int UserId)
+        {
+
+            bool isadmin = false;
+
+            var Roles = await _dataContext.SelectedRoles.Where(r => r.UserId == UserId)
+                                                        .Select(r => r.Role)
+                                                        .ToListAsync();
 
 
+
+            if (Roles != null)
+            {
+                foreach (var item in Roles)
+                {
+
+                    if (item.RoleUniqueName == "Admin")
+                    {
+
+                        isadmin = true;
+                    }
+
+                }
+            }
+
+
+
+            return isadmin;
+
+        }
+
+        #endregion
 
 
 

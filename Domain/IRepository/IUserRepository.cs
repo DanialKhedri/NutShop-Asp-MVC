@@ -26,6 +26,8 @@ namespace Domain.IRepository
         public Task RemoveUser(int UserId);
 
 
+        public Task<bool> IsAdmin(int UserId);
+
 
 
         public void SaveChange();

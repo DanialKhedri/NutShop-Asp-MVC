@@ -24,6 +24,8 @@ namespace Application.Services.Interfaces
 
         public void SaveChange();
 
+        public Task<bool> IsAdmin(int UserId);
+
 
     }
 }
