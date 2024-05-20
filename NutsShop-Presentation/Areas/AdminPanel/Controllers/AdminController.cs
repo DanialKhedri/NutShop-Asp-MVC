@@ -296,11 +296,6 @@ public class AdminController : Controller
     public async Task<IActionResult> EditCategory(int CategoryId)
     {
 
-
-
-
-
-
         bool isadmin = await IsAdmin();
 
         if (isadmin == true)
@@ -352,11 +347,24 @@ public class AdminController : Controller
     public async Task<IActionResult> GetAllUsers()
     {
 
+        bool isadmin = await IsAdmin();
+        if (isadmin == true)
+        {
 
-        var UserDTOs = await _IUserService.GetAllUser();
+            var UserDTOs = await _IUserService.GetAllUser();
 
 
-        return View(UserDTOs);
+            return View(UserDTOs);
+
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
 
     }
 
@@ -367,18 +375,30 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> EditUser(int UserId)
     {
-
-        var user = await _IUserService.GetUserById(UserId);
-
-        var Roles = await _IRoleService.GetAllRoles();
-
-        EditUserViewModel editUserViewModel = new EditUserViewModel()
+        bool isadmin = await IsAdmin();
+        if (isadmin == true)
         {
-            UserAdminPanelDTO = user,
-            Roles = Roles,
-        };
 
-        return View(editUserViewModel);
+            var user = await _IUserService.GetUserById(UserId);
+
+            var Roles = await _IRoleService.GetAllRoles();
+
+            EditUserViewModel editUserViewModel = new EditUserViewModel()
+            {
+                UserAdminPanelDTO = user,
+                Roles = Roles,
+            };
+
+            return View(editUserViewModel);
+
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
 
 
     }
@@ -425,11 +445,23 @@ public class AdminController : Controller
 
     public async Task<IActionResult> GetAllOrders()
     {
+        bool isadmin = await IsAdmin();
+        if (isadmin == true)
+        {
 
-        var OrdersList = await _IOrderService.GetAllFinaledOrders();
+            var OrdersList = await _IOrderService.GetAllFinaledOrders();
 
 
-        return View(OrdersList);
+            return View(OrdersList);
+
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
 
     }
 
@@ -438,26 +470,39 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> GetOrderDetails(int OrderId)
     {
-
-        //Get Order By Order Id
-        var Order = await _IOrderService.GetFinalyOrderByOrderId(OrderId);
-
-        //Get orderDetails By Order Id
-        List<OrderDetailDTO>? orderDetails = await _IOrderService.GetAllOrderDetailsByOrderId(Order.Id);
-
-        //Location
-        LocationDTO? location = await _IOrderService.GetLocationByOrderId(Order.Id);
-
-
-        GetOrderDetailsViewModel getOrderDetailsViewModel = new GetOrderDetailsViewModel()
+        bool isadmin = await IsAdmin();
+        if (isadmin == true)
         {
-            OrderDTO = Order,
-            orderDetails = orderDetails,
-            LocationDTO = location,
 
-        };
+            //Get Order By Order Id
+            var Order = await _IOrderService.GetFinalyOrderByOrderId(OrderId);
 
-        return View(getOrderDetailsViewModel);
+            //Get orderDetails By Order Id
+            List<OrderDetailDTO>? orderDetails = await _IOrderService.GetAllOrderDetailsByOrderId(Order.Id);
+
+            //Location
+            LocationDTO? location = await _IOrderService.GetLocationByOrderId(Order.Id);
+
+
+            GetOrderDetailsViewModel getOrderDetailsViewModel = new GetOrderDetailsViewModel()
+            {
+                OrderDTO = Order,
+                orderDetails = orderDetails,
+                LocationDTO = location,
+
+            };
+
+            return View(getOrderDetailsViewModel);
+
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
 
     }
 
@@ -479,18 +524,42 @@ public class AdminController : Controller
 
     public async Task<IActionResult> ShopDetails()
     {
+        bool isadmin = await IsAdmin();
+        if (isadmin == true)
+        {
 
-        var shop = await _IShopService.GetShopDetail();
+            var shop = await _IShopService.GetShopDetail();
 
-        return View(shop);
+            return View(shop);
+
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
     }
 
     public async Task<IActionResult> EditShopDetails(ShopDTO shopDTO)
     {
+        bool isadmin = await IsAdmin();
+        if (isadmin == true)
+        {
 
-        await _IShopService.EditShopDetail(shopDTO);
 
-        return RedirectToAction($"{nameof(Index)}");
+            await _IShopService.EditShopDetail(shopDTO);
+
+            return RedirectToAction($"{nameof(Index)}");
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
 
     }
 
@@ -502,19 +571,47 @@ public class AdminController : Controller
 
     public async Task<IActionResult> GetAboutUs()
     {
-        var AboutUs = await _IAboutUs.GetAboutUs();
 
-        return View(AboutUs);
+        bool isadmin = await IsAdmin();
+        if (isadmin == true)
+        {
+
+            var AboutUs = await _IAboutUs.GetAboutUs();
+
+            return View(AboutUs);
+
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
+
+
 
     }
 
 
     public async Task<IActionResult> EditAboutUs(AboutUsDTO aboutUsDTO)
     {
+        bool isadmin = await IsAdmin();
+        if (isadmin == true)
+        {
 
-        await _IAboutUs.EditAboutUs(aboutUsDTO);
 
-        return RedirectToAction(nameof(Index));
+            await _IAboutUs.EditAboutUs(aboutUsDTO);
+
+            return RedirectToAction(nameof(Index));
+
+
+        }
+        else
+        {
+            return BadRequest();
+        }
+
     }
 
     #endregion
