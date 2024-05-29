@@ -47,12 +47,14 @@ public class ShopRepository : IShopRepository
             //Intro
             tempshop.IntroTitle = shop.IntroTitle;
             tempshop.IntroDescription = shop.IntroDescription;
+
+            if(shop.IntroImage != null)
             tempshop.IntroImage = shop.IntroImage;
 
             //Why
 
             tempshop.WhyNutsTitle = shop.WhyNutsTitle;
-            tempshop.WhyUsDescription = shop.WhyUsDescription;
+            tempshop.WhyNutsDescription = shop.WhyNutsDescription;
 
             tempshop.WhyUsTitle = shop.WhyUsTitle;
             tempshop.WhyUsDescription =shop.WhyUsDescription;
